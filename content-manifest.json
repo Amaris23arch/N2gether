@@ -1,0 +1,25 @@
+{
+  "app": "N2gether",
+  "version": "0.3-data",
+  "sections": {
+    "kanji": {
+      "source": "data/sources.json",
+      "count": 367,
+      "status": "runtime"
+    },
+    "kotoba": {
+      "source": "data/sources.json",
+      "count": 1793,
+      "status": "runtime"
+    },
+    "bunpo": {
+      "source": "data/bunpo.json",
+      "count": 100,
+      "status": "local"
+    },
+    "choukai": {
+      "count": 4,
+      "status": "original-samples"
+    }
+  }
+}

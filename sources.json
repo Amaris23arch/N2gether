@@ -1,0 +1,16 @@
+{
+  "vocabulary": {
+    "name": "OpenJLPT N2 vocabulary",
+    "count": 1793,
+    "url": "https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/vocab/n2.json",
+    "license": "CC BY-SA 4.0",
+    "note": "JLPT does not publish a fixed official post-2010 vocabulary list; OpenJLPT documents its N2 coverage and source methodology."
+  },
+  "kanji": {
+    "name": "OpenJLPT N2 kanji",
+    "count": 367,
+    "url": "https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n2.json",
+    "license": "CC BY-SA 4.0",
+    "note": "JLPT does not publish a fixed official post-2010 kanji list; OpenJLPT documents its N2 coverage and source methodology."
+  }
+}
