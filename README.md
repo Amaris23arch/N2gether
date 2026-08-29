@@ -1,14 +1,19 @@
-# N2gether data
+# N2gether v0.5 🌸
 
-`bunpo.json` contains the 100 high-priority N2 grammar points curated for N2gether.
+Updates:
+- Daily-changing girlfriend-to-girlfriend encouragement message
+- Core N2 kanji library
+- Supplemental related-kanji study set
+- N2 vocabulary library
+- 100 important N2 grammar patterns
+- Chōkai sample practice
+- Mini mock
+- Mastered/XP tracking
+- Browser pronunciation
 
-N2gether loads the comprehensive N2 vocabulary and kanji libraries from OpenJLPT at runtime instead of copying the entire external dataset into this repository.
-
-OpenJLPT documents:
-- N2 vocabulary: 1,793 entries
-- N2 kanji: 367 entries
-
-Source: https://github.com/evanclan/OpenJLPT
+Data:
+Core N2 kanji + vocabulary are loaded from OpenJLPT at runtime.
+OpenJLPT: https://github.com/evanclan/OpenJLPT
 License: CC BY-SA 4.0
 
-The JLPT itself does not publish a fixed official post-2010 vocabulary/kanji master list. OpenJLPT explains its level assignments and upstream sources in its README and NOTICE.
+The supplemental related-kanji set is a N2gether-curated study aid, not an official JLPT list.
