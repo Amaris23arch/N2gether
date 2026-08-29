@@ -125,7 +125,7 @@ const VURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/vocab/n
 const KURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n2.json';
 const RURL='./kanji-related.json';
 const BURL='./bunpo.json';
-const S={xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),vocab:[],kanji:[],related:[],bunpo:[],vp:1,kp:1,bp:1,vq:'',kq:'',bq:'',kmode:'core'};
+const S={kfilter:'all',xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),vocab:[],kanji:[],related:[],bunpo:[],vp:1,kp:1,bp:1,vq:'',kq:'',bq:'',kmode:'core'};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'})}
@@ -194,7 +194,7 @@ function renderK(){
  const a=src.filter(x=>{
    const text=(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.word||'')+' '+(x.wordReading||'')+' '+(x.wordMeaning||'')).toLowerCase();
    return (!q||text.includes(q)) &&
-     (S.kfilter==='all'||(S.kfilter==='mastered'&&kanjiMastered(x.id))||(S.kfilter==='unmastered'&&!kanjiMastered(x.id)));
+     ((S.kfilter||'all')==='all'||(S.kfilter==='mastered'&&kanjiMastered(x.id))||(S.kfilter==='unmastered'&&!kanjiMastered(x.id)));
  });
  $('#kanjiCount').textContent=a.length.toLocaleString()+' study items';
  grid.innerHTML='';
@@ -213,8 +213,8 @@ function renderK(){
 }
 function legacyRenderB(){let q=S.bq.toLowerCase(),a=S.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+x.example).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.example||'Tap to study')}</div></button>`).join('')}
 
-$('#vp').onclick=()=>{S.vp=Math.max(1,S.vp-1);renderV()};$('#vn').onclick=()=>{S.vp++;renderV()};$('#kp').onclick=()=>{S.kp=Math.max(1,S.kp-1);renderK()};$('#kn').onclick=()=>{S.kp++;renderK()};$('#bp').onclick=()=>{S.bp=Math.max(1,S.bp-1);renderB()};$('#bn').onclick=()=>{S.bp++;renderB()};
-$('#coreBtn').onclick=()=>{S.kmode='core';S.kp=1;renderK()};$('#relatedBtn').onclick=()=>{S.kmode='related';S.kp=1;renderK()};
+document.getElementById('vp')?.addEventListener('click',()=>{S.vp=Math.max(1,S.vp-1);renderV()});document.getElementById('vn')?.addEventListener('click',()=>{S.vp++;renderV()});document.getElementById('kp')?.addEventListener('click',()=>{S.kp=Math.max(1,S.kp-1);renderK()});document.getElementById('kn')?.addEventListener('click',()=>{S.kp++;renderK()});document.getElementById('bp')?.addEventListener('click',()=>{S.bp=Math.max(1,S.bp-1);renderB()});document.getElementById('bn')?.addEventListener('click',()=>{S.bp++;renderB()});
+document.getElementById('coreBtn')?.addEventListener('click',()=>{S.kmode='core';S.kp=1;renderK()});document.getElementById('relatedBtn')?.addEventListener('click',()=>{S.kmode='related';S.kp=1;renderK()});
 
 document.addEventListener('click',e=>{
   let v=e.target.closest('[data-v]');if(v){let x=S.vocab.find(a=>a.id===v.dataset.v);if(x)modal(`<div class="eyebrow" style="color:#b54974">KOTOBA · N2</div><h2>${esc(x.word)}</h2><p><b>${esc(x.reading||'')}</b></p><p><b>Meaning:</b> ${esc((x.meanings||[]).join(' · '))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.word)})">🔊 Listen</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
@@ -465,6 +465,6 @@ document.addEventListener('click',e=>{
  bunpoFilter=b.dataset.bfilter;document.querySelectorAll('[data-bfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderBunpo();
 });
 
-stats();daily();renderKanji();document.getElementById('bunpoRandom')?.addEventListener('click',randomBunpoQuiz);load();
+stats();daily();renderK();renderKotoba();renderBunpo();document.getElementById('bunpoRandom')?.addEventListener('click',randomBunpoQuiz);load();
 </script>
 </body></html>
