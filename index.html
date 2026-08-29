@@ -14,6 +14,12 @@
 .lesson{background:var(--soft);border:1px solid #4d293a;border-radius:21px;padding:20px}.lesson h2{margin:4px 0;font-size:31px}.lesson p{color:#eadde4;line-height:1.6}.example{background:#141217;border:1px solid #2f2831;border-radius:13px;padding:12px;color:#f3e8ed}.choice{display:block;width:100%;background:#fff;color:#1d191e;border:1px solid var(--line);border-radius:13px;padding:12px;text-align:left;margin:7px 0}.choice.correct{border-color:var(--good);background:#effaf3}.choice.wrong{border-color:var(--bad);background:#fff0f2}.feedback{min-height:22px;font-weight:900;margin-top:8px}.listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.listen{background:#111114;border:1px solid var(--line);border-radius:18px;padding:17px}.script{display:none;background:#17151a;border:1px solid #2c2830;border-radius:13px;padding:11px;color:#dcd3da;margin:9px 0}.result{margin-top:12px;background:#151217;border:1px solid #312b33;border-radius:18px;padding:16px}.audioStatus{font-size:12px;color:#bdb5bd}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}.modal.open{display:flex}.modalCard{max-width:640px;width:100%;max-height:86vh;overflow:auto;background:#fff;color:#1d191e;border-radius:23px;padding:20px}.close{float:right;border:0;background:#f1ebef;border-radius:50%;width:40px;height:40px;font-size:20px}
 @media(max-width:760px){.library{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.listen-grid{grid-template-columns:1fr}}@media(max-width:460px){.library{grid-template-columns:1fr}.hero h1{font-size:27px}.node{grid-template-columns:48px minmax(0,1fr)}.dot{width:45px;height:45px}.connector{left:23px}}
+
+.vcard{background:#fff;color:#19161a;border-radius:18px;padding:16px;border:1px solid #e2dfe3}
+.vword{font-size:26px;font-weight:900}.vread{color:#98506e;font-weight:800;margin-top:4px}
+.vmeaning{font-weight:800;margin-top:9px}.vexample{font-size:12px;color:#6f6670;line-height:1.55;margin-top:9px}
+.vtranslation{font-size:11px;color:#938994;margin-top:4px}.vactions{display:flex;gap:7px;margin-top:12px}.vactions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}
+.vactions button.mastered{background:#f5d9eb;border-color:#ed6fbe}
 </style>
 </head>
 <body>
@@ -54,9 +60,18 @@
 </section>
 
 <section id="kotoba" class="screen">
-<div class="head"><h2>💬 N2 Kotoba</h2><span id="vocabCount"></span></div>
-<div class="toolbar"><input id="vocabSearch" class="search" placeholder="Search Japanese, reading, English…"><button class="btn secondary" id="randomVocab">🎲 Random</button></div>
-<div class="count" id="vocabCount2"></div><div id="vocabList" class="library"></div><div class="pagination"><button id="vp">←</button><span id="vpage"></span><button id="vn">→</button></div>
+<div class="head"><h2>💬 N2 Kotoba Library</h2><span id="vocabCount">Study collection</span></div>
+<div class="lesson">
+<div class="eyebrow">Today's word • hear it • use it</div>
+<input id="vocabSearch" class="search" placeholder="Search Japanese, reading, English, or example…" autocomplete="off">
+<div class="filters">
+<button class="filter active" data-vfilter="all">All</button>
+<button class="filter" data-vfilter="unmastered">Unmastered</button>
+<button class="filter" data-vfilter="mastered">Mastered ⭐</button>
+<button class="filter" data-vfilter="daily">🌸 Random</button>
+</div>
+</div>
+<div id="vocabGrid" class="library"></div>
 </section>
 
 <section id="bunpo" class="screen">
@@ -141,17 +156,17 @@ function slice(a,p,n){return a.slice((p-1)*n,p*n)}
 async function load(){
   try{
     const [v,k,r,b]=await Promise.all([fetch(VURL).then(x=>x.json()),fetch(KURL).then(x=>x.json()),fetch(RURL).then(x=>x.json()),fetch(BURL).then(x=>x.json())]);
-    S.vocab=v.map((x,i)=>({...x,id:'v'+i}));S.kanji=k.map((x,i)=>({...x,id:'k'+i}));S.related=r;S.bunpo=b;
+    S.vocab=v.map((x,i)=>({...x,id:'v'+(x.id||i)}));S.kanji=k.map((x,i)=>({...x,id:'k'+i}));S.related=r;S.bunpo=b;
     $('#vocabCount').textContent=S.vocab.length.toLocaleString()+' entries';$('#kanjiCount').textContent=S.kanji.length.toLocaleString()+' core + '+S.related.length+' related';
-    renderV();renderK();renderB();$('#status')?.replaceChildren?.();
+    renderKotoba();renderK();renderB();$('#status')?.replaceChildren?.();
   }catch(e){console.error(e)}
 }
 
-function renderV(){let q=S.vq.toLowerCase(),a=S.vocab.filter(x=>(x.word+' '+x.reading+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.vp=Math.min(S.vp,pages);$('#vocabCount2').textContent=a.length.toLocaleString()+' results';$('#vpage').textContent=S.vp+' / '+pages;$('#vocabList').innerHTML=slice(a,S.vp,30).map(x=>`<button class="item" data-v="${esc(x.id)}"><h3>${esc(x.word)}</h3><div class="reading">${esc(x.reading||'')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,2).join(' · ')||'—')}</div><div class="sub">Tap to study</div></button>`).join('')}
+function legacyRenderV(){let q=S.vq.toLowerCase(),a=S.vocab.filter(x=>(x.word+' '+x.reading+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.vp=Math.min(S.vp,pages);$('#vocabCount2').textContent=a.length.toLocaleString()+' results';$('#vpage').textContent=S.vp+' / '+pages;$('#vocabList').innerHTML=slice(a,S.vp,30).map(x=>`<button class="item" data-v="${esc(x.id)}"><h3>${esc(x.word)}</h3><div class="reading">${esc(x.reading||'')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,2).join(' · ')||'—')}</div><div class="sub">Tap to study</div></button>`).join('')}
 function renderK(){let src=S.kmode==='related'?S.related:S.kanji,q=S.kq.toLowerCase(),a=src.filter(x=>(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.word||'')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.kp=Math.min(S.kp,pages);$('#kanjiCount2').textContent=a.length.toLocaleString()+' results';$('#kpage').textContent=S.kp+' / '+pages;$('#kanjiList').innerHTML=slice(a,S.kp,30).map(x=>S.kmode==='related'?`<button class="item" data-rk="${esc(x.id)}"><h3>${esc(x.character)}</h3><div class="reading">${esc(x.reading)}</div><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.word)} · ${esc(x.wordReading)} · ${esc(x.wordMeaning)}</div></button>`:`<button class="item" data-k="${esc(x.id)}"><h3>${esc(x.character)}</h3><div class="reading">${esc((x.onyomi||[]).slice(0,2).join(' · ')||'—')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,3).join(' · ')||'—')}</div><div class="sub">${esc(String(x.strokes||''))} strokes · Tap to study</div></button>`).join('')}
 function renderB(){let q=S.bq.toLowerCase(),a=S.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+x.example).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.example||'Tap to study')}</div></button>`).join('')}
 
-$('#vocabSearch').oninput=e=>{S.vq=e.target.value;S.vp=1;renderV()};$('#kanjiSearch').oninput=e=>{S.kq=e.target.value;S.kp=1;renderK()};$('#bunpoSearch').oninput=e=>{S.bq=e.target.value;S.bp=1;renderB()};
+$('#kanjiSearch').oninput=e=>{S.kq=e.target.value;S.kp=1;renderK()};$('#bunpoSearch').oninput=e=>{S.bq=e.target.value;S.bp=1;renderB()};
 $('#vp').onclick=()=>{S.vp=Math.max(1,S.vp-1);renderV()};$('#vn').onclick=()=>{S.vp++;renderV()};$('#kp').onclick=()=>{S.kp=Math.max(1,S.kp-1);renderK()};$('#kn').onclick=()=>{S.kp++;renderK()};$('#bp').onclick=()=>{S.bp=Math.max(1,S.bp-1);renderB()};$('#bn').onclick=()=>{S.bp++;renderB()};
 $('#coreBtn').onclick=()=>{S.kmode='core';S.kp=1;renderK()};$('#relatedBtn').onclick=()=>{S.kmode='related';S.kp=1;renderK()};
 
@@ -261,6 +276,44 @@ document.addEventListener('click',e=>{
   kanjiFilter=b.dataset.kfilter;
   document.querySelectorAll('[data-kfilter]').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');renderKanji();
+});
+
+
+let vocabFilter='all';
+function vocabKey(id){return 'n2g-vocab-'+id}
+function vocabMastered(id){return localStorage.getItem(vocabKey(id))==='1'}
+function renderKotoba(){
+ const grid=$('#vocabGrid');if(!grid)return;
+ const q=($('#vocabSearch')?.value||'').trim().toLowerCase();
+ let a=S.vocab.filter(x=>{
+   const text=(x.word+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.example||'')).toLowerCase();
+   return (!q||text.includes(q)) &&
+     (vocabFilter==='all'||(vocabFilter==='mastered'&&vocabMastered(x.id))||(vocabFilter==='unmastered'&&!vocabMastered(x.id)));
+ });
+ $('#vocabCount').textContent=a.length+' study words';
+ grid.innerHTML='';
+ a.slice(0,80).forEach(x=>{
+   const c=document.createElement('article');c.className='vcard';
+   c.innerHTML='<div class="vword">'+esc(x.word)+'</div><div class="vread">'+esc(x.reading||'')+'</div><div class="vmeaning">'+esc(x.meaning||'')+'</div><div class="vexample">'+esc(x.example||'')+'</div><div class="vtranslation">'+esc(x.translation||'')+'</div>';
+   const actions=document.createElement('div');actions.className='vactions';
+   const hear=document.createElement('button');hear.type='button';hear.textContent='🔊 Hear';hear.onclick=()=>speak(x.word+'。'+(x.example||''),.78);
+   const master=document.createElement('button');master.type='button';master.textContent=vocabMastered(x.id)?'⭐ Mastered':'☆ Master it';if(vocabMastered(x.id))master.classList.add('mastered');
+   master.onclick=()=>{if(vocabMastered(x.id)){localStorage.removeItem(vocabKey(x.id))}else{localStorage.setItem(vocabKey(x.id),'1');addXP(5)}renderKotoba()};
+   actions.append(hear,master);c.appendChild(actions);grid.appendChild(c);
+ });
+}
+function randomKotoba(){
+ if(!S.vocab.length)return;
+ const x=S.vocab[Math.floor(Math.random()*S.vocab.length)];
+ modal('<div class="eyebrow" style="color:#b54974">🌸 TODAY\'S KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading||'')+'</b><br>'+esc(x.meaning||'')+'</p><div class="example">'+esc(x.example||'')+'<br><small>'+esc(x.translation||'')+'</small></div><button class="btn secondary" id="rkHear">🔊 Hear</button>');
+ $('#rkHear').onclick=()=>speak(x.word+'。'+(x.example||''),.78);
+}
+document.addEventListener('input',e=>{if(e.target.id==='vocabSearch')renderKotoba()});
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-vfilter]');if(!b)return;
+ const f=b.dataset.vfilter;
+ if(f==='daily'){randomKotoba();return}
+ vocabFilter=f;document.querySelectorAll('[data-vfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderKotoba();
 });
 
 stats();daily();renderListen();renderKanji();load();
