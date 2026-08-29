@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N2gether — 頑張ろう、一緒に。</title>
+<style>
+:root{
+  --bg:#09090b;--panel:#111114;--panel2:#17171b;--card:#fff;--text:#f7f3f6;
+  --muted:#a9a1aa;--pink:#ec6d9c;--pink2:#351a28;--line:#29252c;
+  --good:#55b57e;--bad:#e36c78;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}
+a{color:inherit;text-decoration:none}
+.app{max-width:980px;margin:auto;padding:18px 16px 50px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.logo{font-weight:900;font-size:24px}.logo span{color:var(--pink)}
+.streak{border:1px solid #4b303c;background:#1a1116;color:#ffc0d5;padding:9px 13px;border-radius:999px;font-weight:800;font-size:13px}
+.hero{border:1px solid #3a2730;background:linear-gradient(135deg,#171217,#21151d);border-radius:28px;padding:25px}
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:900;color:#f18bb2}
+.hero h1{font-size:34px;line-height:1.05;margin:8px 0}
+.hero p{color:#b9b0b8;line-height:1.6;margin:0}
+.love{margin-top:18px;background:#fff;color:#514451;border-radius:17px;padding:14px 16px;line-height:1.55}
+.love b{color:#b54873}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}
+.stat{background:#17151a;border:1px solid #2f2a31;border-radius:16px;text-align:center;padding:11px}
+.stat strong{font-size:20px;display:block}.stat small{font-size:10px;color:#938b95}
+.bar{height:9px;border-radius:99px;background:#302a31;overflow:hidden;margin-top:13px}
+.fill{width:38%;height:100%;background:var(--pink);border-radius:99px;transition:.35s}
+
+.section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.section-head h2{margin:0;font-size:19px}.section-head span{font-size:12px;color:var(--muted)}
+
+.path{position:relative}.connector{position:absolute;left:28px;top:29px;bottom:28px;width:3px;background:#312c33;border-radius:99px}
+.node{position:relative;display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;margin-bottom:12px}
+.dot{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#16151a;border:2px solid #3a353d;z-index:1;font-size:23px}
+.node.done .dot{border-color:var(--pink);background:var(--pink2)}
+.node.current .dot{border-color:#ff9fc1;box-shadow:0 0 0 5px #2c1721}
+.node.locked{opacity:.55}
+.jcard{background:#fff;color:#1d191e;border-radius:19px;padding:15px;border:1px solid #e9e2e7}
+.jtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;font-size:12px;color:#756b75}
+.tag{font-size:10px;font-weight:900;border-radius:999px;padding:6px 8px;background:#f3edf1;color:#97516e;white-space:nowrap}
+.current .tag{background:#ffe7f0;color:#ba4d78}
+.jmeta{font-size:11px;color:#8a7e89;margin-top:9px}
+.btn{border:0;border-radius:14px;padding:13px 15px;font-weight:900;cursor:pointer}
+.btn-pink{width:100%;background:var(--pink);color:#fff;margin-top:10px}
+.btn-ghost{background:#1b191e;border:1px solid #37323a;color:#eee;padding:10px 13px}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+.screen{display:none}.screen.active{display:block}
+.lesson{background:var(--pink2);border:1px solid #4c2939;border-radius:22px;padding:21px}
+.jp{font-size:36px;font-weight:950;margin-top:6px}.meaning{color:#e8dae1;margin-top:5px}
+.example{margin-top:15px;line-height:1.8;color:#f1e7ed}.example small{color:#b9aeb7}
+.q{margin-top:14px}.q h3{font-size:17px}.choice{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;color:#1d191e;border-radius:14px;padding:13px;margin:7px 0;cursor:pointer}
+.choice.correct{border-color:var(--good);background:#effaf3}.choice.wrong{border-color:var(--bad);background:#fff0f2}.feedback{min-height:23px;margin-top:10px;font-weight:800}
+.back{background:none;border:0;color:#f18bb2;font-weight:900;padding:4px 0 12px;cursor:pointer}
+.timer{font-variant-numeric:tabular-nums;font-weight:900;color:#ffbfd2}
+.result{margin-top:12px;background:#151318;border:1px solid #2c2730;border-radius:18px;padding:17px}
+.result strong{font-size:28px}
+.mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mission{border:1px solid #2c2730;background:#111114;border-radius:18px;padding:16px}
+.mission .ico{font-size:25px}.mission strong{display:block;margin-top:7px}.mission small{color:var(--muted)}
+footer{text-align:center;color:#716a73;font-size:11px;margin-top:22px}
+
+@media(max-width:600px){
+  .app{padding:14px 12px 40px}.hero{padding:20px}.hero h1{font-size:28px}
+  .node{grid-template-columns:50px minmax(0,1fr)}.dot{width:46px;height:46px}.connector{left:24px}
+  .mission-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">N2<span>gether</span> 🌸</div>
+  <div class="streak">🔥 <span id="streak">7</span> day streak</div>
+</header>
+
+<div id="home" class="screen active">
+<section class="hero">
+  <div class="eyebrow">日本語能力試験 N2</div>
+  <h1>おかえり、未来のN2合格者。🌸</h1>
+  <p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
+  <div class="love">💌 <b>Today's message from your boyfriend:</b><br>
+    「焦らなくていいよ。ちゃんと前に進んでる。」<br>
+    <small>Now… let's get that N2. 😌❤️</small>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div>
+    <div class="stat"><strong id="dayCount">7 🔥</strong><small>STREAK</small></div>
+    <div class="stat"><strong id="progressText">38%</strong><small>JOURNEY</small></div>
+  </div>
+  <div class="bar"><div class="fill" id="progressFill"></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>🌱 Today's mission</h2><span>~15–20 min</span></div>
+  <div class="mission-grid">
+    <button class="mission btn-ghost" data-screen="kanji"><span class="ico">🈶</span><strong>10 Kanji</strong><small>読み方・意味・例文</small></button>
+    <button class="mission btn-ghost" data-screen="kotoba"><span class="ico">💬</span><strong>15 Kotoba</strong><small>Words worth remembering</small></button>
+    <button class="mission btn-ghost" data-screen="bunpo"><span class="ico">📝</span><strong>3 Bunpō</strong><small>Grammar power-up</small></button>
+    <button class="mission btn-ghost" data-screen="reading"><span class="ico">📖</span><strong>1 Dokkai</strong><small>Read like a detective</small></button>
+    <button class="mission btn-ghost" data-screen="listening"><span class="ico">🎧</span><strong>Chōkai</strong><small>Train your ears</small></button>
+  </div>
+</section>
+
+<section class="section">
+<div class="section-head"><h2>🗺️ Your N2 Journey</h2><span id="journeyPercent">38% complete</span></div>
+<div class="path">
+<div class="connector"></div>
+<div class="node done"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div><div class="jmeta">You officially started. No turning back now. 😌</div></div></div>
+<div class="node current"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>Read it. Recognize it. Own it.</p></div><div class="tag">NOW</div></div><div class="jmeta">Today's deck is ready · +50 XP</div><button class="btn btn-pink" data-screen="kanji">START KANJI →</button></div></div>
+<div class="node locked"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>Build your N2 vocabulary.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Unlock by finishing today's Kanji.</div></div></div>
+<div class="node locked"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>Grammar that actually makes sense.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">More grammar, less panic.</div></div></div>
+<div class="node locked"><div class="dot">📖</div><div class="jcard"><div class="jtop"><div><h3>05 · 読解 Dokkai</h3><p>Read faster. Understand more.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Short → medium → long passages.</div></div></div>
+<div class="node locked"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>06 · 聴解 Chōkai</h3><p>Listen like a Japanese pro.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Train your ears, not just your eyes.</div></div></div>
+<div class="node locked"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>07 · 模擬試験 Mock Exam</h3><p>No hints. No mercy. 😌</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Full N2-style practice.</div></div></div>
+<div class="node locked"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>08 · N2合格</h3><p>The screenshot we want.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">「合格おめでとう！」 🌸</div></div></div>
+</div>
+</section>
+<footer>Made with love, Japanese, and unreasonable amounts of motivation. ♡</footer>
+</div>
+
+<div id="kanji" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">KANJI · 01</div><div class="jp">改善</div><div class="meaning"><b>かいぜん</b> · improvement / to improve</div><div class="example">仕事のやり方を<strong>改善</strong>する。<br><small>Improve the way you work.</small></div></div>
+<div class="q" id="kanjiQ"></div>
+</div>
+
+<div id="kotoba" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">KOTOBA · 01</div><div class="jp" style="font-size:30px">あらかじめ</div><div class="meaning"><b>Meaning:</b> beforehand · in advance</div><div class="example">会議の前に、資料を<strong>あらかじめ</strong>確認しておいてください。</div></div>
+<button class="btn btn-pink" id="knowWord">✨ I know this! +10 XP</button>
+</div>
+
+<div id="bunpo" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">BUNPŌ · 01</div><div class="jp" style="font-size:29px">〜わけではない</div><div class="meaning"><b>Meaning:</b> It's not that... · doesn't necessarily mean...</div><div class="example">日本語が嫌いな<strong>わけではない</strong>。<br><small>It's not that I dislike Japanese.</small></div></div>
+<div class="q" id="bunpoQ"></div>
+</div>
+
+<div id="reading" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">DOKKAI · SHORT READING</div><div class="example">最近、仕事の効率を上げるために、朝早く起きる人が増えている。しかし、早起きすれば必ず仕事の効率が上がる<strong>わけではない</strong>。大切なのは、自分に合った生活リズムを見つけることである。</div></div>
+<div class="q" id="readingQ"></div>
+</div>
+
+<div id="listening" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">CHŌKAI · QUICK RESPONSE</div><div class="example"><strong>「明日の会議、9時からですよね？」</strong><br><small>Choose the most natural response.</small></div></div>
+<div class="q" id="listeningQ"></div>
+</div>
+
+<div id="mock" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">MINI N2 MOCK</div><h2 style="margin:8px 0 4px">No peeking. 👀</h2><p>Let's see what that Japanese brain can do.</p><div class="timer" id="timer">05:00</div></div>
+<div class="q" id="mockQ"></div>
+<div class="result" id="mockResult" hidden></div>
+</div>
+</div>
+
+<script>
+const state={
+  xp:120,
+  completed:{start:true,kanji:false,kotoba:false,bunpo:false,reading:false,listening:false,mock:false},
+  mockStarted:false,mockSeconds:300
+};
+
+const $=(s)=>document.querySelector(s);
+const $$=(s)=>document.querySelectorAll(s);
+
+function showScreen(id){
+  $$('.screen').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>{
+  const target=b.dataset.screen;
+  if(canEnter(target)) showScreen(target);
+}));
+
+function addXP(n){
+  state.xp+=n;
+  $('#xp').textContent=state.xp;
+}
+
+const unlockMap={
+  kanji:'start',
+  kotoba:'kanji',
+  bunpo:'kotoba',
+  reading:'bunpo',
+  listening:'reading',
+  mock:'listening'
+};
+
+function canEnter(id){
+  const needs=unlockMap[id];
+  if(!needs || state.completed[needs]) return true;
+  showToast('🔒 Finish the previous mission first!');
+  return false;
+}
+
+function showToast(message){
+  let toast=$('#toast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='toast';
+    toast.style.cssText='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:9999;background:#fff;color:#1d191e;padding:12px 16px;border-radius:14px;border:1px solid #e8e0e6;font-weight:800;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:calc(100% - 28px);text-align:center';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=message;
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>toast.remove(),1800);
+}
+
+function complete(id,xp=20){
+  if(state.completed[id]) return;
+  state.completed[id]=true;
+  addXP(xp);
+  refreshJourney();
+}
+
+function refreshJourney(){
+  const ids=['kanji','kotoba','bunpo','reading','listening','mock'];
+  const done=ids.filter(id=>state.completed[id]).length;
+  const pct=Math.round((done/(ids.length+1))*100);
+  $('#progressText').textContent=pct+'%';
+  $('#progressFill').style.width=Math.max(8,pct)+'%';
+  $('#journeyPercent').textContent=pct+'% complete';
+
+  const labels={kanji:'02',kotoba:'03',bunpo:'04',reading:'05',listening:'06',mock:'07'};
+  ids.forEach((id,i)=>{
+    const q=document.querySelector(`.node-${id}`);
+    if(!q)return;
+    const doneNow=state.completed[id];
+    const next=ids.find(x=>!state.completed[x])===id;
+    q.classList.toggle('done',doneNow);
+    q.classList.toggle('current',next);
+    q.classList.toggle('locked',!doneNow && !next);
+    const tag=q.querySelector('.tag');
+    if(tag) tag.textContent=doneNow?'DONE ✓':next?'NOW':'LOCKED';
+    const meta=q.querySelector('.jmeta');
+    if(meta && doneNow) meta.textContent='Mission complete · +XP earned ✨';
+  });
+}
+
+function makeQuestion(host,question,answers,correct,explanation,xp=10,onCorrect){
+  const el=$(host);
+  el.innerHTML='<h3>'+question+'</h3>'+
+    answers.map((a,i)=>'<button class="choice" data-i="'+i+'">'+a+'</button>').join('')+
+    '<div class="feedback" aria-live="polite"></div>';
+  el.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.choice');
+    if(!btn || btn.disabled)return;
+    const buttons=el.querySelectorAll('.choice');
+    buttons.forEach(x=>x.disabled=true);
+    const i=Number(btn.dataset.i);
+    if(i===correct){
+      btn.classList.add('correct');
+      el.querySelector('.feedback').textContent='🎉 正解！ +'+xp+' XP';
+      addXP(xp);
+      if(onCorrect) onCorrect();
+    }else{
+      btn.classList.add('wrong');
+      buttons[correct].classList.add('correct');
+      el.querySelector('.feedback').textContent='🌱 Not quite. '+explanation;
+    }
+  });
+}
+
+makeQuestion('#kanjiQ','「改善」の読み方は？',
+  ['かいせん','かいぜん','かいせい','かえん'],1,
+  '「改善」は かいぜん と読みます。',10,()=>complete('kanji',40));
+
+makeQuestion('#bunpoQ','日本語が嫌いな（　　）。',
+  ['わけではない','ことにする','ようになる','ばかりだ'],0,
+  '「わけではない」は部分的な否定です。',10,()=>complete('bunpo',40));
+
+makeQuestion('#readingQ','筆者が大切だと言っていることは？',
+  ['必ず早起きすること','仕事を増やすこと','自分に合った生活リズムを見つけること','朝に運動すること'],2,
+  '本文の最後にあります。',10,()=>complete('reading',50));
+
+makeQuestion('#listeningQ','最も自然な返事は？',
+  ['はい、9時からです。','いいえ、昨日です。','9時を食べます。','会議は高いです。'],0,
+  '時間を確認する質問なので「はい、9時からです」が自然です。',10,()=>complete('listening',50));
+
+const wordBtn=$('#knowWord');
+wordBtn.addEventListener('click',()=>{
+  if(state.completed.kotoba)return;
+  addXP(10);
+  complete('kotoba',40);
+  wordBtn.textContent='✅ Kotoba complete! +40 XP';
+  wordBtn.disabled=true;
+  showToast('💬 Kotoba unlocked Bunpō!');
+  refreshJourney();
+});
+
+function unlockMockButton(){
+  const btn=document.querySelector('[data-screen="mock"]');
+  if(btn) btn.disabled=!canEnter('mock');
+}
+
+let timerInterval;
+function startMock(){
+  if(state.mockStarted)return;
+  state.mockStarted=true;
+  timerInterval=setInterval(()=>{
+    state.mockSeconds--;
+    const m=String(Math.floor(state.mockSeconds/60)).padStart(2,'0');
+    const s=String(state.mockSeconds%60).padStart(2,'0');
+    $('#timer').textContent=m+':'+s;
+    if(state.mockSeconds<=0){
+      clearInterval(timerInterval);
+      $('#mockResult').hidden=false;
+      $('#mockResult').innerHTML='<strong>⏰ Time!</strong><br><span style="color:#aaa">Review your mistakes and try again.</span>';
+    }
+  },1000);
+}
+
+document.querySelector('#mockQ').addEventListener('click',()=>{
+  startMock();
+  if(!document.querySelector('#mockQ .finish-mock')){
+    const b=document.createElement('button');
+    b.className='btn btn-pink finish-mock';
+    b.textContent='🏁 Finish Mini Mock';
+    b.type='button';
+    b.addEventListener('click',()=>{
+      clearInterval(timerInterval);
+      complete('mock',100);
+      $('#mockResult').hidden=false;
+      $('#mockResult').innerHTML='<strong>🏆 Mock complete!</strong><br><span style="color:#aaa">You did it. Now review and come back stronger.</span>';
+      showToast('🏆 N2gether milestone unlocked!');
+    });
+    document.querySelector('#mockQ').appendChild(b);
+  }
+},{once:true});
+
+document.querySelectorAll('.node').forEach((node)=>{
+  const card=node.querySelector('.jcard');
+  const title=card?.querySelector('h3')?.textContent||'';
+  const map=[['02 · 漢字','kanji'],['03 · 言葉','kotoba'],['04 · 文法','bunpo'],['05 · 読解','reading'],['06 · 聴解','listening'],['07 · 模擬試験','mock']];
+  const match=map.find(([prefix])=>title.startsWith(prefix));
+  if(match){
+    node.classList.add('node-'+match[1]);
+  }
+});
+
+refreshJourney();
+</script>
+</body>
+</html>
