@@ -1,98 +1,357 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>N2gether — 頑張ろう、一緒に。</title>
 <style>
-:root{--bg:#09090b;--panel:#111114;--card:#fff;--text:#f7f3f6;--muted:#a9a2aa;--pink:#ed6f9e;--soft:#351a28;--line:#2b272e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input{font:inherit}.app{max-width:1050px;margin:auto;padding:16px 13px 50px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.logo{font-size:25px;font-weight:950}.logo span{color:var(--pink)}.streak{padding:8px 12px;border:1px solid #49303c;background:#1a1116;color:#ffc1d5;border-radius:999px;font-size:12px;font-weight:900}
-.nav{display:flex;gap:8px;overflow:auto;margin-bottom:15px}.nav button{white-space:nowrap;border:1px solid var(--line);background:#111114;color:#cec7cf;border-radius:999px;padding:10px 14px;font-weight:800}.nav button.active{background:var(--soft);color:#ffb5ce;border-color:#674254}
-.screen{display:none}.screen.active{display:block}.hero{background:linear-gradient(135deg,#171217,#21151d);border:1px solid #392630;border-radius:28px;padding:23px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#f08ab1;font-weight:900}.hero h1{font-size:31px;line-height:1.05;margin:7px 0}.hero p{color:#b8b0b8;line-height:1.6}.love{margin-top:16px;background:#fff;color:#554653;border-radius:17px;padding:13px 15px;line-height:1.55}.love b{color:#b54974}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{background:#17151a;border:1px solid #2f2a31;border-radius:15px;padding:11px;text-align:center}.stat strong{display:block;font-size:19px}.stat small{font-size:10px;color:#938b95}.bar{height:8px;background:#302a31;border-radius:99px;overflow:hidden;margin-top:12px}.fill{height:100%;width:4%;background:var(--pink)}
-.head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px}.head h2{margin:0;font-size:19px}.head span{font-size:12px;color:var(--muted)}
-.path{position:relative}.connector{position:absolute;left:27px;top:30px;bottom:30px;width:3px;background:#332e35}.node{display:grid;grid-template-columns:55px minmax(0,1fr);gap:12px;margin-bottom:12px}.dot{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#16151a;border:2px solid #3a353d;z-index:1}.jcard{background:#fff;color:#1d191e;border-radius:18px;padding:15px}.jtop{display:flex;justify-content:space-between;gap:8px}.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;color:#776d77;font-size:12px}.tag{font-size:10px;background:#f2edf0;color:#96506c;border-radius:99px;padding:6px 8px;font-weight:900;white-space:nowrap}
-.btn{border:0;border-radius:14px;padding:13px 15px;font-weight:900;cursor:pointer}.primary{width:100%;background:var(--pink);color:#fff;margin-top:10px}.secondary{border:1px solid #3b343d;background:#151318;color:#f5eff3}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.search{flex:1;min-width:200px;background:#111114;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:#fff}.count{color:var(--muted);font-size:12px;margin:9px 0}.library{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.item{background:#fff;color:#1d191e;border:1px solid #e7e0e5;border-radius:17px;padding:15px;text-align:left;cursor:pointer}.item h3{margin:0;font-size:25px}.item .reading{color:#98506e;font-weight:900;margin-top:4px}.item .meaning{color:#756b76;font-size:13px;margin-top:6px;line-height:1.45}.pagination{display:flex;justify-content:center;gap:12px;align-items:center;margin-top:13px}.pagination button{background:#111114;border:1px solid var(--line);color:#fff;border-radius:12px;padding:9px 12px}
-.lesson{background:var(--soft);border:1px solid #4e2b3b;border-radius:21px;padding:20px}.lesson h2{font-size:31px;margin:5px 0}.lesson p{color:#eadde4;line-height:1.6}.example{background:#141217;border:1px solid #2d2830;border-radius:14px;padding:12px}.subtle{color:#a79ca6!important;font-size:12px}.listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.listen{background:#111114;border:1px solid var(--line);border-radius:18px;padding:17px}.script{display:none;background:#17151a;border-radius:13px;padding:12px;margin:9px 0;color:#ddd4db}.choice{display:block;width:100%;background:#fff;border:1px solid var(--line);color:#1d191e;border-radius:13px;padding:12px;text-align:left;margin:6px 0}.result{background:#151217;border:1px solid #302b33;border-radius:18px;padding:16px;margin-top:12px}.credit{font-size:11px;color:#756e77;line-height:1.55;margin-top:18px}.credit a{color:#aeb5ff}
-@media(max-width:760px){.library{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.listen-grid{grid-template-columns:1fr}}@media(max-width:460px){.library{grid-template-columns:1fr}.hero h1{font-size:27px}.node{grid-template-columns:48px minmax(0,1fr)}.dot{width:45px;height:45px}.connector{left:23px}}
-</style></head>
-<body><div class="app">
-<div class="top"><div class="logo">N2<span>gether</span> 🌸</div><div class="streak">🔥 7 day streak</div></div>
-<nav class="nav"><button class="active" data-screen="home">🏠 Home</button><button data-screen="kanji">🈶 Kanji</button><button data-screen="kotoba">💬 Kotoba</button><button data-screen="bunpo">📝 Bunpō</button><button data-screen="choukai">🎧 Chōkai</button><button data-screen="mock">🧪 Mock</button></nav>
+:root{
+  --bg:#09090b;--panel:#111114;--panel2:#17171b;--card:#fff;--text:#f7f3f6;
+  --muted:#a9a1aa;--pink:#ec6d9c;--pink2:#351a28;--line:#29252c;
+  --good:#55b57e;--bad:#e36c78;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}
+a{color:inherit;text-decoration:none}
+.app{max-width:980px;margin:auto;padding:18px 16px 50px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.logo{font-weight:900;font-size:24px}.logo span{color:var(--pink)}
+.streak{border:1px solid #4b303c;background:#1a1116;color:#ffc0d5;padding:9px 13px;border-radius:999px;font-weight:800;font-size:13px}
+.hero{border:1px solid #3a2730;background:linear-gradient(135deg,#171217,#21151d);border-radius:28px;padding:25px}
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:900;color:#f18bb2}
+.hero h1{font-size:34px;line-height:1.05;margin:8px 0}
+.hero p{color:#b9b0b8;line-height:1.6;margin:0}
+.love{margin-top:18px;background:#fff;color:#514451;border-radius:17px;padding:14px 16px;line-height:1.55}
+.love b{color:#b54873}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}
+.stat{background:#17151a;border:1px solid #2f2a31;border-radius:16px;text-align:center;padding:11px}
+.stat strong{font-size:20px;display:block}.stat small{font-size:10px;color:#938b95}
+.bar{height:9px;border-radius:99px;background:#302a31;overflow:hidden;margin-top:13px}
+.fill{width:38%;height:100%;background:var(--pink);border-radius:99px;transition:.35s}
 
-<section id="home" class="screen active"><div class="hero"><div class="eyebrow">日本語能力試験 N2</div><h1>おかえり、未来のN2合格者。🌸</h1><p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p><div class="love">💌 <b>From your girlfriend:</b><br>「焦らなくていいよ。ちゃんと前に進んでる。」<br><small>Now go study. I believe in you. 😌❤️</small></div><div class="stats"><div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div><div class="stat"><strong>7 🔥</strong><small>STREAK</small></div><div class="stat"><strong id="mastered">0</strong><small>MASTERED</small></div><div class="stat"><strong id="pct">0%</strong><small>PROGRESS</small></div></div><div class="bar"><div class="fill" id="fill"></div></div></div>
-<div class="head"><h2>🗺️ N2 Journey</h2><span>300+ core items and growing</span></div><div class="path"><div class="connector"></div>
-<div class="node"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div><div class="subtle" style="margin-top:8px">Made with love by two girls in love. ♡</div></div></div>
-<div class="node"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>Open the full N2 kanji library.</p></div><div class="tag">LIBRARY</div></div><button class="btn primary" data-screen="kanji">OPEN KANJI →</button></div></div>
-<div class="node"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>Search the full N2 vocabulary library.</p></div><div class="tag">LIBRARY</div></div><button class="btn primary" data-screen="kotoba">OPEN KOTOBA →</button></div></div>
-<div class="node"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>100 important N2 grammar patterns.</p></div><div class="tag">100</div></div><button class="btn primary" data-screen="bunpo">OPEN BUNPŌ →</button></div></div>
-<div class="node"><div class="dot">📖</div><div class="jcard"><div class="jtop"><div><h3>05 · 読解 Dokkai</h3><p>Coming next: original reading lab.</p></div><div class="tag">NEXT</div></div></div></div>
-<div class="node"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>06 · 聴解 Chōkai</h3><p>Sample listening drills with browser voice.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="choukai">OPEN CHŌKAI →</button></div></div>
-<div class="node"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>07 · 模擬試験 Mock</h3><p>Quick N2-style practice.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="mock">START MOCK →</button></div></div>
-<div class="node"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>08 · N2合格</h3><p>The screenshot we want. 😭❤️</p></div><div class="tag">GOAL</div></div></div></div></div>
-<div class="credit">Kanji and vocabulary are loaded from <a href="https://github.com/evanclan/OpenJLPT" target="_blank" rel="noopener">OpenJLPT</a>, an openly licensed CC BY-SA 4.0 dataset. JLPT itself does not publish a fixed official post-2010 word/kanji list; OpenJLPT documents its N2 coverage as 1,793 vocabulary entries and 367 kanji entries. <span id="status"></span></div></section>
+.section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.section-head h2{margin:0;font-size:19px}.section-head span{font-size:12px;color:var(--muted)}
 
-<section id="kanji" class="screen"><div class="head"><h2>🈶 N2 Kanji Library</h2><span id="kanjiCount"></span></div><div class="toolbar"><input id="kanjiSearch" class="search" placeholder="Search kanji, reading, or meaning…"><button class="btn secondary" id="randomKanji">🎲 Random</button></div><div class="count" id="kanjiCount2"></div><div id="kanjiList" class="library"></div><div class="pagination"><button id="kp">←</button><span id="kpage"></span><button id="kn">→</button></div></section>
+.path{position:relative}.connector{position:absolute;left:28px;top:29px;bottom:28px;width:3px;background:#312c33;border-radius:99px}
+.node{position:relative;display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;margin-bottom:12px}
+.dot{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#16151a;border:2px solid #3a353d;z-index:1;font-size:23px}
+.node.done .dot{border-color:var(--pink);background:var(--pink2)}
+.node.current .dot{border-color:#ff9fc1;box-shadow:0 0 0 5px #2c1721}
+.node.locked{opacity:.55}
+.jcard{background:#fff;color:#1d191e;border-radius:19px;padding:15px;border:1px solid #e9e2e7}
+.jtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;font-size:12px;color:#756b75}
+.tag{font-size:10px;font-weight:900;border-radius:999px;padding:6px 8px;background:#f3edf1;color:#97516e;white-space:nowrap}
+.current .tag{background:#ffe7f0;color:#ba4d78}
+.jmeta{font-size:11px;color:#8a7e89;margin-top:9px}
+.btn{border:0;border-radius:14px;padding:13px 15px;font-weight:900;cursor:pointer}
+.btn-pink{width:100%;background:var(--pink);color:#fff;margin-top:10px}
+.btn-ghost{background:#1b191e;border:1px solid #37323a;color:#eee;padding:10px 13px}
+.btn:disabled{opacity:.6;cursor:not-allowed}
 
-<section id="kotoba" class="screen"><div class="head"><h2>💬 N2 Kotoba Library</h2><span id="vocabCount"></span></div><div class="toolbar"><input id="vocabSearch" class="search" placeholder="Search Japanese, reading, or meaning…"><button class="btn secondary" id="randomVocab">🎲 Random</button></div><div class="count" id="vocabCount2"></div><div id="vocabList" class="library"></div><div class="pagination"><button id="vp">←</button><span id="vpage"></span><button id="vn">→</button></div></section>
+.screen{display:none}.screen.active{display:block}
+.lesson{background:var(--pink2);border:1px solid #4c2939;border-radius:22px;padding:21px}
+.jp{font-size:36px;font-weight:950;margin-top:6px}.meaning{color:#e8dae1;margin-top:5px}
+.example{margin-top:15px;line-height:1.8;color:#f1e7ed}.example small{color:#b9aeb7}
+.q{margin-top:14px}.q h3{font-size:17px}.choice{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;color:#1d191e;border-radius:14px;padding:13px;margin:7px 0;cursor:pointer}
+.choice.correct{border-color:var(--good);background:#effaf3}.choice.wrong{border-color:var(--bad);background:#fff0f2}.feedback{min-height:23px;margin-top:10px;font-weight:800}
+.back{background:none;border:0;color:#f18bb2;font-weight:900;padding:4px 0 12px;cursor:pointer}
+.timer{font-variant-numeric:tabular-nums;font-weight:900;color:#ffbfd2}
+.result{margin-top:12px;background:#151318;border:1px solid #2c2730;border-radius:18px;padding:17px}
+.result strong{font-size:28px}
+.mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mission{border:1px solid #2c2730;background:#111114;border-radius:18px;padding:16px}
+.mission .ico{font-size:25px}.mission strong{display:block;margin-top:7px}.mission small{color:var(--muted)}
+footer{text-align:center;color:#716a73;font-size:11px;margin-top:22px}
 
-<section id="bunpo" class="screen"><div class="head"><h2>📝 100 Important N2 Bunpō</h2><span>100 patterns</span></div><div class="toolbar"><input id="bunpoSearch" class="search" placeholder="Search grammar or meaning…"><button class="btn secondary" id="randomBunpo">🎲 Random</button></div><div class="count" id="bunpoCount"></div><div id="bunpoList" class="library"></div><div class="pagination"><button id="bp">←</button><span id="bpage"></span><button id="bn">→</button></div></section>
+@media(max-width:600px){
+  .app{padding:14px 12px 40px}.hero{padding:20px}.hero h1{font-size:28px}
+  .node{grid-template-columns:50px minmax(0,1fr)}.dot{width:46px;height:46px}.connector{left:24px}
+  .mission-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">N2<span>gether</span> 🌸</div>
+  <div class="streak">🔥 <span id="streak">7</span> day streak</div>
+</header>
 
-<section id="choukai" class="screen"><div class="head"><h2>🎧 Chōkai Sample Lab</h2><span>Original practice</span></div><div id="listenGrid" class="listen-grid"></div></section>
-<section id="mock" class="screen"><div class="head"><h2>🧪 Mini N2 Mock</h2><span id="mockTimer">05:00</span></div><div class="lesson"><div class="eyebrow">Quick challenge</div><h2 id="mockTitle">Ready?</h2><p>No peeking. Your future N2 self is watching. 👀</p><button class="btn primary" id="startMock">START MINI MOCK</button></div><div id="mockArea"></div></section>
+<div id="home" class="screen active">
+<section class="hero">
+  <div class="eyebrow">日本語能力試験 N2</div>
+  <h1>おかえり、未来のN2合格者。🌸</h1>
+  <p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
+  <div class="love">💌 <b>Today's message from your boyfriend:</b><br>
+    「焦らなくていいよ。ちゃんと前に進んでる。」<br>
+    <small>Now… let's get that N2. 😌❤️</small>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div>
+    <div class="stat"><strong id="dayCount">7 🔥</strong><small>STREAK</small></div>
+    <div class="stat"><strong id="progressText">38%</strong><small>JOURNEY</small></div>
+  </div>
+  <div class="bar"><div class="fill" id="progressFill"></div></div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>🌱 Today's mission</h2><span>~15–20 min</span></div>
+  <div class="mission-grid">
+    <button class="mission btn-ghost" data-screen="kanji"><span class="ico">🈶</span><strong>10 Kanji</strong><small>読み方・意味・例文</small></button>
+    <button class="mission btn-ghost" data-screen="kotoba"><span class="ico">💬</span><strong>15 Kotoba</strong><small>Words worth remembering</small></button>
+    <button class="mission btn-ghost" data-screen="bunpo"><span class="ico">📝</span><strong>3 Bunpō</strong><small>Grammar power-up</small></button>
+    <button class="mission btn-ghost" data-screen="reading"><span class="ico">📖</span><strong>1 Dokkai</strong><small>Read like a detective</small></button>
+    <button class="mission btn-ghost" data-screen="listening"><span class="ico">🎧</span><strong>Chōkai</strong><small>Train your ears</small></button>
+  </div>
+</section>
+
+<section class="section">
+<div class="section-head"><h2>🗺️ Your N2 Journey</h2><span id="journeyPercent">38% complete</span></div>
+<div class="path">
+<div class="connector"></div>
+<div class="node done"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div><div class="jmeta">You officially started. No turning back now. 😌</div></div></div>
+<div class="node current"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>Read it. Recognize it. Own it.</p></div><div class="tag">NOW</div></div><div class="jmeta">Today's deck is ready · +50 XP</div><button class="btn btn-pink" data-screen="kanji">START KANJI →</button></div></div>
+<div class="node locked"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>Build your N2 vocabulary.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Unlock by finishing today's Kanji.</div></div></div>
+<div class="node locked"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>Grammar that actually makes sense.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">More grammar, less panic.</div></div></div>
+<div class="node locked"><div class="dot">📖</div><div class="jcard"><div class="jtop"><div><h3>05 · 読解 Dokkai</h3><p>Read faster. Understand more.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Short → medium → long passages.</div></div></div>
+<div class="node locked"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>06 · 聴解 Chōkai</h3><p>Listen like a Japanese pro.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Train your ears, not just your eyes.</div></div></div>
+<div class="node locked"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>07 · 模擬試験 Mock Exam</h3><p>No hints. No mercy. 😌</p></div><div class="tag">LOCKED</div></div><div class="jmeta">Full N2-style practice.</div></div></div>
+<div class="node locked"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>08 · N2合格</h3><p>The screenshot we want.</p></div><div class="tag">LOCKED</div></div><div class="jmeta">「合格おめでとう！」 🌸</div></div></div>
 </div>
-<div id="modal" class="modal"></div>
+</section>
+<footer>Made with love, Japanese, and unreasonable amounts of motivation. ♡</footer>
+</div>
+
+<div id="kanji" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">KANJI · 01</div><div class="jp">改善</div><div class="meaning"><b>かいぜん</b> · improvement / to improve</div><div class="example">仕事のやり方を<strong>改善</strong>する。<br><small>Improve the way you work.</small></div></div>
+<div class="q" id="kanjiQ"></div>
+</div>
+
+<div id="kotoba" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">KOTOBA · 01</div><div class="jp" style="font-size:30px">あらかじめ</div><div class="meaning"><b>Meaning:</b> beforehand · in advance</div><div class="example">会議の前に、資料を<strong>あらかじめ</strong>確認しておいてください。</div></div>
+<button class="btn btn-pink" id="knowWord">✨ I know this! +10 XP</button>
+</div>
+
+<div id="bunpo" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">BUNPŌ · 01</div><div class="jp" style="font-size:29px">〜わけではない</div><div class="meaning"><b>Meaning:</b> It's not that... · doesn't necessarily mean...</div><div class="example">日本語が嫌いな<strong>わけではない</strong>。<br><small>It's not that I dislike Japanese.</small></div></div>
+<div class="q" id="bunpoQ"></div>
+</div>
+
+<div id="reading" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">DOKKAI · SHORT READING</div><div class="example">最近、仕事の効率を上げるために、朝早く起きる人が増えている。しかし、早起きすれば必ず仕事の効率が上がる<strong>わけではない</strong>。大切なのは、自分に合った生活リズムを見つけることである。</div></div>
+<div class="q" id="readingQ"></div>
+</div>
+
+<div id="listening" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">CHŌKAI · QUICK RESPONSE</div><div class="example"><strong>「明日の会議、9時からですよね？」</strong><br><small>Choose the most natural response.</small></div></div>
+<div class="q" id="listeningQ"></div>
+</div>
+
+<div id="mock" class="screen">
+<button class="back" data-screen="home">← Back to Journey</button>
+<div class="lesson"><div class="eyebrow">MINI N2 MOCK</div><h2 style="margin:8px 0 4px">No peeking. 👀</h2><p>Let's see what that Japanese brain can do.</p><div class="timer" id="timer">05:00</div></div>
+<div class="q" id="mockQ"></div>
+<div class="result" id="mockResult" hidden></div>
+</div>
+</div>
 
 <script>
-const GRAMMAR=[{"id": 1, "pattern": "〜際（に）", "meaning": "When; on the occasion of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 2, "pattern": "〜に際して", "meaning": "On the occasion of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 3, "pattern": "〜にあたって", "meaning": "At the time of; in preparation for", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 4, "pattern": "〜に伴って", "meaning": "Along with; as changes", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 5, "pattern": "〜につれて", "meaning": "As; in proportion as", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 6, "pattern": "〜に従って", "meaning": "As; according to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 7, "pattern": "〜とともに", "meaning": "Together with; as", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 8, "pattern": "〜たびに", "meaning": "Every time", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 9, "pattern": "〜つつ", "meaning": "While; although", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 10, "pattern": "〜つつある", "meaning": "Be in the process of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 11, "pattern": "〜か〜ないかのうちに", "meaning": "Just as; no sooner ... than", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 12, "pattern": "〜次第", "meaning": "As soon as", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 13, "pattern": "〜て以来", "meaning": "Ever since", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 14, "pattern": "〜ぶりに", "meaning": "For the first time in", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 15, "pattern": "〜をきっかけに", "meaning": "Taking ... as an opportunity", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 16, "pattern": "〜を通じて", "meaning": "Through; throughout", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 17, "pattern": "〜を通して", "meaning": "Through; by means of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 18, "pattern": "〜において", "meaning": "In; at (formal)", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 19, "pattern": "〜における", "meaning": "In; regarding (formal)", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 20, "pattern": "〜にわたって", "meaning": "Over; throughout", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 21, "pattern": "〜をめぐって", "meaning": "Concerning; over", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 22, "pattern": "〜に関して", "meaning": "Regarding; concerning", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 23, "pattern": "〜に対して", "meaning": "Toward; in contrast to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 24, "pattern": "〜に応じて", "meaning": "According to; in response to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 25, "pattern": "〜に基づいて", "meaning": "Based on", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 26, "pattern": "〜をもとに", "meaning": "Based on", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 27, "pattern": "〜を中心に", "meaning": "Centered around", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 28, "pattern": "〜をはじめ", "meaning": "Beginning with; including", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 29, "pattern": "〜はもちろん", "meaning": "Not only ... but of course", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 30, "pattern": "〜はともかく", "meaning": "Setting ... aside", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 31, "pattern": "〜はさておき", "meaning": "Putting ... aside", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 32, "pattern": "〜にかかわらず", "meaning": "Regardless of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 33, "pattern": "〜にかかわりなく", "meaning": "Regardless of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 34, "pattern": "〜を問わず", "meaning": "Regardless of; irrespective of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 35, "pattern": "〜に限らず", "meaning": "Not limited to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 36, "pattern": "〜に限って", "meaning": "Only when; especially", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 37, "pattern": "〜に限り", "meaning": "Limited to; only", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 38, "pattern": "〜に限っては", "meaning": "As far as ... is concerned", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 39, "pattern": "〜わけではない", "meaning": "It is not that; not necessarily", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 40, "pattern": "〜わけがない", "meaning": "There is no way", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 41, "pattern": "〜わけにはいかない", "meaning": "Cannot afford to; cannot", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 42, "pattern": "〜ないわけにはいかない", "meaning": "Cannot not; must", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 43, "pattern": "〜というわけではない", "meaning": "It doesn't mean that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 44, "pattern": "〜というものではない", "meaning": "It is not simply the case that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 45, "pattern": "〜ことから", "meaning": "From the fact that; because", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 46, "pattern": "〜ことだから", "meaning": "Because it is; judging from", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 47, "pattern": "〜ものだから", "meaning": "Because; the reason is", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 48, "pattern": "〜ものの", "meaning": "Although; though", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 49, "pattern": "〜とは限らない", "meaning": "Not necessarily", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 50, "pattern": "〜に違いない", "meaning": "Must be; surely", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 51, "pattern": "〜に決まっている", "meaning": "Must be; definitely", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 52, "pattern": "〜に相違ない", "meaning": "There is no doubt", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 53, "pattern": "〜どころか", "meaning": "Far from; let alone", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 54, "pattern": "〜どころではない", "meaning": "Not in a state to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 55, "pattern": "〜ばかりか", "meaning": "Not only ... but also", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 56, "pattern": "〜ばかりに", "meaning": "Just because; only because", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 57, "pattern": "〜さえ", "meaning": "Even; as long as", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 58, "pattern": "〜さえ〜ば", "meaning": "As long as; if only", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 59, "pattern": "〜すら", "meaning": "Even (formal)", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 60, "pattern": "〜まで", "meaning": "Even; to the extent that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 61, "pattern": "〜こそ", "meaning": "Precisely; exactly", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 62, "pattern": "〜からこそ", "meaning": "Precisely because", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 63, "pattern": "〜あまり", "meaning": "So much ... that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 64, "pattern": "〜あげく", "meaning": "After all; in the end", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 65, "pattern": "〜末に", "meaning": "After; finally", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 66, "pattern": "〜結果", "meaning": "As a result", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 67, "pattern": "〜上で", "meaning": "After; based on", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 68, "pattern": "〜上に", "meaning": "In addition; moreover", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 69, "pattern": "〜上は", "meaning": "Now that; since", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 70, "pattern": "〜限り", "meaning": "As long as; as far as", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 71, "pattern": "〜限りでは", "meaning": "As far as ...", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 72, "pattern": "〜限りにおいて", "meaning": "As long as; within limits", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 73, "pattern": "〜ないことには", "meaning": "Unless; without doing", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 74, "pattern": "〜ことなく", "meaning": "Without doing", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 75, "pattern": "〜ことに", "meaning": "To one's ...", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 76, "pattern": "〜ことになっている", "meaning": "Be scheduled; be decided", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 77, "pattern": "〜こととなっている", "meaning": "It has been decided (formal)", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 78, "pattern": "〜ことはない", "meaning": "There is no need to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 79, "pattern": "〜ことだ", "meaning": "Should; it is important to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 80, "pattern": "〜ようでは", "meaning": "If things are like that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 81, "pattern": "〜ように見える", "meaning": "Appear to; seem", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 82, "pattern": "〜かのようだ", "meaning": "As if", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 83, "pattern": "〜にしては", "meaning": "Considering; for", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 84, "pattern": "〜わりに", "meaning": "Although; considering", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 85, "pattern": "〜にしても", "meaning": "Even if; even considering", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 86, "pattern": "〜としても", "meaning": "Even if", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 87, "pattern": "〜としたら", "meaning": "If; assuming", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 88, "pattern": "〜とすれば", "meaning": "If that is the case", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 89, "pattern": "〜ならでは", "meaning": "Unique to; characteristic of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 90, "pattern": "〜向け", "meaning": "Intended for", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 91, "pattern": "〜向き", "meaning": "Suitable for", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 92, "pattern": "〜に反して", "meaning": "Contrary to", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 93, "pattern": "〜に代わって", "meaning": "Instead of; on behalf of", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 94, "pattern": "〜にかけて", "meaning": "From ... through ...", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 95, "pattern": "〜からすると", "meaning": "Judging from", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 96, "pattern": "〜から見ると", "meaning": "Judging from; from viewpoint", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 97, "pattern": "〜にせよ", "meaning": "Whether; even if", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 98, "pattern": "〜にせよ〜にせよ", "meaning": "Whether ... or ...", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 99, "pattern": "〜というより", "meaning": "Rather than saying", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}, {"id": 100, "pattern": "〜ということだ", "meaning": "I hear that; it means that", "reading": "", "formation": "See the examples and context for natural usage.", "example": "この文法を使ったN2レベルの例文を練習しましょう。"}];
-const VURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/vocab/n2.json';
-const KURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n2.json';
-const S={xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),vocab:[],kanji:[],vp:1,kp:1,bp:1,vq:'',kq:'',bq:''};
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-function save(){localStorage.setItem('n2g_xp',S.xp);localStorage.setItem('n2g_mastered',JSON.stringify([...S.mastered]));}
-function stats(){ $('#xp').textContent=S.xp;$('#mastered').textContent=S.mastered.size;const p=Math.min(100,Math.round(S.mastered.size/28*100));$('#pct').textContent=p+'%';$('#fill').style.width=Math.max(4,p)+'%';}
-function xp(n){S.xp+=n;save();stats()}
-function master(id){if(!S.mastered.has(id)){S.mastered.add(id);xp(5)}}
-function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'})}
-$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screen)));
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-async function load(){
- try{
- const [v,k]=await Promise.all([fetch(VURL).then(r=>r.json()),fetch(KURL).then(r=>r.json())]);
- S.vocab=v.map((x,i)=>({...x,id:'v'+i}));
- S.kanji=k.map((x,i)=>({...x,id:'k'+i}));
- $('#vocabCount').textContent=S.vocab.length.toLocaleString()+' entries';$('#kanjiCount').textContent=S.kanji.length.toLocaleString()+' characters';
- $('#vocabCount2').textContent=S.vocab.length.toLocaleString()+' results';$('#kanjiCount2').textContent=S.kanji.length.toLocaleString()+' results';
- $('#status').textContent=' Loaded successfully.';
- renderV();renderK();
- }catch(e){$('#status').textContent=' Could not load the library. Refresh when online.'}
-}
-function slice(a,p,n){return a.slice((p-1)*n,p*n)}
-function renderV(){let q=S.vq.toLowerCase(),a=S.vocab.filter(x=>(x.word+' '+x.reading+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.vp=Math.min(S.vp,pages);$('#vocabCount2').textContent=a.length.toLocaleString()+' results';$('#vpage').textContent=S.vp+' / '+pages;$('#vocabList').innerHTML=slice(a,S.vp,30).map(x=>`<button class="item" data-v="${esc(x.id)}"><h3>${esc(x.word)}</h3><div class="reading">${esc(x.reading||'')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,2).join(' · ')||'—')}</div><div class="subtle">Tap to study</div></button>`).join('')}
-function renderK(){let q=S.kq.toLowerCase(),a=S.kanji.filter(x=>(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.kp=Math.min(S.kp,pages);$('#kanjiCount2').textContent=a.length.toLocaleString()+' results';$('#kpage').textContent=S.kp+' / '+pages;$('#kanjiList').innerHTML=slice(a,S.kp,30).map(x=>`<button class="item" data-k="${esc(x.id)}"><h3>${esc(x.character)}</h3><div class="reading">${esc((x.onyomi||[]).slice(0,2).join(' · ')||'—')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,3).join(' · ')||'—')}</div><div class="subtle">${esc(String(x.strokes||''))} strokes · Tap to study</div></button>`).join('')}
-function renderB(){let q=S.bq.toLowerCase(),a=GRAMMAR.filter(x=>(x.pattern+' '+x.meaning).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="subtle">Tap to study</div></button>`).join('')}
-function modal(body){let m=$('#modal');m.className='modal';m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30';m.innerHTML='<div style="max-width:620px;width:100%;max-height:85vh;overflow:auto;background:#fff;color:#1d191e;border-radius:22px;padding:20px"><button id="close" style="float:right;border:0;background:#f1ebef;border-radius:50%;width:38px;height:38px;font-size:20px">×</button>'+body+'</div>';$('#close').onclick=()=>m.style.display='none'}
-document.addEventListener('click',e=>{
- let v=e.target.closest('[data-v]');if(v){let x=S.vocab.find(a=>a.id===v.dataset.v);modal(`<div class="eyebrow" style="color:#b54974">KOTOBA · N2</div><h2 style="font-size:32px">${esc(x.word)}</h2><b style="color:#98506e">${esc(x.reading||'')}</b><p><b>Meaning:</b> ${esc((x.meanings||[]).join(' · '))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.word)})">🔊 Listen</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
- let k=e.target.closest('[data-k]');if(k){let x=S.kanji.find(a=>a.id===k.dataset.k);modal(`<div class="eyebrow" style="color:#b54974">KANJI · N2</div><h2 style="font-size:42px">${esc(x.character)}</h2><p><b>Onyomi:</b> ${esc((x.onyomi||[]).join(' · ')||'—')}<br><b>Kunyomi:</b> ${esc((x.kunyomi||[]).join(' · ')||'—')}<br><b>Meaning:</b> ${esc((x.meanings||[]).join(' · ')||'—')}<br><b>Strokes:</b> ${esc(String(x.strokes||'—'))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.character)})">🔊 Hear</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
- let b=e.target.closest('[data-b]');if(b){let x=GRAMMAR.find(a=>a.id===Number(b.dataset.b));modal(`<div class="eyebrow" style="color:#b54974">BUNPŌ · ${x.id}/100</div><h2 style="font-size:30px">${esc(x.pattern)}</h2><p><b>Meaning:</b> ${esc(x.meaning)}</p><p><b>Formation:</b> ${esc(x.formation)}</p><div style="background:#f7f2f5;padding:12px;border-radius:13px">${esc(x.example)}</div><p><b>💡 Tip:</b> Review this pattern in context and compare it with similar N2 grammar.</p><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify('g'+x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}});
-function speak(t){if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.82;window.speechSynthesis.speak(u)}
-$('#vocabSearch').oninput=e=>{S.vq=e.target.value;S.vp=1;renderV()};$('#kanjiSearch').oninput=e=>{S.kq=e.target.value;S.kp=1;renderK()};$('#bunpoSearch').oninput=e=>{S.bq=e.target.value;S.bp=1;renderB()};
-$('#vp').onclick=()=>{S.vp=Math.max(1,S.vp-1);renderV()};$('#vn').onclick=()=>{S.vp++;renderV()};$('#kp').onclick=()=>{S.kp=Math.max(1,S.kp-1);renderK()};$('#kn').onclick=()=>{S.kp++;renderK()};$('#bp').onclick=()=>{S.bp=Math.max(1,S.bp-1);renderB()};$('#bn').onclick=()=>{S.bp++;renderB()};
-$('#randomVocab').onclick=()=>{if(S.vocab.length){let x=S.vocab[Math.floor(Math.random()*S.vocab.length)];modal('<div class="eyebrow" style="color:#b54974">RANDOM KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading||'')+'</b></p><p>'+esc((x.meanings||[]).join(' · '))+'</p><button class="btn secondary" onclick="speak('+JSON.stringify(x.word)+')">🔊 Listen</button>'})};
-$('#randomKanji').onclick=()=>{if(S.kanji.length){let x=S.kanji[Math.floor(Math.random()*S.kanji.length)];modal('<div class="eyebrow" style="color:#b54974">RANDOM KANJI</div><h2 style="font-size:46px">'+esc(x.character)+'</h2><p>'+esc((x.meanings||[]).join(' · '))+'</p><p>Onyomi: '+esc((x.onyomi||[]).join(' · ')||'—')+'<br>Kunyomi: '+esc((x.kunyomi||[]).join(' · ')||'—')+'</p><button class="btn secondary" onclick="speak('+JSON.stringify(x.character)+')">🔊 Hear</button>'})};
-$('#randomBunpo').onclick=()=>{let x=GRAMMAR[Math.floor(Math.random()*GRAMMAR.length)];modal('<div class="eyebrow" style="color:#b54974">RANDOM BUNPŌ · '+x.id+'/100</div><h2>'+esc(x.pattern)+'</h2><p>'+esc(x.meaning)+'</p>')};
+const state={
+  xp:120,
+  completed:{start:true,kanji:false,kotoba:false,bunpo:false,reading:false,listening:false,mock:false},
+  mockStarted:false,mockSeconds:300
+};
 
-const listen=[
-['明日の会議は何時からですか？',['8時からです。','駅からです。','昨日からです。'],0,'明日の会議は、午前9時からではなく、10時から始まります。'],
-['この電車は新宿に行きますか？',['はい、行きます。','10分です。','右です。'],0,'はい、新宿に行きます。ただし、次の駅で乗り換えてください。'],
-['田中さんは今日来ますか？',['はい、午後から来るそうです。','二階の部屋です。','来週の資料です。'],0,'田中さんは、午前中は別の仕事があるので、午後から来るそうです。'],
-['この店、予約が必要ですか？',['今日は必要ありません。','駅の近くです。','三人でした。'],0,'今日は予約がいっぱいなので必要ありませんが、週末は予約したほうがいいですよ。']
-];
-$('#listenGrid').innerHTML=listen.map((x,i)=>`<div class="listen"><h3>🎧 Sample ${i+1}</h3><p>${esc(x[0])}</p><button class="btn primary" onclick="speak(${JSON.stringify(x[3])},.8)">🔊 PLAY</button><div id="ls${i}">${x[1].map((a,j)=>`<button class="choice" onclick="ansL(${i},${j})">${esc(a)}</button>`).join('')}</div><div class="feedback" id="lf${i}"></div><button class="btn secondary" onclick="document.getElementById('sc'+${i}).style.display='block'">Show transcript</button><div id="sc${i}" class="script">${esc(x[3])}</div></div>`).join('');
-function ansL(i,j){let x=listen[i],f=$('#lf'+i);if(f.dataset.done)return;f.dataset.done='1';if(j===x[2]){f.textContent='🎉 正解！ +10 XP';xp(10)}else f.textContent='🌱 Not quite. Listen again and check the transcript.';$$(`#ls${i} .choice`).forEach((b,n)=>{b.disabled=true;if(n===x[2])b.classList.add('correct');if(n===j&&n!==x[2])b.classList.add('wrong')})}
-window.speak=(t,r=.9)=>{if(!('speechSynthesis'in window))return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=r;speechSynthesis.speak(u)}
-let mockQ=[['彼は忙しい（　　）、毎日勉強している。',['ものの','ながらも','ばかりか','ことから'],1],['この教材は初心者（　　）作られている。',['向けに','向きに','として','に際して'],0],['努力した（　　）、合格できた。',['結果','わけ','ばかり','際'],0]],mi=0,ms=0,mt=null,sec=300;
-$('#startMock').onclick=()=>{if(mt)return;$('#startMock').style.display='none';mi=0;ms=0;sec=300;mt=setInterval(()=>{sec--;let m=String(Math.floor(sec/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');$('#mockTimer').textContent=m+':'+s;if(sec<=0)finishMock()},1000);renderMQ()}
-function renderMQ(){let q=mockQ[mi];$('#mockTitle').textContent='Question '+(mi+1)+' / '+mockQ.length;$('#mockArea').innerHTML='<div class="lesson"><p style="font-weight:900">'+q[0]+'</p>'+q[1].map((a,i)=>`<button class="choice" data-mi="${i}">${a}</button>`).join('')+'<div id="mf" class="feedback"></div></div>'}
-$('#mockArea').onclick=e=>{let b=e.target.closest('[data-mi]');if(!b)return;let q=mockQ[mi],i=+b.dataset.mi;$('#mockArea').querySelectorAll('.choice').forEach(x=>x.disabled=true);if(i===q[2]){ms++;xp(10);$('#mf').textContent='🎉 Correct! +10 XP'}else $('#mf').textContent='🌱 '+['Review this grammar point and try again.'][0];setTimeout(()=>{mi++;if(mi>=mockQ.length)finishMock();else renderMQ()},650)}
-function finishMock(){if(mt)clearInterval(mt);mt=null;$('#mockTimer').textContent='DONE';$('#mockTitle').textContent='Result';$('#mockArea').innerHTML='<div class="result"><h2>🏆 Mini Mock Complete</h2><p>Score: <b>'+ms+'/'+mockQ.length+'</b></p><p>Every mistake is a study clue. ♡</p><button class="btn primary" onclick="location.reload()">TRY AGAIN</button></div>'}
-stats();renderB();load();
-</script></body></html>
+const $=(s)=>document.querySelector(s);
+const $$=(s)=>document.querySelectorAll(s);
+
+function showScreen(id){
+  $$('.screen').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>{
+  const target=b.dataset.screen;
+  if(canEnter(target)) showScreen(target);
+}));
+
+function addXP(n){
+  state.xp+=n;
+  $('#xp').textContent=state.xp;
+}
+
+const unlockMap={
+  kanji:'start',
+  kotoba:'kanji',
+  bunpo:'kotoba',
+  reading:'bunpo',
+  listening:'reading',
+  mock:'listening'
+};
+
+function canEnter(id){
+  const needs=unlockMap[id];
+  if(!needs || state.completed[needs]) return true;
+  showToast('🔒 Finish the previous mission first!');
+  return false;
+}
+
+function showToast(message){
+  let toast=$('#toast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='toast';
+    toast.style.cssText='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:9999;background:#fff;color:#1d191e;padding:12px 16px;border-radius:14px;border:1px solid #e8e0e6;font-weight:800;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:calc(100% - 28px);text-align:center';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=message;
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>toast.remove(),1800);
+}
+
+function complete(id,xp=20){
+  if(state.completed[id]) return;
+  state.completed[id]=true;
+  addXP(xp);
+  refreshJourney();
+}
+
+function refreshJourney(){
+  const ids=['kanji','kotoba','bunpo','reading','listening','mock'];
+  const done=ids.filter(id=>state.completed[id]).length;
+  const pct=Math.round((done/(ids.length+1))*100);
+  $('#progressText').textContent=pct+'%';
+  $('#progressFill').style.width=Math.max(8,pct)+'%';
+  $('#journeyPercent').textContent=pct+'% complete';
+
+  const labels={kanji:'02',kotoba:'03',bunpo:'04',reading:'05',listening:'06',mock:'07'};
+  ids.forEach((id,i)=>{
+    const q=document.querySelector(`.node-${id}`);
+    if(!q)return;
+    const doneNow=state.completed[id];
+    const next=ids.find(x=>!state.completed[x])===id;
+    q.classList.toggle('done',doneNow);
+    q.classList.toggle('current',next);
+    q.classList.toggle('locked',!doneNow && !next);
+    const tag=q.querySelector('.tag');
+    if(tag) tag.textContent=doneNow?'DONE ✓':next?'NOW':'LOCKED';
+    const meta=q.querySelector('.jmeta');
+    if(meta && doneNow) meta.textContent='Mission complete · +XP earned ✨';
+  });
+}
+
+function makeQuestion(host,question,answers,correct,explanation,xp=10,onCorrect){
+  const el=$(host);
+  el.innerHTML='<h3>'+question+'</h3>'+
+    answers.map((a,i)=>'<button class="choice" data-i="'+i+'">'+a+'</button>').join('')+
+    '<div class="feedback" aria-live="polite"></div>';
+  el.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.choice');
+    if(!btn || btn.disabled)return;
+    const buttons=el.querySelectorAll('.choice');
+    buttons.forEach(x=>x.disabled=true);
+    const i=Number(btn.dataset.i);
+    if(i===correct){
+      btn.classList.add('correct');
+      el.querySelector('.feedback').textContent='🎉 正解！ +'+xp+' XP';
+      addXP(xp);
+      if(onCorrect) onCorrect();
+    }else{
+      btn.classList.add('wrong');
+      buttons[correct].classList.add('correct');
+      el.querySelector('.feedback').textContent='🌱 Not quite. '+explanation;
+    }
+  });
+}
+
+makeQuestion('#kanjiQ','「改善」の読み方は？',
+  ['かいせん','かいぜん','かいせい','かえん'],1,
+  '「改善」は かいぜん と読みます。',10,()=>complete('kanji',40));
+
+makeQuestion('#bunpoQ','日本語が嫌いな（　　）。',
+  ['わけではない','ことにする','ようになる','ばかりだ'],0,
+  '「わけではない」は部分的な否定です。',10,()=>complete('bunpo',40));
+
+makeQuestion('#readingQ','筆者が大切だと言っていることは？',
+  ['必ず早起きすること','仕事を増やすこと','自分に合った生活リズムを見つけること','朝に運動すること'],2,
+  '本文の最後にあります。',10,()=>complete('reading',50));
+
+makeQuestion('#listeningQ','最も自然な返事は？',
+  ['はい、9時からです。','いいえ、昨日です。','9時を食べます。','会議は高いです。'],0,
+  '時間を確認する質問なので「はい、9時からです」が自然です。',10,()=>complete('listening',50));
+
+const wordBtn=$('#knowWord');
+wordBtn.addEventListener('click',()=>{
+  if(state.completed.kotoba)return;
+  addXP(10);
+  complete('kotoba',40);
+  wordBtn.textContent='✅ Kotoba complete! +40 XP';
+  wordBtn.disabled=true;
+  showToast('💬 Kotoba unlocked Bunpō!');
+  refreshJourney();
+});
+
+function unlockMockButton(){
+  const btn=document.querySelector('[data-screen="mock"]');
+  if(btn) btn.disabled=!canEnter('mock');
+}
+
+let timerInterval;
+function startMock(){
+  if(state.mockStarted)return;
+  state.mockStarted=true;
+  timerInterval=setInterval(()=>{
+    state.mockSeconds--;
+    const m=String(Math.floor(state.mockSeconds/60)).padStart(2,'0');
+    const s=String(state.mockSeconds%60).padStart(2,'0');
+    $('#timer').textContent=m+':'+s;
+    if(state.mockSeconds<=0){
+      clearInterval(timerInterval);
+      $('#mockResult').hidden=false;
+      $('#mockResult').innerHTML='<strong>⏰ Time!</strong><br><span style="color:#aaa">Review your mistakes and try again.</span>';
+    }
+  },1000);
+}
+
+document.querySelector('#mockQ').addEventListener('click',()=>{
+  startMock();
+  if(!document.querySelector('#mockQ .finish-mock')){
+    const b=document.createElement('button');
+    b.className='btn btn-pink finish-mock';
+    b.textContent='🏁 Finish Mini Mock';
+    b.type='button';
+    b.addEventListener('click',()=>{
+      clearInterval(timerInterval);
+      complete('mock',100);
+      $('#mockResult').hidden=false;
+      $('#mockResult').innerHTML='<strong>🏆 Mock complete!</strong><br><span style="color:#aaa">You did it. Now review and come back stronger.</span>';
+      showToast('🏆 N2gether milestone unlocked!');
+    });
+    document.querySelector('#mockQ').appendChild(b);
+  }
+},{once:true});
+
+document.querySelectorAll('.node').forEach((node)=>{
+  const card=node.querySelector('.jcard');
+  const title=card?.querySelector('h3')?.textContent||'';
+  const map=[['02 · 漢字','kanji'],['03 · 言葉','kotoba'],['04 · 文法','bunpo'],['05 · 読解','reading'],['06 · 聴解','listening'],['07 · 模擬試験','mock']];
+  const match=map.find(([prefix])=>title.startsWith(prefix));
+  if(match){
+    node.classList.add('node-'+match[1]);
+  }
+});
+
+refreshJourney();
+</script>
+</body>
+</html>
