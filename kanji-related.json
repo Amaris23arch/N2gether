@@ -1,0 +1,1181 @@
+[
+  {
+    "id": "r1",
+    "character": "働",
+    "reading": "はたらく",
+    "meaning": "to work",
+    "word": "労働",
+    "wordReading": "ろうどう",
+    "wordMeaning": "labor/work"
+  },
+  {
+    "id": "r2",
+    "character": "研",
+    "reading": "けん",
+    "meaning": "research",
+    "word": "研究",
+    "wordReading": "けんきゅう",
+    "wordMeaning": "research"
+  },
+  {
+    "id": "r3",
+    "character": "究",
+    "reading": "きゅう",
+    "meaning": "investigate",
+    "word": "研究",
+    "wordReading": "けんきゅう",
+    "wordMeaning": "research"
+  },
+  {
+    "id": "r4",
+    "character": "経",
+    "reading": "けい",
+    "meaning": "experience/manage",
+    "word": "経験",
+    "wordReading": "けいけん",
+    "wordMeaning": "experience"
+  },
+  {
+    "id": "r5",
+    "character": "験",
+    "reading": "けん",
+    "meaning": "experience/test",
+    "word": "経験",
+    "wordReading": "けいけん",
+    "wordMeaning": "experience"
+  },
+  {
+    "id": "r6",
+    "character": "営",
+    "reading": "えい",
+    "meaning": "operate",
+    "word": "営業",
+    "wordReading": "えいぎょう",
+    "wordMeaning": "business"
+  },
+  {
+    "id": "r7",
+    "character": "職",
+    "reading": "しょく",
+    "meaning": "occupation",
+    "word": "職業",
+    "wordReading": "しょくぎょう",
+    "wordMeaning": "occupation"
+  },
+  {
+    "id": "r8",
+    "character": "務",
+    "reading": "む",
+    "meaning": "duty",
+    "word": "勤務",
+    "wordReading": "きんむ",
+    "wordMeaning": "service/work"
+  },
+  {
+    "id": "r9",
+    "character": "給",
+    "reading": "きゅう",
+    "meaning": "salary",
+    "word": "給与",
+    "wordReading": "きゅうよ",
+    "wordMeaning": "salary"
+  },
+  {
+    "id": "r10",
+    "character": "費",
+    "reading": "ひ",
+    "meaning": "cost",
+    "word": "費用",
+    "wordReading": "ひよう",
+    "wordMeaning": "cost"
+  },
+  {
+    "id": "r11",
+    "character": "税",
+    "reading": "ぜい",
+    "meaning": "tax",
+    "word": "税金",
+    "wordReading": "ぜいきん",
+    "wordMeaning": "tax"
+  },
+  {
+    "id": "r12",
+    "character": "価",
+    "reading": "か",
+    "meaning": "value/price",
+    "word": "価格",
+    "wordReading": "かかく",
+    "wordMeaning": "price"
+  },
+  {
+    "id": "r13",
+    "character": "資",
+    "reading": "し",
+    "meaning": "resources/capital",
+    "word": "資源",
+    "wordReading": "しげん",
+    "wordMeaning": "resources"
+  },
+  {
+    "id": "r14",
+    "character": "源",
+    "reading": "げん",
+    "meaning": "source",
+    "word": "資源",
+    "wordReading": "しげん",
+    "wordMeaning": "resources"
+  },
+  {
+    "id": "r15",
+    "character": "産",
+    "reading": "さん",
+    "meaning": "produce/industry",
+    "word": "産業",
+    "wordReading": "さんぎょう",
+    "wordMeaning": "industry"
+  },
+  {
+    "id": "r16",
+    "character": "輸",
+    "reading": "ゆ",
+    "meaning": "transport",
+    "word": "輸出",
+    "wordReading": "ゆしゅつ",
+    "wordMeaning": "export"
+  },
+  {
+    "id": "r17",
+    "character": "貿",
+    "reading": "ぼう",
+    "meaning": "trade",
+    "word": "貿易",
+    "wordReading": "ぼうえき",
+    "wordMeaning": "trade"
+  },
+  {
+    "id": "r18",
+    "character": "易",
+    "reading": "えき",
+    "meaning": "trade/easy",
+    "word": "貿易",
+    "wordReading": "ぼうえき",
+    "wordMeaning": "trade"
+  },
+  {
+    "id": "r19",
+    "character": "政",
+    "reading": "せい",
+    "meaning": "politics",
+    "word": "政治",
+    "wordReading": "せいじ",
+    "wordMeaning": "politics"
+  },
+  {
+    "id": "r20",
+    "character": "治",
+    "reading": "じ",
+    "meaning": "govern",
+    "word": "政治",
+    "wordReading": "せいじ",
+    "wordMeaning": "politics"
+  },
+  {
+    "id": "r21",
+    "character": "法",
+    "reading": "ほう",
+    "meaning": "law/method",
+    "word": "法律",
+    "wordReading": "ほうりつ",
+    "wordMeaning": "law"
+  },
+  {
+    "id": "r22",
+    "character": "律",
+    "reading": "りつ",
+    "meaning": "law/rule",
+    "word": "法律",
+    "wordReading": "ほうりつ",
+    "wordMeaning": "law"
+  },
+  {
+    "id": "r23",
+    "character": "議",
+    "reading": "ぎ",
+    "meaning": "discussion",
+    "word": "議論",
+    "wordReading": "ぎろん",
+    "wordMeaning": "discussion"
+  },
+  {
+    "id": "r24",
+    "character": "論",
+    "reading": "ろん",
+    "meaning": "argument/theory",
+    "word": "議論",
+    "wordReading": "ぎろん",
+    "wordMeaning": "discussion"
+  },
+  {
+    "id": "r25",
+    "character": "際",
+    "reading": "さい",
+    "meaning": "occasion",
+    "word": "国際",
+    "wordReading": "こくさい",
+    "wordMeaning": "international"
+  },
+  {
+    "id": "r26",
+    "character": "環",
+    "reading": "かん",
+    "meaning": "environment",
+    "word": "環境",
+    "wordReading": "かんきょう",
+    "wordMeaning": "environment"
+  },
+  {
+    "id": "r27",
+    "character": "境",
+    "reading": "きょう",
+    "meaning": "boundary/environment",
+    "word": "環境",
+    "wordReading": "かんきょう",
+    "wordMeaning": "environment"
+  },
+  {
+    "id": "r28",
+    "character": "状",
+    "reading": "じょう",
+    "meaning": "condition",
+    "word": "状況",
+    "wordReading": "じょうきょう",
+    "wordMeaning": "situation"
+  },
+  {
+    "id": "r29",
+    "character": "況",
+    "reading": "きょう",
+    "meaning": "condition",
+    "word": "状況",
+    "wordReading": "じょうきょう",
+    "wordMeaning": "situation"
+  },
+  {
+    "id": "r30",
+    "character": "情",
+    "reading": "じょう",
+    "meaning": "feeling/information",
+    "word": "情報",
+    "wordReading": "じょうほう",
+    "wordMeaning": "information"
+  },
+  {
+    "id": "r31",
+    "character": "報",
+    "reading": "ほう",
+    "meaning": "report/information",
+    "word": "情報",
+    "wordReading": "じょうほう",
+    "wordMeaning": "information"
+  },
+  {
+    "id": "r32",
+    "character": "機",
+    "reading": "き",
+    "meaning": "machine/chance",
+    "word": "機会",
+    "wordReading": "きかい",
+    "wordMeaning": "opportunity"
+  },
+  {
+    "id": "r33",
+    "character": "能",
+    "reading": "のう",
+    "meaning": "ability/function",
+    "word": "能力",
+    "wordReading": "のうりょく",
+    "wordMeaning": "ability"
+  },
+  {
+    "id": "r34",
+    "character": "性",
+    "reading": "せい",
+    "meaning": "nature/possibility",
+    "word": "可能性",
+    "wordReading": "かのうせい",
+    "wordMeaning": "possibility"
+  },
+  {
+    "id": "r35",
+    "character": "可",
+    "reading": "か",
+    "meaning": "possible",
+    "word": "可能",
+    "wordReading": "かのう",
+    "wordMeaning": "possible"
+  },
+  {
+    "id": "r36",
+    "character": "必",
+    "reading": "ひつ",
+    "meaning": "must/necessary",
+    "word": "必要",
+    "wordReading": "ひつよう",
+    "wordMeaning": "necessary"
+  },
+  {
+    "id": "r37",
+    "character": "要",
+    "reading": "よう",
+    "meaning": "need/main point",
+    "word": "必要",
+    "wordReading": "ひつよう",
+    "wordMeaning": "necessary"
+  },
+  {
+    "id": "r38",
+    "character": "効",
+    "reading": "こう",
+    "meaning": "effect",
+    "word": "効果",
+    "wordReading": "こうか",
+    "wordMeaning": "effect"
+  },
+  {
+    "id": "r39",
+    "character": "果",
+    "reading": "か",
+    "meaning": "result",
+    "word": "効果",
+    "wordReading": "こうか",
+    "wordMeaning": "effect"
+  },
+  {
+    "id": "r40",
+    "character": "増",
+    "reading": "ぞう",
+    "meaning": "increase",
+    "word": "増加",
+    "wordReading": "ぞうか",
+    "wordMeaning": "increase"
+  },
+  {
+    "id": "r41",
+    "character": "加",
+    "reading": "か",
+    "meaning": "add",
+    "word": "増加",
+    "wordReading": "ぞうか",
+    "wordMeaning": "increase"
+  },
+  {
+    "id": "r42",
+    "character": "減",
+    "reading": "げん",
+    "meaning": "decrease",
+    "word": "減少",
+    "wordReading": "げんしょう",
+    "wordMeaning": "decrease"
+  },
+  {
+    "id": "r43",
+    "character": "少",
+    "reading": "しょう",
+    "meaning": "few/less",
+    "word": "減少",
+    "wordReading": "げんしょう",
+    "wordMeaning": "decrease"
+  },
+  {
+    "id": "r44",
+    "character": "比",
+    "reading": "ひ",
+    "meaning": "compare",
+    "word": "比較",
+    "wordReading": "ひかく",
+    "wordMeaning": "comparison"
+  },
+  {
+    "id": "r45",
+    "character": "較",
+    "reading": "かく",
+    "meaning": "compare",
+    "word": "比較",
+    "wordReading": "ひかく",
+    "wordMeaning": "comparison"
+  },
+  {
+    "id": "r46",
+    "character": "選",
+    "reading": "せん",
+    "meaning": "choose",
+    "word": "選択",
+    "wordReading": "せんたく",
+    "wordMeaning": "selection"
+  },
+  {
+    "id": "r47",
+    "character": "択",
+    "reading": "たく",
+    "meaning": "choose",
+    "word": "選択",
+    "wordReading": "せんたく",
+    "wordMeaning": "selection"
+  },
+  {
+    "id": "r48",
+    "character": "決",
+    "reading": "けつ",
+    "meaning": "decide",
+    "word": "決定",
+    "wordReading": "けってい",
+    "wordMeaning": "decision"
+  },
+  {
+    "id": "r49",
+    "character": "定",
+    "reading": "てい",
+    "meaning": "fix/decide",
+    "word": "決定",
+    "wordReading": "けってい",
+    "wordMeaning": "decision"
+  },
+  {
+    "id": "r50",
+    "character": "解",
+    "reading": "かい",
+    "meaning": "solve/understand",
+    "word": "理解",
+    "wordReading": "りかい",
+    "wordMeaning": "understanding"
+  },
+  {
+    "id": "r51",
+    "character": "理",
+    "reading": "り",
+    "meaning": "reason",
+    "word": "理解",
+    "wordReading": "りかい",
+    "wordMeaning": "understanding"
+  },
+  {
+    "id": "r52",
+    "character": "認",
+    "reading": "にん",
+    "meaning": "recognize",
+    "word": "確認",
+    "wordReading": "かくにん",
+    "wordMeaning": "confirmation"
+  },
+  {
+    "id": "r53",
+    "character": "確",
+    "reading": "かく",
+    "meaning": "certain",
+    "word": "確認",
+    "wordReading": "かくにん",
+    "wordMeaning": "confirmation"
+  },
+  {
+    "id": "r54",
+    "character": "調",
+    "reading": "ちょう",
+    "meaning": "investigate",
+    "word": "調査",
+    "wordReading": "ちょうさ",
+    "wordMeaning": "investigation"
+  },
+  {
+    "id": "r55",
+    "character": "査",
+    "reading": "さ",
+    "meaning": "inspect",
+    "word": "調査",
+    "wordReading": "ちょうさ",
+    "wordMeaning": "investigation"
+  },
+  {
+    "id": "r56",
+    "character": "結",
+    "reading": "けつ",
+    "meaning": "tie/result",
+    "word": "結果",
+    "wordReading": "けっか",
+    "wordMeaning": "result"
+  },
+  {
+    "id": "r57",
+    "character": "原",
+    "reading": "げん",
+    "meaning": "origin/cause",
+    "word": "原因",
+    "wordReading": "げんいん",
+    "wordMeaning": "cause"
+  },
+  {
+    "id": "r58",
+    "character": "因",
+    "reading": "いん",
+    "meaning": "cause",
+    "word": "原因",
+    "wordReading": "げんいん",
+    "wordMeaning": "cause"
+  },
+  {
+    "id": "r59",
+    "character": "影",
+    "reading": "えい",
+    "meaning": "shadow/influence",
+    "word": "影響",
+    "wordReading": "えいきょう",
+    "wordMeaning": "influence"
+  },
+  {
+    "id": "r60",
+    "character": "響",
+    "reading": "きょう",
+    "meaning": "echo/influence",
+    "word": "影響",
+    "wordReading": "えいきょう",
+    "wordMeaning": "influence"
+  },
+  {
+    "id": "r61",
+    "character": "対",
+    "reading": "たい",
+    "meaning": "against/response",
+    "word": "対策",
+    "wordReading": "たいさく",
+    "wordMeaning": "measure"
+  },
+  {
+    "id": "r62",
+    "character": "策",
+    "reading": "さく",
+    "meaning": "plan/measure",
+    "word": "対策",
+    "wordReading": "たいさく",
+    "wordMeaning": "measure"
+  },
+  {
+    "id": "r63",
+    "character": "防",
+    "reading": "ぼう",
+    "meaning": "prevent",
+    "word": "防止",
+    "wordReading": "ぼうし",
+    "wordMeaning": "prevention"
+  },
+  {
+    "id": "r64",
+    "character": "止",
+    "reading": "し",
+    "meaning": "stop",
+    "word": "防止",
+    "wordReading": "ぼうし",
+    "wordMeaning": "prevention"
+  },
+  {
+    "id": "r65",
+    "character": "改",
+    "reading": "かい",
+    "meaning": "reform",
+    "word": "改善",
+    "wordReading": "かいぜん",
+    "wordMeaning": "improvement"
+  },
+  {
+    "id": "r66",
+    "character": "善",
+    "reading": "ぜん",
+    "meaning": "good",
+    "word": "改善",
+    "wordReading": "かいぜん",
+    "wordMeaning": "improvement"
+  },
+  {
+    "id": "r67",
+    "character": "保",
+    "reading": "ほ",
+    "meaning": "protect",
+    "word": "保存",
+    "wordReading": "ほぞん",
+    "wordMeaning": "preservation"
+  },
+  {
+    "id": "r68",
+    "character": "存",
+    "reading": "そん",
+    "meaning": "exist/preserve",
+    "word": "保存",
+    "wordReading": "ほぞん",
+    "wordMeaning": "preservation"
+  },
+  {
+    "id": "r69",
+    "character": "維",
+    "reading": "い",
+    "meaning": "maintain",
+    "word": "維持",
+    "wordReading": "いじ",
+    "wordMeaning": "maintenance"
+  },
+  {
+    "id": "r70",
+    "character": "持",
+    "reading": "じ",
+    "meaning": "hold/maintain",
+    "word": "維持",
+    "wordReading": "いじ",
+    "wordMeaning": "maintenance"
+  },
+  {
+    "id": "r71",
+    "character": "発",
+    "reading": "はつ",
+    "meaning": "emit/start",
+    "word": "発展",
+    "wordReading": "はってん",
+    "wordMeaning": "development"
+  },
+  {
+    "id": "r72",
+    "character": "展",
+    "reading": "てん",
+    "meaning": "develop",
+    "word": "発展",
+    "wordReading": "はってん",
+    "wordMeaning": "development"
+  },
+  {
+    "id": "r73",
+    "character": "成",
+    "reading": "せい",
+    "meaning": "achieve/become",
+    "word": "成功",
+    "wordReading": "せいこう",
+    "wordMeaning": "success"
+  },
+  {
+    "id": "r74",
+    "character": "功",
+    "reading": "こう",
+    "meaning": "achievement",
+    "word": "成功",
+    "wordReading": "せいこう",
+    "wordMeaning": "success"
+  },
+  {
+    "id": "r75",
+    "character": "失",
+    "reading": "しつ",
+    "meaning": "lose/fail",
+    "word": "失敗",
+    "wordReading": "しっぱい",
+    "wordMeaning": "failure"
+  },
+  {
+    "id": "r76",
+    "character": "敗",
+    "reading": "はい",
+    "meaning": "defeat/fail",
+    "word": "失敗",
+    "wordReading": "しっぱい",
+    "wordMeaning": "failure"
+  },
+  {
+    "id": "r77",
+    "character": "長",
+    "reading": "ちょう",
+    "meaning": "grow/long",
+    "word": "成長",
+    "wordReading": "せいちょう",
+    "wordMeaning": "growth"
+  },
+  {
+    "id": "r78",
+    "character": "常",
+    "reading": "じょう",
+    "meaning": "usual/normal",
+    "word": "通常",
+    "wordReading": "つうじょう",
+    "wordMeaning": "normally"
+  },
+  {
+    "id": "r79",
+    "character": "通",
+    "reading": "つう",
+    "meaning": "pass/common",
+    "word": "通常",
+    "wordReading": "つうじょう",
+    "wordMeaning": "normally"
+  },
+  {
+    "id": "r80",
+    "character": "例",
+    "reading": "れい",
+    "meaning": "example",
+    "word": "例えば",
+    "wordReading": "たとえば",
+    "wordMeaning": "for example"
+  },
+  {
+    "id": "r81",
+    "character": "複",
+    "reading": "ふく",
+    "meaning": "multiple/complex",
+    "word": "複雑",
+    "wordReading": "ふくざつ",
+    "wordMeaning": "complex"
+  },
+  {
+    "id": "r82",
+    "character": "雑",
+    "reading": "ざつ",
+    "meaning": "miscellaneous",
+    "word": "複雑",
+    "wordReading": "ふくざつ",
+    "wordMeaning": "complex"
+  },
+  {
+    "id": "r83",
+    "character": "簡",
+    "reading": "かん",
+    "meaning": "simple",
+    "word": "簡単",
+    "wordReading": "かんたん",
+    "wordMeaning": "simple"
+  },
+  {
+    "id": "r84",
+    "character": "単",
+    "reading": "たん",
+    "meaning": "single/simple",
+    "word": "簡単",
+    "wordReading": "かんたん",
+    "wordMeaning": "simple"
+  },
+  {
+    "id": "r85",
+    "character": "適",
+    "reading": "てき",
+    "meaning": "suitable",
+    "word": "適切",
+    "wordReading": "てきせつ",
+    "wordMeaning": "appropriate"
+  },
+  {
+    "id": "r86",
+    "character": "切",
+    "reading": "せつ",
+    "meaning": "cut/suitable",
+    "word": "適切",
+    "wordReading": "てきせつ",
+    "wordMeaning": "appropriate"
+  },
+  {
+    "id": "r87",
+    "character": "余",
+    "reading": "よ",
+    "meaning": "surplus/leeway",
+    "word": "余裕",
+    "wordReading": "よゆう",
+    "wordMeaning": "leeway"
+  },
+  {
+    "id": "r88",
+    "character": "裕",
+    "reading": "ゆう",
+    "meaning": "abundance",
+    "word": "余裕",
+    "wordReading": "よゆう",
+    "wordMeaning": "leeway"
+  },
+  {
+    "id": "r89",
+    "character": "判",
+    "reading": "はん",
+    "meaning": "judge",
+    "word": "判断",
+    "wordReading": "はんだん",
+    "wordMeaning": "judgment"
+  },
+  {
+    "id": "r90",
+    "character": "断",
+    "reading": "だん",
+    "meaning": "decide/cut",
+    "word": "判断",
+    "wordReading": "はんだん",
+    "wordMeaning": "judgment"
+  },
+  {
+    "id": "r91",
+    "character": "予",
+    "reading": "よ",
+    "meaning": "beforehand",
+    "word": "予定",
+    "wordReading": "よてい",
+    "wordMeaning": "plan"
+  },
+  {
+    "id": "r92",
+    "character": "準",
+    "reading": "じゅん",
+    "meaning": "prepare/standard",
+    "word": "準備",
+    "wordReading": "じゅんび",
+    "wordMeaning": "preparation"
+  },
+  {
+    "id": "r93",
+    "character": "備",
+    "reading": "び",
+    "meaning": "prepare/equipment",
+    "word": "準備",
+    "wordReading": "じゅんび",
+    "wordMeaning": "preparation"
+  },
+  {
+    "id": "r94",
+    "character": "連",
+    "reading": "れん",
+    "meaning": "connect",
+    "word": "連絡",
+    "wordReading": "れんらく",
+    "wordMeaning": "contact"
+  },
+  {
+    "id": "r95",
+    "character": "絡",
+    "reading": "らく",
+    "meaning": "contact/entangle",
+    "word": "連絡",
+    "wordReading": "れんらく",
+    "wordMeaning": "contact"
+  },
+  {
+    "id": "r96",
+    "character": "提",
+    "reading": "てい",
+    "meaning": "present/propose",
+    "word": "提案",
+    "wordReading": "ていあん",
+    "wordMeaning": "proposal"
+  },
+  {
+    "id": "r97",
+    "character": "案",
+    "reading": "あん",
+    "meaning": "plan/proposal",
+    "word": "提案",
+    "wordReading": "ていあん",
+    "wordMeaning": "proposal"
+  },
+  {
+    "id": "r98",
+    "character": "達",
+    "reading": "たつ",
+    "meaning": "reach/achieve",
+    "word": "達成",
+    "wordReading": "たっせい",
+    "wordMeaning": "achievement"
+  },
+  {
+    "id": "r99",
+    "character": "実",
+    "reading": "じつ",
+    "meaning": "real",
+    "word": "実現",
+    "wordReading": "じつげん",
+    "wordMeaning": "realization"
+  },
+  {
+    "id": "r100",
+    "character": "現",
+    "reading": "げん",
+    "meaning": "appear/realize",
+    "word": "実現",
+    "wordReading": "じつげん",
+    "wordMeaning": "realization"
+  },
+  {
+    "id": "r101",
+    "character": "傾",
+    "reading": "けい",
+    "meaning": "lean/tendency",
+    "word": "傾向",
+    "wordReading": "けいこう",
+    "wordMeaning": "tendency"
+  },
+  {
+    "id": "r102",
+    "character": "向",
+    "reading": "こう",
+    "meaning": "direction",
+    "word": "傾向",
+    "wordReading": "けいこう",
+    "wordMeaning": "tendency"
+  },
+  {
+    "id": "r103",
+    "character": "態",
+    "reading": "たい",
+    "meaning": "state/attitude",
+    "word": "態度",
+    "wordReading": "たいど",
+    "wordMeaning": "attitude"
+  },
+  {
+    "id": "r104",
+    "character": "度",
+    "reading": "ど",
+    "meaning": "degree",
+    "word": "態度",
+    "wordReading": "たいど",
+    "wordMeaning": "attitude"
+  },
+  {
+    "id": "r105",
+    "character": "含",
+    "reading": "がん",
+    "meaning": "include",
+    "word": "含む",
+    "wordReading": "ふくむ",
+    "wordMeaning": "to include"
+  },
+  {
+    "id": "r106",
+    "character": "承",
+    "reading": "しょう",
+    "meaning": "accept",
+    "word": "承認",
+    "wordReading": "しょうにん",
+    "wordMeaning": "approval"
+  },
+  {
+    "id": "r107",
+    "character": "責",
+    "reading": "せき",
+    "meaning": "responsibility",
+    "word": "責任",
+    "wordReading": "せきにん",
+    "wordMeaning": "responsibility"
+  },
+  {
+    "id": "r108",
+    "character": "任",
+    "reading": "にん",
+    "meaning": "entrust/responsibility",
+    "word": "責任",
+    "wordReading": "せきにん",
+    "wordMeaning": "responsibility"
+  },
+  {
+    "id": "r109",
+    "character": "信",
+    "reading": "しん",
+    "meaning": "trust",
+    "word": "信頼",
+    "wordReading": "しんらい",
+    "wordMeaning": "trust"
+  },
+  {
+    "id": "r110",
+    "character": "頼",
+    "reading": "らい",
+    "meaning": "rely",
+    "word": "信頼",
+    "wordReading": "しんらい",
+    "wordMeaning": "trust"
+  },
+  {
+    "id": "r111",
+    "character": "評",
+    "reading": "ひょう",
+    "meaning": "evaluate",
+    "word": "評価",
+    "wordReading": "ひょうか",
+    "wordMeaning": "evaluation"
+  },
+  {
+    "id": "r112",
+    "character": "象",
+    "reading": "しょう",
+    "meaning": "image/phenomenon",
+    "word": "印象",
+    "wordReading": "いんしょう",
+    "wordMeaning": "impression"
+  },
+  {
+    "id": "r113",
+    "character": "印",
+    "reading": "いん",
+    "meaning": "mark/imprint",
+    "word": "印象",
+    "wordReading": "いんしょう",
+    "wordMeaning": "impression"
+  },
+  {
+    "id": "r114",
+    "character": "特",
+    "reading": "とく",
+    "meaning": "special",
+    "word": "特徴",
+    "wordReading": "とくちょう",
+    "wordMeaning": "feature"
+  },
+  {
+    "id": "r115",
+    "character": "徴",
+    "reading": "ちょう",
+    "meaning": "feature/sign",
+    "word": "特徴",
+    "wordReading": "とくちょう",
+    "wordMeaning": "feature"
+  },
+  {
+    "id": "r116",
+    "character": "共",
+    "reading": "きょう",
+    "meaning": "together/common",
+    "word": "共通",
+    "wordReading": "きょうつう",
+    "wordMeaning": "common"
+  },
+  {
+    "id": "r117",
+    "character": "個",
+    "reading": "こ",
+    "meaning": "individual",
+    "word": "個人",
+    "wordReading": "こじん",
+    "wordMeaning": "individual"
+  },
+  {
+    "id": "r118",
+    "character": "集",
+    "reading": "しゅう",
+    "meaning": "gather",
+    "word": "集中",
+    "wordReading": "しゅうちゅう",
+    "wordMeaning": "concentration"
+  },
+  {
+    "id": "r119",
+    "character": "中",
+    "reading": "ちゅう",
+    "meaning": "middle/inside",
+    "word": "集中",
+    "wordReading": "しゅうちゅう",
+    "wordMeaning": "concentration"
+  },
+  {
+    "id": "r120",
+    "character": "注",
+    "reading": "ちゅう",
+    "meaning": "attention",
+    "word": "注意",
+    "wordReading": "ちゅうい",
+    "wordMeaning": "attention"
+  },
+  {
+    "id": "r121",
+    "character": "意",
+    "reading": "い",
+    "meaning": "mind/attention",
+    "word": "注意",
+    "wordReading": "ちゅうい",
+    "wordMeaning": "attention"
+  },
+  {
+    "id": "r122",
+    "character": "普",
+    "reading": "ふ",
+    "meaning": "usual",
+    "word": "普段",
+    "wordReading": "ふだん",
+    "wordMeaning": "usually"
+  },
+  {
+    "id": "r123",
+    "character": "段",
+    "reading": "だん",
+    "meaning": "step/level",
+    "word": "普段",
+    "wordReading": "ふだん",
+    "wordMeaning": "usually"
+  },
+  {
+    "id": "r124",
+    "character": "最",
+    "reading": "さい",
+    "meaning": "most",
+    "word": "最高",
+    "wordReading": "さいこう",
+    "wordMeaning": "highest/best"
+  },
+  {
+    "id": "r125",
+    "character": "低",
+    "reading": "てい",
+    "meaning": "low",
+    "word": "最低",
+    "wordReading": "さいてい",
+    "wordMeaning": "lowest"
+  },
+  {
+    "id": "r126",
+    "character": "全",
+    "reading": "ぜん",
+    "meaning": "all",
+    "word": "全部",
+    "wordReading": "ぜんぶ",
+    "wordMeaning": "all"
+  },
+  {
+    "id": "r127",
+    "character": "部",
+    "reading": "ぶ",
+    "meaning": "part",
+    "word": "全部",
+    "wordReading": "ぜんぶ",
+    "wordMeaning": "all"
+  },
+  {
+    "id": "r128",
+    "character": "各",
+    "reading": "かく",
+    "meaning": "each",
+    "word": "各自",
+    "wordReading": "かくじ",
+    "wordMeaning": "each person"
+  },
+  {
+    "id": "r129",
+    "character": "自",
+    "reading": "じ",
+    "meaning": "self",
+    "word": "各自",
+    "wordReading": "かくじ",
+    "wordMeaning": "each person"
+  },
+  {
+    "id": "r130",
+    "character": "区",
+    "reading": "く",
+    "meaning": "district/divide",
+    "word": "区別",
+    "wordReading": "くべつ",
+    "wordMeaning": "distinction"
+  },
+  {
+    "id": "r131",
+    "character": "別",
+    "reading": "べつ",
+    "meaning": "separate/different",
+    "word": "区別",
+    "wordReading": "くべつ",
+    "wordMeaning": "distinction"
+  }
+]
