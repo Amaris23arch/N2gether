@@ -128,7 +128,7 @@ function modal(body){
   $('#closeModal').onclick=()=>m.className='modal';
 }
 window.speak=speak;
-(body){const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalCard"><button class="close" id="closeModal">×</button>'+body+'</div>';$('#closeModal').onclick=()=>m.className='modal'}
+function modal(body){const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalCard"><button class="close" id="closeModal">×</button>'+body+'</div>';$('#closeModal').onclick=()=>m.className='modal'}
 function slice(a,p,n){return a.slice((p-1)*n,p*n)}
 
 async function load(){
