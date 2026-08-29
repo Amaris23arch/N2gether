@@ -1,0 +1,874 @@
+[
+  {
+    "id": 1,
+    "word": "改善",
+    "reading": "かいぜん",
+    "meaning": "improvement; to improve",
+    "example": "仕事を改善する。",
+    "translation": "Improve the work."
+  },
+  {
+    "id": 2,
+    "word": "環境",
+    "reading": "かんきょう",
+    "meaning": "environment",
+    "example": "環境を守ることが大切だ。",
+    "translation": "Protecting the environment is important."
+  },
+  {
+    "id": 3,
+    "word": "経験",
+    "reading": "けいけん",
+    "meaning": "experience",
+    "example": "海外で働いた経験がある。",
+    "translation": "I have experience working abroad."
+  },
+  {
+    "id": 4,
+    "word": "結果",
+    "reading": "けっか",
+    "meaning": "result",
+    "example": "試験の結果を確認する。",
+    "translation": "Check the exam result."
+  },
+  {
+    "id": 5,
+    "word": "原因",
+    "reading": "げんいん",
+    "meaning": "cause",
+    "example": "事故の原因を調べる。",
+    "translation": "Investigate the cause of the accident."
+  },
+  {
+    "id": 6,
+    "word": "影響",
+    "reading": "えいきょう",
+    "meaning": "influence; effect",
+    "example": "天気は生活に影響する。",
+    "translation": "Weather affects daily life."
+  },
+  {
+    "id": 7,
+    "word": "状況",
+    "reading": "じょうきょう",
+    "meaning": "situation; circumstances",
+    "example": "現在の状況を説明してください。",
+    "translation": "Please explain the current situation."
+  },
+  {
+    "id": 8,
+    "word": "情報",
+    "reading": "じょうほう",
+    "meaning": "information",
+    "example": "必要な情報を集める。",
+    "translation": "Collect the necessary information."
+  },
+  {
+    "id": 9,
+    "word": "可能",
+    "reading": "かのう",
+    "meaning": "possible",
+    "example": "明日の参加は可能ですか。",
+    "translation": "Is it possible to participate tomorrow?"
+  },
+  {
+    "id": 10,
+    "word": "必要",
+    "reading": "ひつよう",
+    "meaning": "necessary",
+    "example": "パスポートが必要です。",
+    "translation": "A passport is necessary."
+  },
+  {
+    "id": 11,
+    "word": "比較",
+    "reading": "ひかく",
+    "meaning": "comparison",
+    "example": "二つの商品を比較する。",
+    "translation": "Compare the two products."
+  },
+  {
+    "id": 12,
+    "word": "選択",
+    "reading": "せんたく",
+    "meaning": "choice; selection",
+    "example": "自分で進路を選択する。",
+    "translation": "Choose your own career path."
+  },
+  {
+    "id": 13,
+    "word": "決定",
+    "reading": "けってい",
+    "meaning": "decision; determination",
+    "example": "日程を決定した。",
+    "translation": "We decided the schedule."
+  },
+  {
+    "id": 14,
+    "word": "理解",
+    "reading": "りかい",
+    "meaning": "understanding",
+    "example": "内容をよく理解する。",
+    "translation": "Understand the content well."
+  },
+  {
+    "id": 15,
+    "word": "確認",
+    "reading": "かくにん",
+    "meaning": "confirmation; check",
+    "example": "時間をもう一度確認する。",
+    "translation": "Check the time once more."
+  },
+  {
+    "id": 16,
+    "word": "調査",
+    "reading": "ちょうさ",
+    "meaning": "investigation; survey",
+    "example": "原因を詳しく調査する。",
+    "translation": "Investigate the cause in detail."
+  },
+  {
+    "id": 17,
+    "word": "対策",
+    "reading": "たいさく",
+    "meaning": "countermeasure; measure",
+    "example": "暑さ対策を考える。",
+    "translation": "Think of measures against the heat."
+  },
+  {
+    "id": 18,
+    "word": "防止",
+    "reading": "ぼうし",
+    "meaning": "prevention",
+    "example": "事故防止に努める。",
+    "translation": "Work to prevent accidents."
+  },
+  {
+    "id": 19,
+    "word": "維持",
+    "reading": "いじ",
+    "meaning": "maintenance; preservation",
+    "example": "健康を維持する。",
+    "translation": "Maintain good health."
+  },
+  {
+    "id": 20,
+    "word": "増加",
+    "reading": "ぞうか",
+    "meaning": "increase",
+    "example": "利用者が増加した。",
+    "translation": "The number of users increased."
+  },
+  {
+    "id": 21,
+    "word": "減少",
+    "reading": "げんしょう",
+    "meaning": "decrease",
+    "example": "人口が減少している。",
+    "translation": "The population is decreasing."
+  },
+  {
+    "id": 22,
+    "word": "成功",
+    "reading": "せいこう",
+    "meaning": "success",
+    "example": "計画は成功した。",
+    "translation": "The plan succeeded."
+  },
+  {
+    "id": 23,
+    "word": "失敗",
+    "reading": "しっぱい",
+    "meaning": "failure; mistake",
+    "example": "失敗から学ぶ。",
+    "translation": "Learn from mistakes."
+  },
+  {
+    "id": 24,
+    "word": "成長",
+    "reading": "せいちょう",
+    "meaning": "growth",
+    "example": "毎日の練習で成長する。",
+    "translation": "Grow through daily practice."
+  },
+  {
+    "id": 25,
+    "word": "予定",
+    "reading": "よてい",
+    "meaning": "plan; schedule",
+    "example": "週末の予定を決める。",
+    "translation": "Decide the weekend plans."
+  },
+  {
+    "id": 26,
+    "word": "準備",
+    "reading": "じゅんび",
+    "meaning": "preparation",
+    "example": "試験の準備をする。",
+    "translation": "Prepare for the exam."
+  },
+  {
+    "id": 27,
+    "word": "連絡",
+    "reading": "れんらく",
+    "meaning": "contact; communication",
+    "example": "到着したら連絡してください。",
+    "translation": "Please contact me when you arrive."
+  },
+  {
+    "id": 28,
+    "word": "提案",
+    "reading": "ていあん",
+    "meaning": "proposal; suggestion",
+    "example": "新しい方法を提案する。",
+    "translation": "Propose a new method."
+  },
+  {
+    "id": 29,
+    "word": "達成",
+    "reading": "たっせい",
+    "meaning": "achievement; accomplishment",
+    "example": "目標を達成した。",
+    "translation": "I achieved my goal."
+  },
+  {
+    "id": 30,
+    "word": "実現",
+    "reading": "じつげん",
+    "meaning": "realization; actualization",
+    "example": "夢を実現する。",
+    "translation": "Make a dream a reality."
+  },
+  {
+    "id": 31,
+    "word": "傾向",
+    "reading": "けいこう",
+    "meaning": "tendency; trend",
+    "example": "最近その傾向が強い。",
+    "translation": "That tendency is strong recently."
+  },
+  {
+    "id": 32,
+    "word": "態度",
+    "reading": "たいど",
+    "meaning": "attitude; manner",
+    "example": "丁寧な態度で話す。",
+    "translation": "Speak with a polite attitude."
+  },
+  {
+    "id": 33,
+    "word": "責任",
+    "reading": "せきにん",
+    "meaning": "responsibility",
+    "example": "自分の行動に責任を持つ。",
+    "translation": "Take responsibility for your actions."
+  },
+  {
+    "id": 34,
+    "word": "信頼",
+    "reading": "しんらい",
+    "meaning": "trust; confidence",
+    "example": "友人を信頼している。",
+    "translation": "I trust my friend."
+  },
+  {
+    "id": 35,
+    "word": "評価",
+    "reading": "ひょうか",
+    "meaning": "evaluation; reputation",
+    "example": "努力が高く評価された。",
+    "translation": "The effort was highly evaluated."
+  },
+  {
+    "id": 36,
+    "word": "特徴",
+    "reading": "とくちょう",
+    "meaning": "feature; characteristic",
+    "example": "この製品の特徴を説明する。",
+    "translation": "Explain this product's features."
+  },
+  {
+    "id": 37,
+    "word": "共通",
+    "reading": "きょうつう",
+    "meaning": "common; shared",
+    "example": "二人には共通点が多い。",
+    "translation": "The two have many things in common."
+  },
+  {
+    "id": 38,
+    "word": "集中",
+    "reading": "しゅうちゅう",
+    "meaning": "concentration; focus",
+    "example": "勉強に集中する。",
+    "translation": "Concentrate on studying."
+  },
+  {
+    "id": 39,
+    "word": "注意",
+    "reading": "ちゅうい",
+    "meaning": "attention; caution",
+    "example": "足元に注意してください。",
+    "translation": "Please watch your step."
+  },
+  {
+    "id": 40,
+    "word": "複雑",
+    "reading": "ふくざつ",
+    "meaning": "complicated; complex",
+    "example": "問題が複雑になった。",
+    "translation": "The problem became complicated."
+  },
+  {
+    "id": 41,
+    "word": "簡単",
+    "reading": "かんたん",
+    "meaning": "simple; easy",
+    "example": "これは簡単な問題です。",
+    "translation": "This is an easy problem."
+  },
+  {
+    "id": 42,
+    "word": "適切",
+    "reading": "てきせつ",
+    "meaning": "appropriate; suitable",
+    "example": "適切な言葉を選ぶ。",
+    "translation": "Choose appropriate words."
+  },
+  {
+    "id": 43,
+    "word": "余裕",
+    "reading": "よゆう",
+    "meaning": "room; leeway; composure",
+    "example": "時間に余裕を持つ。",
+    "translation": "Allow yourself enough time."
+  },
+  {
+    "id": 44,
+    "word": "判断",
+    "reading": "はんだん",
+    "meaning": "judgment; decision",
+    "example": "状況を見て判断する。",
+    "translation": "Judge after considering the situation."
+  },
+  {
+    "id": 45,
+    "word": "承認",
+    "reading": "しょうにん",
+    "meaning": "approval; authorization",
+    "example": "上司の承認が必要だ。",
+    "translation": "A supervisor's approval is necessary."
+  },
+  {
+    "id": 46,
+    "word": "含む",
+    "reading": "ふくむ",
+    "meaning": "to include; contain",
+    "example": "料金は税金を含む。",
+    "translation": "The fee includes tax."
+  },
+  {
+    "id": 47,
+    "word": "承知",
+    "reading": "しょうち",
+    "meaning": "acknowledgment; consent",
+    "example": "承知しました。",
+    "translation": "Understood."
+  },
+  {
+    "id": 48,
+    "word": "納得",
+    "reading": "なっとく",
+    "meaning": "conviction; acceptance",
+    "example": "説明を聞いて納得した。",
+    "translation": "I was convinced after hearing the explanation."
+  },
+  {
+    "id": 49,
+    "word": "我慢",
+    "reading": "がまん",
+    "meaning": "patience; endurance",
+    "example": "少し我慢してください。",
+    "translation": "Please be patient for a little while."
+  },
+  {
+    "id": 50,
+    "word": "努力",
+    "reading": "どりょく",
+    "meaning": "effort",
+    "example": "合格のために努力する。",
+    "translation": "Make an effort to pass."
+  },
+  {
+    "id": 51,
+    "word": "工夫",
+    "reading": "くふう",
+    "meaning": "ingenuity; device",
+    "example": "勉強方法を工夫する。",
+    "translation": "Devise a study method."
+  },
+  {
+    "id": 52,
+    "word": "解決",
+    "reading": "かいけつ",
+    "meaning": "solution; resolution",
+    "example": "問題を解決する。",
+    "translation": "Solve the problem."
+  },
+  {
+    "id": 53,
+    "word": "発展",
+    "reading": "はってん",
+    "meaning": "development; expansion",
+    "example": "町が大きく発展した。",
+    "translation": "The town developed greatly."
+  },
+  {
+    "id": 54,
+    "word": "経済",
+    "reading": "けいざい",
+    "meaning": "economy; economics",
+    "example": "日本経済について学ぶ。",
+    "translation": "Study the Japanese economy."
+  },
+  {
+    "id": 55,
+    "word": "政治",
+    "reading": "せいじ",
+    "meaning": "politics",
+    "example": "政治に関心を持つ。",
+    "translation": "Take an interest in politics."
+  },
+  {
+    "id": 56,
+    "word": "法律",
+    "reading": "ほうりつ",
+    "meaning": "law",
+    "example": "法律を守る。",
+    "translation": "Obey the law."
+  },
+  {
+    "id": 57,
+    "word": "制度",
+    "reading": "せいど",
+    "meaning": "system; institution",
+    "example": "新しい制度が始まった。",
+    "translation": "A new system started."
+  },
+  {
+    "id": 58,
+    "word": "資格",
+    "reading": "しかく",
+    "meaning": "qualification; certification",
+    "example": "資格を取得する。",
+    "translation": "Obtain a qualification."
+  },
+  {
+    "id": 59,
+    "word": "給与",
+    "reading": "きゅうよ",
+    "meaning": "salary; pay",
+    "example": "給与は銀行に振り込まれる。",
+    "translation": "The salary is transferred to the bank."
+  },
+  {
+    "id": 60,
+    "word": "費用",
+    "reading": "ひよう",
+    "meaning": "cost; expense",
+    "example": "旅行の費用を計算する。",
+    "translation": "Calculate the travel expenses."
+  },
+  {
+    "id": 61,
+    "word": "税金",
+    "reading": "ぜいきん",
+    "meaning": "tax",
+    "example": "税金を支払う。",
+    "translation": "Pay taxes."
+  },
+  {
+    "id": 62,
+    "word": "価格",
+    "reading": "かかく",
+    "meaning": "price",
+    "example": "商品の価格が上がった。",
+    "translation": "The product's price increased."
+  },
+  {
+    "id": 63,
+    "word": "利益",
+    "reading": "りえき",
+    "meaning": "profit; benefit",
+    "example": "会社の利益が増えた。",
+    "translation": "The company's profit increased."
+  },
+  {
+    "id": 64,
+    "word": "資源",
+    "reading": "しげん",
+    "meaning": "resource",
+    "example": "資源を大切に使う。",
+    "translation": "Use resources carefully."
+  },
+  {
+    "id": 65,
+    "word": "貿易",
+    "reading": "ぼうえき",
+    "meaning": "trade",
+    "example": "貿易が盛んな国だ。",
+    "translation": "It is a country with active trade."
+  },
+  {
+    "id": 66,
+    "word": "輸出",
+    "reading": "ゆしゅつ",
+    "meaning": "export",
+    "example": "車を海外へ輸出する。",
+    "translation": "Export cars overseas."
+  },
+  {
+    "id": 67,
+    "word": "輸入",
+    "reading": "ゆにゅう",
+    "meaning": "import",
+    "example": "食品を輸入する。",
+    "translation": "Import food."
+  },
+  {
+    "id": 68,
+    "word": "国際",
+    "reading": "こくさい",
+    "meaning": "international",
+    "example": "国際交流に参加する。",
+    "translation": "Participate in international exchange."
+  },
+  {
+    "id": 69,
+    "word": "議論",
+    "reading": "ぎろん",
+    "meaning": "discussion; argument",
+    "example": "問題について議論する。",
+    "translation": "Discuss the issue."
+  },
+  {
+    "id": 70,
+    "word": "主張",
+    "reading": "しゅちょう",
+    "meaning": "claim; assertion",
+    "example": "自分の意見を主張する。",
+    "translation": "Assert your opinion."
+  },
+  {
+    "id": 71,
+    "word": "意識",
+    "reading": "いしき",
+    "meaning": "consciousness; awareness",
+    "example": "安全を意識する。",
+    "translation": "Be conscious of safety."
+  },
+  {
+    "id": 72,
+    "word": "知識",
+    "reading": "ちしき",
+    "meaning": "knowledge",
+    "example": "専門的な知識を身につける。",
+    "translation": "Acquire specialized knowledge."
+  },
+  {
+    "id": 73,
+    "word": "印象",
+    "reading": "いんしょう",
+    "meaning": "impression",
+    "example": "第一印象が大切だ。",
+    "translation": "First impressions are important."
+  },
+  {
+    "id": 75,
+    "word": "個人",
+    "reading": "こじん",
+    "meaning": "individual; personal",
+    "example": "個人情報を守る。",
+    "translation": "Protect personal information."
+  },
+  {
+    "id": 76,
+    "word": "集団",
+    "reading": "しゅうだん",
+    "meaning": "group; collective",
+    "example": "集団で行動する。",
+    "translation": "Act as a group."
+  },
+  {
+    "id": 77,
+    "word": "存在",
+    "reading": "そんざい",
+    "meaning": "existence",
+    "example": "その問題の存在を知った。",
+    "translation": "I learned that the problem exists."
+  },
+  {
+    "id": 78,
+    "word": "事故",
+    "reading": "じこ",
+    "meaning": "accident",
+    "example": "交通事故に注意する。",
+    "translation": "Be careful of traffic accidents."
+  },
+  {
+    "id": 79,
+    "word": "事件",
+    "reading": "じけん",
+    "meaning": "incident; case",
+    "example": "事件の詳細を調べる。",
+    "translation": "Investigate the details of the case."
+  },
+  {
+    "id": 80,
+    "word": "条件",
+    "reading": "じょうけん",
+    "meaning": "condition; requirement",
+    "example": "条件を確認する。",
+    "translation": "Check the conditions."
+  },
+  {
+    "id": 81,
+    "word": "場合",
+    "reading": "ばあい",
+    "meaning": "case; situation",
+    "example": "雨の場合は中止します。",
+    "translation": "In case of rain, it will be canceled."
+  },
+  {
+    "id": 82,
+    "word": "方法",
+    "reading": "ほうほう",
+    "meaning": "method; way",
+    "example": "新しい方法を試す。",
+    "translation": "Try a new method."
+  },
+  {
+    "id": 83,
+    "word": "目的",
+    "reading": "もくてき",
+    "meaning": "purpose; objective",
+    "example": "旅行の目的を説明する。",
+    "translation": "Explain the purpose of the trip."
+  },
+  {
+    "id": 84,
+    "word": "理由",
+    "reading": "りゆう",
+    "meaning": "reason",
+    "example": "遅れた理由を話す。",
+    "translation": "Explain the reason for being late."
+  },
+  {
+    "id": 87,
+    "word": "内容",
+    "reading": "ないよう",
+    "meaning": "content; details",
+    "example": "メールの内容を確認する。",
+    "translation": "Check the contents of the email."
+  },
+  {
+    "id": 88,
+    "word": "具体的",
+    "reading": "ぐたいてき",
+    "meaning": "concrete; specific",
+    "example": "具体的な例を挙げる。",
+    "translation": "Give a specific example."
+  },
+  {
+    "id": 89,
+    "word": "一般的",
+    "reading": "いっぱんてき",
+    "meaning": "general; common",
+    "example": "一般的な考え方です。",
+    "translation": "It is a common way of thinking."
+  },
+  {
+    "id": 90,
+    "word": "基本的",
+    "reading": "きほんてき",
+    "meaning": "basic; fundamental",
+    "example": "基本的なルールを学ぶ。",
+    "translation": "Learn the basic rules."
+  },
+  {
+    "id": 91,
+    "word": "積極的",
+    "reading": "せっきょくてき",
+    "meaning": "positive; proactive",
+    "example": "積極的に参加する。",
+    "translation": "Participate actively."
+  },
+  {
+    "id": 92,
+    "word": "消極的",
+    "reading": "しょうきょくてき",
+    "meaning": "passive; negative",
+    "example": "消極的な態度を取る。",
+    "translation": "Take a passive attitude."
+  },
+  {
+    "id": 93,
+    "word": "十分",
+    "reading": "じゅうぶん",
+    "meaning": "enough; sufficient",
+    "example": "十分な時間がある。",
+    "translation": "There is enough time."
+  },
+  {
+    "id": 94,
+    "word": "急速",
+    "reading": "きゅうそく",
+    "meaning": "rapid; rapidity",
+    "example": "技術が急速に進歩する。",
+    "translation": "Technology advances rapidly."
+  },
+  {
+    "id": 95,
+    "word": "正確",
+    "reading": "せいかく",
+    "meaning": "accurate; exact",
+    "example": "正確な情報が必要だ。",
+    "translation": "Accurate information is necessary."
+  },
+  {
+    "id": 96,
+    "word": "明確",
+    "reading": "めいかく",
+    "meaning": "clear; definite",
+    "example": "目標を明確にする。",
+    "translation": "Make the goal clear."
+  },
+  {
+    "id": 97,
+    "word": "重要",
+    "reading": "じゅうよう",
+    "meaning": "important",
+    "example": "睡眠はとても重要だ。",
+    "translation": "Sleep is very important."
+  },
+  {
+    "id": 98,
+    "word": "重大",
+    "reading": "じゅうだい",
+    "meaning": "serious; grave",
+    "example": "重大な問題が起きた。",
+    "translation": "A serious problem occurred."
+  },
+  {
+    "id": 99,
+    "word": "豊富",
+    "reading": "ほうふ",
+    "meaning": "abundant; rich",
+    "example": "経験が豊富だ。",
+    "translation": "Have abundant experience."
+  },
+  {
+    "id": 100,
+    "word": "不足",
+    "reading": "ふそく",
+    "meaning": "shortage; lack",
+    "example": "睡眠が不足している。",
+    "translation": "I lack sleep."
+  },
+  {
+    "id": 101,
+    "word": "適度",
+    "reading": "てきど",
+    "meaning": "moderate; proper",
+    "example": "適度な運動をする。",
+    "translation": "Do moderate exercise."
+  },
+  {
+    "id": 102,
+    "word": "余分",
+    "reading": "よぶん",
+    "meaning": "extra; surplus",
+    "example": "余分な費用がかかった。",
+    "translation": "Extra costs were incurred."
+  },
+  {
+    "id": 103,
+    "word": "急に",
+    "reading": "きゅうに",
+    "meaning": "suddenly",
+    "example": "急に雨が降ってきた。",
+    "translation": "It suddenly started raining."
+  },
+  {
+    "id": 104,
+    "word": "あらかじめ",
+    "reading": "あらかじめ",
+    "meaning": "in advance",
+    "example": "あらかじめ予約してください。",
+    "translation": "Please make a reservation in advance."
+  },
+  {
+    "id": 105,
+    "word": "たまたま",
+    "reading": "たまたま",
+    "meaning": "by chance",
+    "example": "駅でたまたま会った。",
+    "translation": "I happened to meet them at the station."
+  },
+  {
+    "id": 106,
+    "word": "せっかく",
+    "reading": "せっかく",
+    "meaning": "with effort; specially",
+    "example": "せっかく来たのだから楽しもう。",
+    "translation": "Since we came all this way, let's enjoy it."
+  },
+  {
+    "id": 107,
+    "word": "とうとう",
+    "reading": "とうとう",
+    "meaning": "finally; at last",
+    "example": "とうとう試験の日になった。",
+    "translation": "The exam day finally came."
+  },
+  {
+    "id": 108,
+    "word": "かなり",
+    "reading": "かなり",
+    "meaning": "considerably; fairly",
+    "example": "かなり難しい問題だ。",
+    "translation": "It is a fairly difficult problem."
+  },
+  {
+    "id": 109,
+    "word": "ほとんど",
+    "reading": "ほとんど",
+    "meaning": "almost; hardly",
+    "example": "宿題はほとんど終わった。",
+    "translation": "I have almost finished my homework."
+  },
+  {
+    "id": 110,
+    "word": "おそらく",
+    "reading": "おそらく",
+    "meaning": "probably",
+    "example": "おそらく間に合うでしょう。",
+    "translation": "We will probably make it in time."
+  },
+  {
+    "id": 111,
+    "word": "必ず",
+    "reading": "かならず",
+    "meaning": "certainly; without fail",
+    "example": "必ず復習してください。",
+    "translation": "Be sure to review."
+  },
+  {
+    "id": 112,
+    "word": "まさに",
+    "reading": "まさに",
+    "meaning": "exactly; truly",
+    "example": "まさにその通りです。",
+    "translation": "That is exactly right."
+  }
+]
