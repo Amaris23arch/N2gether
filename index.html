@@ -20,6 +20,11 @@
 .vmeaning{font-weight:800;margin-top:9px}.vexample{font-size:12px;color:#6f6670;line-height:1.55;margin-top:9px}
 .vtranslation{font-size:11px;color:#938994;margin-top:4px}.vactions{display:flex;gap:7px;margin-top:12px}.vactions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}
 .vactions button.mastered{background:#f5d9eb;border-color:#ed6fbe}
+
+.bcard{background:#fff;color:#19161a;border-radius:18px;padding:16px;border:1px solid #e2dfe3}
+.bpattern{font-size:24px;font-weight:900}.bmeaning{margin-top:7px;font-weight:800}.bexample{margin-top:9px;font-size:12px;color:#6e6670;line-height:1.55}.bactions{display:flex;gap:7px;margin-top:12px}.bactions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}
+.bactions button.mastered{background:#f5d9eb;border-color:#ed6fbe}
+.quizbox{background:#17131a;color:#fff;border:1px solid #332b34;border-radius:18px;padding:17px;margin-top:12px}.quizbox h3{margin:0 0 8px}.qchoice{display:block;width:100%;text-align:left;background:#fff;color:#222;border:1px solid #ddd;border-radius:12px;padding:11px;margin:7px 0;font-weight:700;cursor:pointer}.qchoice.correct{border-color:#55b77f;background:#effaf3}.qchoice.wrong{border-color:#e36d78;background:#fff0f2}.qfeedback{font-weight:900;margin-top:8px;min-height:20px}
 </style>
 </head>
 <body>
@@ -75,9 +80,14 @@
 </section>
 
 <section id="bunpo" class="screen">
-<div class="head"><h2>📝 100 Important N2 Bunpō</h2><span>100 patterns</span></div>
-<div class="toolbar"><input id="bunpoSearch" class="search" placeholder="Search grammar or meaning…"><button class="btn secondary" id="randomBunpo">🎲 Random</button></div>
-<div class="count" id="bunpoCount"></div><div id="bunpoList" class="library"></div><div class="pagination"><button id="bp">←</button><span id="bpage"></span><button id="bn">→</button></div>
+<div class="head"><h2>📝 N2 Bunpō Lab</h2><span id="bunpoCount">100 patterns</span></div>
+<div class="lesson">
+<div class="eyebrow">Learn • test • master</div>
+<p>100 important N2 grammar patterns. Read the explanation, then challenge yourself.</p>
+<div class="toolbar"><input id="bunpoSearch" class="search" placeholder="Search grammar, meaning, or example…" autocomplete="off"><button class="btn secondary" id="bunpoRandom" type="button">🎲 Random Quiz</button></div>
+<div class="filters"><button class="filter active" data-bfilter="all">All</button><button class="filter" data-bfilter="unmastered">Unmastered</button><button class="filter" data-bfilter="mastered">Mastered ⭐</button></div>
+</div>
+<div id="bunpoGrid" class="library"></div>
 </section>
 
 <section id="choukai" class="screen">
@@ -158,15 +168,15 @@ async function load(){
     const [v,k,r,b]=await Promise.all([fetch(VURL).then(x=>x.json()),fetch(KURL).then(x=>x.json()),fetch(RURL).then(x=>x.json()),fetch(BURL).then(x=>x.json())]);
     S.vocab=v.map((x,i)=>({...x,id:'v'+(x.id||i)}));S.kanji=k.map((x,i)=>({...x,id:'k'+i}));S.related=r;S.bunpo=b;
     $('#vocabCount').textContent=S.vocab.length.toLocaleString()+' entries';$('#kanjiCount').textContent=S.kanji.length.toLocaleString()+' core + '+S.related.length+' related';
-    renderKotoba();renderK();renderB();$('#status')?.replaceChildren?.();
+    renderKotoba();renderK();renderBunpo();$('#status')?.replaceChildren?.();
   }catch(e){console.error(e)}
 }
 
 function legacyRenderV(){let q=S.vq.toLowerCase(),a=S.vocab.filter(x=>(x.word+' '+x.reading+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.vp=Math.min(S.vp,pages);$('#vocabCount2').textContent=a.length.toLocaleString()+' results';$('#vpage').textContent=S.vp+' / '+pages;$('#vocabList').innerHTML=slice(a,S.vp,30).map(x=>`<button class="item" data-v="${esc(x.id)}"><h3>${esc(x.word)}</h3><div class="reading">${esc(x.reading||'')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,2).join(' · ')||'—')}</div><div class="sub">Tap to study</div></button>`).join('')}
 function renderK(){let src=S.kmode==='related'?S.related:S.kanji,q=S.kq.toLowerCase(),a=src.filter(x=>(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.word||'')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.kp=Math.min(S.kp,pages);$('#kanjiCount2').textContent=a.length.toLocaleString()+' results';$('#kpage').textContent=S.kp+' / '+pages;$('#kanjiList').innerHTML=slice(a,S.kp,30).map(x=>S.kmode==='related'?`<button class="item" data-rk="${esc(x.id)}"><h3>${esc(x.character)}</h3><div class="reading">${esc(x.reading)}</div><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.word)} · ${esc(x.wordReading)} · ${esc(x.wordMeaning)}</div></button>`:`<button class="item" data-k="${esc(x.id)}"><h3>${esc(x.character)}</h3><div class="reading">${esc((x.onyomi||[]).slice(0,2).join(' · ')||'—')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,3).join(' · ')||'—')}</div><div class="sub">${esc(String(x.strokes||''))} strokes · Tap to study</div></button>`).join('')}
-function renderB(){let q=S.bq.toLowerCase(),a=S.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+x.example).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.example||'Tap to study')}</div></button>`).join('')}
+function legacyRenderB(){let q=S.bq.toLowerCase(),a=S.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+x.example).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.example||'Tap to study')}</div></button>`).join('')}
 
-$('#kanjiSearch').oninput=e=>{S.kq=e.target.value;S.kp=1;renderK()};$('#bunpoSearch').oninput=e=>{S.bq=e.target.value;S.bp=1;renderB()};
+$('#kanjiSearch').oninput=e=>{S.kq=e.target.value;S.kp=1;renderK()};
 $('#vp').onclick=()=>{S.vp=Math.max(1,S.vp-1);renderV()};$('#vn').onclick=()=>{S.vp++;renderV()};$('#kp').onclick=()=>{S.kp=Math.max(1,S.kp-1);renderK()};$('#kn').onclick=()=>{S.kp++;renderK()};$('#bp').onclick=()=>{S.bp=Math.max(1,S.bp-1);renderB()};$('#bn').onclick=()=>{S.bp++;renderB()};
 $('#coreBtn').onclick=()=>{S.kmode='core';S.kp=1;renderK()};$('#relatedBtn').onclick=()=>{S.kmode='related';S.kp=1;renderK()};
 
@@ -316,6 +326,54 @@ document.addEventListener('click',e=>{
  vocabFilter=f;document.querySelectorAll('[data-vfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderKotoba();
 });
 
-stats();daily();renderListen();renderKanji();load();
+
+let bunpoFilter='all';
+function bunpoMastered(id){return localStorage.getItem('n2g-bunpo-'+id)==='1'}
+function renderBunpo(){
+ const grid=$('#bunpoGrid');if(!grid)return;
+ const q=($('#bunpoSearch')?.value||'').trim().toLowerCase();
+ const a=S.bunpo.filter(x=>{
+   const text=(x.pattern+' '+x.meaning+' '+(x.example||'')+' '+(x.note||'')).toLowerCase();
+   return (!q||text.includes(q)) && (bunpoFilter==='all'||(bunpoFilter==='mastered'&&bunpoMastered(x.id))||(bunpoFilter==='unmastered'&&!bunpoMastered(x.id)));
+ });
+ $('#bunpoCount').textContent=a.length+' patterns';
+ grid.innerHTML='';
+ a.forEach(x=>{
+   const c=document.createElement('article');c.className='bcard';
+   c.innerHTML='<div class="bpattern">'+esc(x.pattern)+'</div><div class="bmeaning">'+esc(x.meaning)+'</div><div class="bexample">'+esc(x.example||'')+'</div>';
+   const actions=document.createElement('div');actions.className='bactions';
+   const study=document.createElement('button');study.type='button';study.textContent='📖 Study';
+   study.onclick=()=>openBunpoStudy(x);
+   const master=document.createElement('button');master.type='button';master.textContent=bunpoMastered(x.id)?'⭐ Mastered':'☆ Master it';if(bunpoMastered(x.id))master.classList.add('mastered');
+   master.onclick=()=>{const key='n2g-bunpo-'+x.id;if(bunpoMastered(x.id)){localStorage.removeItem(key)}else{localStorage.setItem(key,'1');addXP(5)}renderBunpo()};
+   actions.append(study,master);c.appendChild(actions);grid.appendChild(c);
+ });
+}
+function openBunpoStudy(x){
+ const distractors=S.bunpo.filter(a=>a.id!==x.id).sort(()=>Math.random()-.5).slice(0,3);
+ const opts=[x,...distractors].sort(()=>Math.random()-.5);
+ modal('<div class="eyebrow" style="color:#b54974">BUNPŌ · '+esc(String(x.id))+'/100</div><h2>'+esc(x.pattern)+'</h2><p><b>Meaning:</b> '+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'</div><div class="quizbox"><h3>🎯 Quick Check</h3><p>Which option matches this grammar pattern?</p><div id="bqopts"></div><div id="bqfeedback" class="qfeedback"></div></div>');
+ const box=$('#bqopts');
+ opts.forEach(o=>{
+   const b=document.createElement('button');b.className='qchoice';b.type='button';b.textContent=o.meaning;b.onclick=()=>{
+     if($('#bqfeedback').dataset.done)return;
+     $('#bqfeedback').dataset.done='1';box.querySelectorAll('button').forEach(z=>z.disabled=true);
+     if(o.id===x.id){b.classList.add('correct');$('#bqfeedback').textContent='🎉 正解！ +10 XP';addXP(10)}
+     else{b.classList.add('wrong');$('#bqfeedback').textContent='🌱 Not quite. The answer is: '+x.meaning;box.querySelectorAll('button').forEach(z=>{if(z.textContent===x.meaning)z.classList.add('correct')})}
+   };box.appendChild(b);
+ });
+}
+function randomBunpoQuiz(){
+ if(!S.bunpo.length)return;
+ const x=S.bunpo[Math.floor(Math.random()*S.bunpo.length)];
+ openBunpoStudy(x);
+}
+document.addEventListener('input',e=>{if(e.target.id==='bunpoSearch')renderBunpo()});
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-bfilter]');if(!b)return;
+ bunpoFilter=b.dataset.bfilter;document.querySelectorAll('[data-bfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderBunpo();
+});
+
+stats();daily();renderListen();renderKanji();document.getElementById('bunpoRandom')?.addEventListener('click',randomBunpoQuiz);load();
 </script>
 </body></html>
