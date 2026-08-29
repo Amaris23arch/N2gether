@@ -1,470 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N2gether — 頑張ろう、一緒に。</title>
 <style>
-:root{--bg:#09090b;--panel:#111114;--card:#fff;--text:#f7f3f6;--muted:#a9a1aa;--pink:#ed6f9e;--soft:#351a28;--line:#2b272e;--good:#55b77f;--bad:#e36d78}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1080px;margin:auto;padding:16px 13px 55px}button,input{font:inherit}button{cursor:pointer}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.logo{font-size:25px;font-weight:950}.logo span{color:var(--pink)}.streak{padding:8px 12px;border:1px solid #49303c;background:#1a1116;color:#ffc2d6;border-radius:999px;font-size:12px;font-weight:900}
-.nav{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.nav button{white-space:nowrap;border:1px solid var(--line);background:#111114;color:#cec6ce;border-radius:999px;padding:10px 14px;font-weight:800}.nav button.active{background:var(--soft);color:#ffb6cf;border-color:#674253}
-.screen{display:none}.screen.active{display:block}.hero{background:linear-gradient(135deg,#171217,#22151d);border:1px solid #3a2730;border-radius:28px;padding:23px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#f18bb2;font-weight:900}.hero h1{font-size:31px;line-height:1.08;margin:7px 0}.hero p{color:#b8afb8;line-height:1.6}.love{margin-top:16px;background:#fff;color:#554653;border-radius:17px;padding:13px 15px;line-height:1.55}.love b{color:#b54974}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{background:#17151a;border:1px solid #2f2a31;border-radius:15px;text-align:center;padding:10px}.stat strong{display:block;font-size:19px}.stat small{color:#938b95;font-size:10px}.bar{height:8px;background:#302a31;border-radius:99px;overflow:hidden;margin-top:12px}.fill{height:100%;width:4%;background:var(--pink);border-radius:99px;transition:.3s}
-.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 0 10px}.head h2{font-size:19px;margin:0}.head span,.count{font-size:12px;color:var(--muted)}
-.path{position:relative}.connector{position:absolute;left:27px;top:29px;bottom:29px;width:3px;background:#342f36}.node{display:grid;grid-template-columns:56px minmax(0,1fr);gap:11px;margin-bottom:12px}.dot{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#151419;border:2px solid #3b363e;z-index:1}.jcard{background:#fff;color:#1d191e;border-radius:18px;padding:15px}.jtop{display:flex;justify-content:space-between;gap:8px}.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;color:#776d77;font-size:12px}.tag{font-size:10px;background:#f2edf0;color:#96506c;border-radius:99px;padding:6px 8px;font-weight:900;white-space:nowrap}.jmeta{margin-top:8px;color:#8a7f89;font-size:11px}.btn{border-radius:13px;padding:11px 13px;font-weight:900}.primary{border:0;background:var(--pink);color:#fff;width:100%;margin-top:10px}.secondary{border:1px solid #3b343d;background:#151318;color:#f3edf2}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.search{flex:1;min-width:220px;background:#111114;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:#fff;outline:none}.library{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}.item{background:#fff;color:#1d191e;border:1px solid #e7e0e5;border-radius:17px;padding:14px;text-align:left}.item h3{margin:0;font-size:25px}.item .reading{color:#98506e;font-weight:900;margin-top:4px}.item .meaning{color:#746a75;font-size:13px;margin-top:6px;line-height:1.45}.item .sub{color:#9a9099;font-size:11px;margin-top:7px}.pagination{display:flex;justify-content:center;gap:10px;align-items:center;margin-top:14px}.pagination button{background:#111114;color:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px}
-.lesson{background:var(--soft);border:1px solid #4d293a;border-radius:21px;padding:20px}.lesson h2{margin:4px 0;font-size:31px}.lesson p{color:#eadde4;line-height:1.6}.example{background:#141217;border:1px solid #2f2831;border-radius:13px;padding:12px;color:#f3e8ed}.choice{display:block;width:100%;background:#fff;color:#1d191e;border:1px solid var(--line);border-radius:13px;padding:12px;text-align:left;margin:7px 0}.choice.correct{border-color:var(--good);background:#effaf3}.choice.wrong{border-color:var(--bad);background:#fff0f2}.feedback{min-height:22px;font-weight:900;margin-top:8px}.listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.listen{background:#111114;border:1px solid var(--line);border-radius:18px;padding:17px}.script{display:none;background:#17151a;border:1px solid #2c2830;border-radius:13px;padding:11px;color:#dcd3da;margin:9px 0}.result{margin-top:12px;background:#151217;border:1px solid #312b33;border-radius:18px;padding:16px}.audioStatus{font-size:12px;color:#bdb5bd}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}.modal.open{display:flex}.modalCard{max-width:640px;width:100%;max-height:86vh;overflow:auto;background:#fff;color:#1d191e;border-radius:23px;padding:20px}.close{float:right;border:0;background:#f1ebef;border-radius:50%;width:40px;height:40px;font-size:20px}
-@media(max-width:760px){.library{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.listen-grid{grid-template-columns:1fr}}@media(max-width:460px){.library{grid-template-columns:1fr}.hero h1{font-size:27px}.node{grid-template-columns:48px minmax(0,1fr)}.dot{width:45px;height:45px}.connector{left:23px}}
-
-.vcard{background:#fff;color:#19161a;border-radius:18px;padding:16px;border:1px solid #e2dfe3}
-.vword{font-size:26px;font-weight:900}.vread{color:#98506e;font-weight:800;margin-top:4px}
-.vmeaning{font-weight:800;margin-top:9px}.vexample{font-size:12px;color:#6f6670;line-height:1.55;margin-top:9px}
-.vtranslation{font-size:11px;color:#938994;margin-top:4px}.vactions{display:flex;gap:7px;margin-top:12px}.vactions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}
-.vactions button.mastered{background:#f5d9eb;border-color:#ed6fbe}
-
-.bcard{background:#fff;color:#19161a;border-radius:18px;padding:16px;border:1px solid #e2dfe3}
-.bpattern{font-size:24px;font-weight:900}.bmeaning{margin-top:7px;font-weight:800}.bexample{margin-top:9px;font-size:12px;color:#6e6670;line-height:1.55}.bactions{display:flex;gap:7px;margin-top:12px}.bactions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}
-.bactions button.mastered{background:#f5d9eb;border-color:#ed6fbe}
-.quizbox{background:#17131a;color:#fff;border:1px solid #332b34;border-radius:18px;padding:17px;margin-top:12px}.quizbox h3{margin:0 0 8px}.qchoice{display:block;width:100%;text-align:left;background:#fff;color:#222;border:1px solid #ddd;border-radius:12px;padding:11px;margin:7px 0;font-weight:700;cursor:pointer}.qchoice.correct{border-color:#55b77f;background:#effaf3}.qchoice.wrong{border-color:#e36d78;background:#fff0f2}.qfeedback{font-weight:900;margin-top:8px;min-height:20px}
-
-.kcard{background:#fff;color:#19161a;border-radius:18px;padding:16px;border:1px solid #e2dfe3}
-.kchar{font-size:42px;font-weight:900;line-height:1}.kread{color:#98506e;font-weight:900;margin-top:6px}.kmeaning{font-weight:800;margin-top:7px}.kexample{font-size:11px;color:#746a73;margin-top:8px;min-height:16px}
+:root{--bg:#09090b;--card:#fff;--text:#f7f3f6;--muted:#aaa2aa;--pink:#ed6f9e;--soft:#351a28;--line:#302b33}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:1080px;margin:auto;padding:16px 13px 55px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.logo{font-size:25px;font-weight:950}.logo span{color:var(--pink)}
+.streak{padding:8px 12px;background:#1a1116;border:1px solid #49303c;border-radius:999px;color:#ffc2d6;font-size:12px;font-weight:900}
+.nav{display:flex;gap:8px;overflow:auto;margin-bottom:15px}
+.nav button{white-space:nowrap;background:#111114;color:#d1c9d0;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:800}
+.nav button.active{background:var(--soft);color:#ffb8d1;border-color:#684356}
+.screen{display:none}.screen.active{display:block}
+.hero{background:linear-gradient(135deg,#171217,#21151d);border:1px solid #3a2730;border-radius:27px;padding:23px}
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#f08bb2;font-weight:900}
+.hero h1{font-size:31px;line-height:1.06;margin:7px 0}.hero p{color:#bab1ba;line-height:1.6}
+.love{margin-top:15px;background:#fff;color:#574857;border-radius:17px;padding:14px;line-height:1.55}.love b{color:#b54974}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.stat{background:#17151a;border:1px solid #2e2931;border-radius:15px;padding:10px;text-align:center}.stat strong{display:block;font-size:19px}.stat small{color:#938b95;font-size:10px}
+.bar{height:8px;background:#302a31;border-radius:99px;overflow:hidden;margin-top:12px}.fill{height:100%;width:6%;background:var(--pink)}
+.head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:20px 0 10px}.head h2{font-size:19px;margin:0}.head span{color:var(--muted);font-size:12px}
+.path{position:relative}.connector{position:absolute;left:27px;top:30px;bottom:30px;width:3px;background:#342f36}.node{display:grid;grid-template-columns:55px minmax(0,1fr);gap:11px;margin-bottom:12px}
+.dot{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#151419;border:2px solid #3a353d;z-index:1}
+.jcard{background:#fff;color:#1c191e;border-radius:18px;padding:15px}.jtop{display:flex;justify-content:space-between;gap:8px}.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;color:#756b75;font-size:12px}
+.tag{font-size:10px;background:#f1ebef;color:#95506d;padding:6px 8px;border-radius:999px;font-weight:900;white-space:nowrap}
+.btn{border-radius:13px;padding:11px 13px;font-weight:900}.primary{border:0;background:var(--pink);color:#fff;width:100%;margin-top:10px}.secondary{border:1px solid #3b343d;background:#151318;color:#f4edf2}
+.lesson{background:var(--soft);border:1px solid #4e2b3b;border-radius:20px;padding:18px}.lesson p{color:#eadde5;line-height:1.6}
+.search{width:100%;padding:13px 14px;border:1px solid #ddd;border-radius:14px;background:#fff;color:#222;margin-top:8px;outline:none}
+.filters{display:flex;gap:7px;overflow:auto;margin-top:10px}.filter{border:1px solid #ddd;background:#fafafa;color:#222;border-radius:999px;padding:8px 12px;font-weight:800;white-space:nowrap}
+.library{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.card{background:#fff;color:#1c191e;border:1px solid #e3dfe3;border-radius:18px;padding:15px}
+.kchar{font-size:39px;font-weight:950;line-height:1}.reading{color:#98506e;font-weight:900;margin-top:5px}.meaning{font-weight:800;margin-top:7px}.example{font-size:12px;color:#6f6670;line-height:1.55;margin-top:8px}
+.actions{display:flex;gap:7px;margin-top:12px}.actions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}.actions button.mastered{background:#f5d9ea;border-color:#ed6fbe}
+.quiz{background:#17131a;border:1px solid #332b34;color:#fff;border-radius:18px;padding:16px;margin-top:11px}.choice{display:block;width:100%;border:1px solid #ddd;background:#fff;color:#222;border-radius:12px;padding:11px;text-align:left;margin:7px 0}.choice.correct{background:#effaf3;border-color:#55b77f}.choice.wrong{background:#fff0f2;border-color:#e36d78}
+.listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.listen{background:#111114;border:1px solid var(--line);border-radius:18px;padding:16px}.script{display:none;background:#17151a;border:1px solid #2d2831;color:#ddd5db;border-radius:13px;padding:11px;margin-top:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:15px;z-index:30}.modal.open{display:flex}.modalbox{max-width:650px;width:100%;max-height:85vh;overflow:auto;background:#fff;color:#1c191e;border-radius:22px;padding:20px}
+@media(max-width:800px){.library{grid-template-columns:repeat(2,1fr)}.listen-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.library{grid-template-columns:1fr}.hero h1{font-size:27px}.node{grid-template-columns:47px minmax(0,1fr)}.dot{width:44px;height:44px}.connector{left:22px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top"><div class="logo">N2<span>gether</span> 🌸</div><div class="streak">🔥 7 day streak</div></header>
 <nav class="nav">
-<button class="active" data-screen="home">🏠 Home</button><button data-screen="kanji">🈶 Kanji</button><button data-screen="kotoba">💬 Kotoba</button><button data-screen="bunpo">📝 Bunpō</button><button data-screen="choukai">🎧 Chōkai</button><button data-screen="mock">🧪 Mock</button>
+<button class="active" data-screen="home">🏠 Home</button>
+<button data-screen="kanji">🈶 Kanji</button>
+<button data-screen="kotoba">💬 Kotoba</button>
+<button data-screen="bunpo">📝 Bunpō</button>
+<button data-screen="choukai">🎧 Chōkai</button>
+<button data-screen="mock">🧪 Mock</button>
 </nav>
 
 <section id="home" class="screen active">
-<div class="hero"><div class="eyebrow">日本語能力試験 N2</div><h1>おかえり、未来のN2合格者。🌸</h1><p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
-<div class="love">💌 <b>Today's message from your girlfriend:</b><br><span id="dailyMessage"></span><br><small>Now go study. I believe in you. 😌❤️</small></div>
-<div class="stats"><div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div><div class="stat"><strong>7 🔥</strong><small>STREAK</small></div><div class="stat"><strong id="mastered">0</strong><small>MASTERED</small></div><div class="stat"><strong id="pct">0%</strong><small>PROGRESS</small></div></div><div class="bar"><div class="fill" id="fill"></div></div></div>
-<div class="head"><h2>🗺️ N2 Journey</h2><span>Keep going, baby. ♡</span></div>
+<div class="hero">
+<div class="eyebrow">日本語能力試験 N2</div>
+<h1>おかえり、未来のN2合格者。🌸</h1>
+<p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
+<div class="love">💌 <b>From your girlfriend:</b><br><span id="dailyMessage"></span><br><small>Now go study. I believe in you. 😌❤️</small></div>
+<div class="stats"><div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div><div class="stat"><strong>7 🔥</strong><small>STREAK</small></div><div class="stat"><strong id="mastered">0</strong><small>MASTERED</small></div><div class="stat"><strong id="pct">0%</strong><small>PROGRESS</small></div></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+</div>
+<div class="head"><h2>🗺️ N2 Journey</h2><span>Study everything in order ♡</span></div>
 <div class="path"><div class="connector"></div>
-<div class="node"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div><div class="jmeta">Made with love by two girls in love. ♡</div></div></div>
-<div class="node"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>Core + related N2 kanji study sets.</p></div><div class="tag">LIBRARY</div></div><button class="btn primary" data-screen="kanji">START KANJI →</button></div></div>
-<div class="node"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>Comprehensive N2 vocabulary.</p></div><div class="tag">LIBRARY</div></div><button class="btn primary" data-screen="kotoba">OPEN KOTOBA →</button></div></div>
-<div class="node"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>100 important N2 grammar patterns.</p></div><div class="tag">100</div></div><button class="btn primary" data-screen="bunpo">OPEN BUNPŌ →</button></div></div>
-<div class="node"><div class="dot">📖</div><div class="jcard"><div class="jtop"><div><h3>05 · 読解 Dokkai</h3><p>Next build: original reading lab.</p></div><div class="tag">NEXT</div></div></div></div>
-<div class="node"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>06 · 聴解 Chōkai</h3><p>Original sample listening drills.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="choukai">OPEN CHŌKAI →</button></div></div>
-<div class="node"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>07 · 模擬試験 Mock</h3><p>Quick N2-style practice.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="mock">START MOCK →</button></div></div>
-<div class="node"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>08 · N2合格</h3><p>The screenshot we want. 😭❤️</p></div><div class="tag">GOAL</div></div></div></div></div>
+<div class="node"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div></div></div>
+<div class="node"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>Cards show up immediately — no search required.</p></div><div class="tag">OPEN</div></div><button class="btn primary" data-screen="kanji">START KANJI →</button></div></div>
+<div class="node"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>Browse first. Search only when you need it.</p></div><div class="tag">OPEN</div></div><button class="btn primary" data-screen="kotoba">OPEN KOTOBA →</button></div></div>
+<div class="node"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>100 important N2 grammar points.</p></div><div class="tag">100</div></div><button class="btn primary" data-screen="bunpo">OPEN BUNPŌ →</button></div></div>
+<div class="node"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>05 · 聴解 Chōkai</h3><p>Original listening practice.</p></div><div class="tag">OPEN</div></div><button class="btn secondary" data-screen="choukai">OPEN CHŌKAI →</button></div></div>
+<div class="node"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>06 · 模擬試験 Mock</h3><p>Quick N2-style practice.</p></div><div class="tag">OPEN</div></div><button class="btn secondary" data-screen="mock">START MOCK →</button></div></div>
+<div class="node"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>07 · N2合格</h3><p>The screenshot we want. 😭❤️</p></div><div class="tag">GOAL</div></div></div></div>
+</div>
 </section>
 
 <section id="kanji" class="screen">
-<div class="head"><h2>🈶 N2 Kanji Library</h2><span id="kanjiCount">N2 study set</span></div>
-<div class="lesson">
-<div class="eyebrow">Browse it • hear it • master it</div>
-<input id="kanjiSearch" class="search" placeholder="Search kanji, reading, meaning, or example word…" autocomplete="off">
-<div class="filters">
-<button class="filter active" data-kfilter="all">All</button>
-<button class="filter" data-kfilter="unmastered">Unmastered</button>
-<button class="filter" data-kfilter="mastered">Mastered ⭐</button>
-</div>
-</div>
+<div class="head"><h2>🈶 N2 Kanji Library</h2><span id="kanjiTotal"></span></div>
+<div class="lesson"><div class="eyebrow">Browse it • hear it • master it</div><input id="kanjiSearch" class="search" placeholder="Search kanji, reading, meaning, or word…"><div class="filters"><button class="filter" id="kAll">All</button><button class="filter" id="kUn">Unmastered</button><button class="filter" id="kDone">Mastered ⭐</button></div></div>
 <div id="kanjiGrid" class="library"></div>
 </section>
 
 <section id="kotoba" class="screen">
-<div class="head"><h2>💬 N2 Kotoba Library</h2><span id="vocabCount">Study collection</span></div>
-<div class="lesson">
-<div class="eyebrow">Browse it • hear it • use it</div>
-<input id="vocabSearch" class="search" placeholder="Search Japanese, reading, English, or example…" autocomplete="off">
-<div class="filters">
-<button class="filter active" data-vfilter="all">All</button>
-<button class="filter" data-vfilter="unmastered">Unmastered</button>
-<button class="filter" data-vfilter="mastered">Mastered ⭐</button>
-<button class="filter" data-vfilter="daily">🌸 Random</button>
-</div>
-</div>
+<div class="head"><h2>💬 N2 Kotoba</h2><span id="vocabTotal"></span></div>
+<div class="lesson"><div class="eyebrow">Browse it • hear it • use it</div><input id="vocabSearch" class="search" placeholder="Search Japanese, reading, English, or example…"><div class="filters"><button class="filter" id="vAll">All</button><button class="filter" id="vUn">Unmastered</button><button class="filter" id="vDone">Mastered ⭐</button><button class="filter" id="vRandom">🌸 Random</button></div></div>
 <div id="vocabGrid" class="library"></div>
 </section>
 
 <section id="bunpo" class="screen">
-<div class="head"><h2>📝 N2 Bunpō Lab</h2><span id="bunpoCount">100 patterns</span></div>
-<div class="lesson">
-<div class="eyebrow">Browse it • test • master</div>
-<p>100 important N2 grammar patterns. Read the explanation, then challenge yourself.</p>
-<div class="toolbar"><input id="bunpoSearch" class="search" placeholder="Search grammar, meaning, or example…" autocomplete="off"><button class="btn secondary" id="bunpoRandom" type="button">🎲 Random Quiz</button></div>
-<div class="filters"><button class="filter active" data-bfilter="all">All</button><button class="filter" data-bfilter="unmastered">Unmastered</button><button class="filter" data-bfilter="mastered">Mastered ⭐</button></div>
-</div>
+<div class="head"><h2>📝 100 Important N2 Bunpō</h2><span id="bunpoTotal"></span></div>
+<div class="lesson"><div class="eyebrow">Browse it • test it • master it</div><input id="bunpoSearch" class="search" placeholder="Search grammar, meaning, or example…"><div class="filters"><button class="filter" id="bAll">All</button><button class="filter" id="bUn">Unmastered</button><button class="filter" id="bDone">Mastered ⭐</button><button class="filter" id="bRandom">🎲 Random Quiz</button></div></div>
 <div id="bunpoGrid" class="library"></div>
 </section>
 
 <section id="choukai" class="screen">
-<div class="head"><h2>🎧 Chōkai Listening Lab</h2><span id="listenScore">0 / 0</span></div>
-<div class="lesson">
-<div class="eyebrow">JLPT-style listening practice</div>
-<h2 id="listenTitle" style="margin:5px 0">聞いて、考えて、選ぶ。</h2>
-<p id="listenPrompt">Listen twice if you need to. No pressure — we're practicing. ♡</p>
-<div class="toolbar">
-<button class="btn primary" id="listenPlay" type="button">🔊 PLAY</button>
-<button class="btn secondary" id="listenReplay" type="button">↻ REPLAY</button>
-<button class="btn secondary" id="listenSlow" type="button">🐢 SLOW</button>
-</div>
-<div id="listenChoices"></div>
-<div id="listenFeedback" class="feedback" aria-live="polite"></div>
-<button class="btn secondary" id="listenTranscript" type="button">Show transcript</button>
-<div id="listenScript" class="script"></div>
-<button class="btn primary" id="listenNext" type="button" style="display:none">NEXT →</button>
-</div>
-<div class="result"><b>🌸 Chōkai tip:</b> Listen for the <i>reason, contrast, time, and final decision</i>. The answer is often hidden in the last sentence.</div>
+<div class="head"><h2>🎧 Chōkai Sample Lab</h2><span>Original practice</span></div>
+<div class="listen-grid" id="listenGrid"></div>
 </section>
 
 <section id="mock" class="screen">
-<div class="head"><h2>🧪 Mini N2 Mock</h2><span id="mockTimer">05:00</span></div><div class="lesson"><div class="eyebrow">Quick challenge</div><h2 id="mockTitle">Ready?</h2><p>No peeking. Your future N2 self is watching. 👀</p><button class="btn primary" id="startMock">START MINI MOCK</button></div><div id="mockArea"></div>
+<div class="head"><h2>🧪 Mini N2 Mock</h2><span>Quick practice</span></div>
+<div class="lesson"><h2 id="mockTitle">Ready?</h2><p>No peeking. Your future N2 self is watching. 👀</p><button class="btn primary" id="startMock">START MINI MOCK</button></div><div id="mockArea"></div>
 </section>
 </div>
-<div class="modal" id="modal"></div>
+<div id="modal" class="modal"></div>
 
 <script>
-const DAILY_MESSAGES=["おはよう、かわいい。🌸 今日も一緒に一歩ずつ。N2は逃げないよ。", "今日もえらい。🥹 10分でも勉強したら、それは前進。", "焦らなくていいよ。❤️ わからないところは、未来の自分に教えてる途中。", "You don't need a perfect study day. You just need a real one. 🌷", "今日はちょっとだけでもいい。続けるあなたが、いちばん強い。", "ねえ、N2。うちの彼女に勝てると思ってる？ 😌", "One page. One word. One grammar point. That's enough for today. ♡", "疲れてるなら、ゆっくりでいい。休むのも合格への準備だよ。🌙", "今日も一緒に頑張ろう。合格した日の私たち、きっと泣く。😭❤️", "間違えても大丈夫。間違いは「ここを覚えよう」って教えてくれる。🌸", "かわいいだけじゃなくて、N2も取りにいこう。😌🔥", "あなたのペースでいい。私はずっと応援席にいるよ。📣❤️", "今日の目標は完璧じゃない。「少し強くなる」こと。🌱"];
-const VURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/vocab/n2.json';
-const KURL='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n2.json';
-const RURL='./kanji-related.json';
-const BURL='./bunpo.json';
-const S={kfilter:'all',xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),vocab:[],kanji:[],related:[],bunpo:[],vp:1,kp:1,bp:1,vq:'',kq:'',bq:'',kmode:'core'};
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'})}
-$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screen)));
-function save(){localStorage.setItem('n2g_xp',String(S.xp));localStorage.setItem('n2g_mastered',JSON.stringify([...S.mastered]))}
-function stats(){ $('#xp').textContent=S.xp;$('#mastered').textContent=S.mastered.size;const p=Math.min(100,Math.round(S.mastered.size/30*100));$('#pct').textContent=p+'%';$('#fill').style.width=Math.max(4,p)+'%'}
-function addXP(n){S.xp+=n;save();stats()}
-function master(id){if(!S.mastered.has(id)){S.mastered.add(id);addXP(5)}else stats()}
-function daily(){const base=new Date(Date.UTC(2026,0,1));const now=new Date();const days=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-base.getTime())/86400000);$('#dailyMessage').textContent=DAILY_MESSAGES[Math.abs(days)%DAILY_MESSAGES.length]}
-function pickJapaneseVoice(){
-  const voices=window.speechSynthesis?.getVoices?.()||[];
-  return voices.find(v=>/^ja(-|_)/i.test(v.lang))
-      || voices.find(v=>/japanese/i.test(v.name))
-      || null;
-}
-function speak(t,rate=.84){
-  if(!('speechSynthesis' in window)){
-    setAudioStatus('This browser does not provide speech audio.');
-    return false;
-  }
-  try{
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(String(t));
-    u.lang='ja-JP';
-    u.rate=rate;
-    u.pitch=1;
-    const v=pickJapaneseVoice();
-    if(v)u.voice=v;
-    u.onstart=()=>setAudioStatus('🔊 Playing Japanese audio…');
-    u.onend=()=>setAudioStatus('✅ Finished');
-    u.onerror=()=>setAudioStatus('⚠️ Your browser could not play the Japanese voice. Turn your volume on and try again.');
-    speechSynthesis.speak(u);
-    return true;
-  }catch(err){
-    setAudioStatus('⚠️ Audio could not start. Please try again.');
-    return false;
-  }
-}
-function setAudioStatus(msg){
-  const el=document.getElementById('audioStatus');
-  if(el)el.textContent=msg;
-}
-function modal(body){
-  const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalCard"><button class="close" id="closeModal" type="button">×</button>'+body+'</div>';
-  $('#closeModal').onclick=()=>m.className='modal';
-}
-window.speak=speak;
-function modal(body){const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalCard"><button class="close" id="closeModal">×</button>'+body+'</div>';$('#closeModal').onclick=()=>m.className='modal'}
-function slice(a,p,n){return a.slice((p-1)*n,p*n)}
-
-async function load(){
-  try{
-    const [v,k,r,b]=await Promise.all([fetch(VURL).then(x=>x.json()),fetch(KURL).then(x=>x.json()),fetch(RURL).then(x=>x.json()),fetch(BURL).then(x=>x.json())]);
-    S.vocab=v.map((x,i)=>({...x,id:'v'+(x.id||i)}));S.kanji=k.map((x,i)=>({...x,id:'k'+i}));S.related=r;S.bunpo=b;
-    $('#vocabCount').textContent=S.vocab.length.toLocaleString()+' entries';$('#kanjiCount').textContent=S.kanji.length.toLocaleString()+' core + '+S.related.length+' related';
-    renderKotoba();renderK();renderBunpo();$('#status')?.replaceChildren?.();
-  }catch(e){console.error(e)}
-}
-
-function legacyRenderV(){let q=S.vq.toLowerCase(),a=S.vocab.filter(x=>(x.word+' '+x.reading+' '+(x.meanings||[]).join(' ')).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/30));S.vp=Math.min(S.vp,pages);$('#vocabCount2').textContent=a.length.toLocaleString()+' results';$('#vpage').textContent=S.vp+' / '+pages;$('#vocabList').innerHTML=slice(a,S.vp,30).map(x=>`<button class="item" data-v="${esc(x.id)}"><h3>${esc(x.word)}</h3><div class="reading">${esc(x.reading||'')}</div><div class="meaning">${esc((x.meanings||[]).slice(0,2).join(' · ')||'—')}</div><div class="sub">Tap to study</div></button>`).join('')}
-function kanjiMastered(id){return localStorage.getItem('n2g-kanji-'+id)==='1'}
-function renderK(){
- const grid=$('#kanjiGrid');if(!grid)return;
- const q=($('#kanjiSearch')?.value||'').trim().toLowerCase();
- const src=S.kmode==='related'?S.related:S.kanji;
- const a=src.filter(x=>{
-   const text=(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.word||'')+' '+(x.wordReading||'')+' '+(x.wordMeaning||'')).toLowerCase();
-   return (!q||text.includes(q)) &&
-     ((S.kfilter||'all')==='all'||(S.kfilter==='mastered'&&kanjiMastered(x.id))||(S.kfilter==='unmastered'&&!kanjiMastered(x.id)));
- });
- $('#kanjiCount').textContent=a.length.toLocaleString()+' study items';
- grid.innerHTML='';
- a.slice(0,60).forEach(x=>{
-   const c=document.createElement('article');c.className='kcard';
-   const meanings=(x.meanings||[x.meaning]).filter(Boolean).slice(0,3).join(' · ');
-   const reading=(x.onyomi||[]).slice(0,2).join(' · ') || x.reading || '—';
-   const example=x.word ? (x.word+' · '+(x.wordReading||'')+' · '+(x.wordMeaning||'')) : '';
-   c.innerHTML='<div class="kchar">'+esc(x.character)+'</div><div class="kread">'+esc(reading)+'</div><div class="kmeaning">'+esc(meanings||'—')+'</div><div class="kexample">'+esc(example)+'</div>';
-   const actions=document.createElement('div');actions.className='vactions';
-   const hear=document.createElement('button');hear.type='button';hear.textContent='🔊 Hear';hear.onclick=()=>speak((x.character||'')+'。'+(x.word||''),.72);
-   const master=document.createElement('button');master.type='button';master.textContent=kanjiMastered(x.id)?'⭐ Mastered':'☆ Master it';if(kanjiMastered(x.id))master.classList.add('mastered');
-   master.onclick=()=>{const key='n2g-kanji-'+x.id;if(kanjiMastered(x.id)){localStorage.removeItem(key)}else{localStorage.setItem(key,'1');addXP(5)}renderK()};
-   actions.append(hear,master);c.appendChild(actions);grid.appendChild(c);
- });
-}
-function legacyRenderB(){let q=S.bq.toLowerCase(),a=S.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+x.example).toLowerCase().includes(q)),pages=Math.max(1,Math.ceil(a.length/24));S.bp=Math.min(S.bp,pages);$('#bunpoCount').textContent=a.length+' patterns';$('#bpage').textContent=S.bp+' / '+pages;$('#bunpoList').innerHTML=slice(a,S.bp,24).map(x=>`<button class="item" data-b="${x.id}"><h3 style="font-size:21px">${esc(x.pattern)}</h3><div class="meaning">${esc(x.meaning)}</div><div class="sub">${esc(x.example||'Tap to study')}</div></button>`).join('')}
-
-document.getElementById('vp')?.addEventListener('click',()=>{S.vp=Math.max(1,S.vp-1);renderV()});document.getElementById('vn')?.addEventListener('click',()=>{S.vp++;renderV()});document.getElementById('kp')?.addEventListener('click',()=>{S.kp=Math.max(1,S.kp-1);renderK()});document.getElementById('kn')?.addEventListener('click',()=>{S.kp++;renderK()});document.getElementById('bp')?.addEventListener('click',()=>{S.bp=Math.max(1,S.bp-1);renderB()});document.getElementById('bn')?.addEventListener('click',()=>{S.bp++;renderB()});
-document.getElementById('coreBtn')?.addEventListener('click',()=>{S.kmode='core';S.kp=1;renderK()});document.getElementById('relatedBtn')?.addEventListener('click',()=>{S.kmode='related';S.kp=1;renderK()});
-
+const DAILY=["おはよう、かわいい。🌸 今日も一緒に一歩ずつ。N2は逃げないよ。", "今日もえらい。🥹 10分でも勉強したら、それは前進。", "焦らなくていいよ。❤️ わからないところは、未来の自分に教えてる途中。", "You don't need a perfect study day. You just need a real one. 🌷", "今日はちょっとだけでもいい。続けるあなたが、いちばん強い。", "ねえ、N2。うちの彼女に勝てると思ってる？ 😌", "One page. One word. One grammar point. That's enough for today. ♡", "疲れてるなら、ゆっくりでいい。休むのも合格への準備だよ。🌙", "今日も一緒に頑張ろう。合格した日の私たち、きっと泣く。😭❤️"];
+const FALLBACK_KANJI=[{"kanji": "愛", "reading": "あい", "meaning": "love", "words": "愛情・愛する"}, {"kanji": "案", "reading": "あん", "meaning": "plan; proposal", "words": "案内・提案"}, {"kanji": "位", "reading": "い", "meaning": "rank; position", "words": "位置・順位"}, {"kanji": "囲", "reading": "い", "meaning": "surround", "words": "囲む・範囲"}, {"kanji": "委", "reading": "い", "meaning": "committee; entrust", "words": "委員・委ねる"}, {"kanji": "異", "reading": "い", "meaning": "different", "words": "異常・異なる"}, {"kanji": "移", "reading": "い", "meaning": "move; transfer", "words": "移動・移る"}, {"kanji": "維", "reading": "い", "meaning": "maintain", "words": "維持"}, {"kanji": "永", "reading": "えい", "meaning": "eternal", "words": "永遠・永久"}, {"kanji": "営", "reading": "えい", "meaning": "manage; operate", "words": "営業・経営"}, {"kanji": "衛", "reading": "えい", "meaning": "defense; guard", "words": "衛生・防衛"}, {"kanji": "易", "reading": "えき", "meaning": "easy; change", "words": "容易・貿易"}, {"kanji": "益", "reading": "えき", "meaning": "benefit; profit", "words": "利益・有益"}, {"kanji": "液", "reading": "えき", "meaning": "liquid", "words": "液体・血液"}, {"kanji": "演", "reading": "えん", "meaning": "perform; present", "words": "演技・講演"}, {"kanji": "応", "reading": "おう", "meaning": "respond; suit", "words": "対応・応援"}, {"kanji": "往", "reading": "おう", "meaning": "go; travel", "words": "往復・往来"}, {"kanji": "桜", "reading": "おう", "meaning": "cherry blossom", "words": "桜・桜色"}, {"kanji": "可", "reading": "か", "meaning": "possible; acceptable", "words": "可能・許可"}, {"kanji": "価", "reading": "か", "meaning": "value; price", "words": "価格・価値"}, {"kanji": "果", "reading": "か", "meaning": "result; fruit", "words": "結果・効果"}, {"kanji": "過", "reading": "か", "meaning": "exceed; pass", "words": "過去・過ぎる"}, {"kanji": "解", "reading": "かい", "meaning": "solve; understand", "words": "解決・理解"}, {"kanji": "格", "reading": "かく", "meaning": "status; standard", "words": "価格・資格"}, {"kanji": "確", "reading": "かく", "meaning": "certain; confirm", "words": "確認・確実"}, {"kanji": "額", "reading": "がく", "meaning": "amount; forehead", "words": "金額・額"}, {"kanji": "刊", "reading": "かん", "meaning": "publish", "words": "刊行・週刊"}, {"kanji": "幹", "reading": "かん", "meaning": "trunk; main", "words": "幹部・幹線"}, {"kanji": "観", "reading": "かん", "meaning": "observe; view", "words": "観光・観察"}, {"kanji": "関", "reading": "かん", "meaning": "connection; barrier", "words": "関係・機関"}, {"kanji": "含", "reading": "がん", "meaning": "contain", "words": "含む・含有"}, {"kanji": "岸", "reading": "がん", "meaning": "shore", "words": "海岸・対岸"}, {"kanji": "希", "reading": "き", "meaning": "hope; rare", "words": "希望・希少"}, {"kanji": "機", "reading": "き", "meaning": "machine; opportunity", "words": "機会・機械"}, {"kanji": "規", "reading": "き", "meaning": "rule; standard", "words": "規則・規模"}, {"kanji": "技", "reading": "ぎ", "meaning": "skill; technique", "words": "技術・技能"}, {"kanji": "義", "reading": "ぎ", "meaning": "justice; meaning", "words": "義務・定義"}, {"kanji": "逆", "reading": "ぎゃく", "meaning": "reverse; opposite", "words": "逆に・逆転"}, {"kanji": "久", "reading": "きゅう", "meaning": "long time", "words": "久しぶり・永久"}, {"kanji": "旧", "reading": "きゅう", "meaning": "old; former", "words": "旧友・旧式"}, {"kanji": "居", "reading": "きょ", "meaning": "reside; be", "words": "居住・居る"}, {"kanji": "許", "reading": "きょ", "meaning": "permit; forgive", "words": "許可・許す"}, {"kanji": "境", "reading": "きょう", "meaning": "boundary; environment", "words": "環境・境界"}, {"kanji": "興", "reading": "きょう", "meaning": "interest; prosper", "words": "興味・興奮"}, {"kanji": "勤", "reading": "きん", "meaning": "work; diligent", "words": "勤務・勤める"}, {"kanji": "禁", "reading": "きん", "meaning": "prohibit", "words": "禁止・禁煙"}, {"kanji": "句", "reading": "く", "meaning": "phrase; sentence", "words": "句読点・文句"}, {"kanji": "群", "reading": "ぐん", "meaning": "group; flock", "words": "群れ・群集"}, {"kanji": "経", "reading": "けい", "meaning": "pass through; manage", "words": "経験・経済"}, {"kanji": "景", "reading": "けい", "meaning": "scenery", "words": "景色・光景"}, {"kanji": "芸", "reading": "げい", "meaning": "art; skill", "words": "芸術・芸能"}, {"kanji": "欠", "reading": "けつ", "meaning": "lack; miss", "words": "欠席・欠ける"}, {"kanji": "結", "reading": "けつ", "meaning": "tie; result", "words": "結果・結局"}, {"kanji": "件", "reading": "けん", "meaning": "matter; case", "words": "事件・条件"}, {"kanji": "険", "reading": "けん", "meaning": "dangerous; steep", "words": "危険・険しい"}, {"kanji": "減", "reading": "げん", "meaning": "decrease", "words": "減少・減る"}, {"kanji": "限", "reading": "げん", "meaning": "limit", "words": "制限・限る"}, {"kanji": "現", "reading": "げん", "meaning": "appear; present", "words": "現在・現れる"}, {"kanji": "個", "reading": "こ", "meaning": "individual", "words": "個人・個性"}, {"kanji": "故", "reading": "こ", "meaning": "reason; late", "words": "故障・事故"}, {"kanji": "候", "reading": "こう", "meaning": "weather; condition", "words": "気候・候補"}, {"kanji": "講", "reading": "こう", "meaning": "lecture; teach", "words": "講義・講演"}, {"kanji": "構", "reading": "こう", "meaning": "construct; structure", "words": "構造・構う"}, {"kanji": "鉱", "reading": "こう", "meaning": "ore; mineral", "words": "鉱山・鉱物"}, {"kanji": "効", "reading": "こう", "meaning": "effect", "words": "効果・有効"}, {"kanji": "混", "reading": "こん", "meaning": "mix; confuse", "words": "混雑・混ぜる"}, {"kanji": "再", "reading": "さい", "meaning": "again", "words": "再確認・再び"}, {"kanji": "災", "reading": "さい", "meaning": "disaster", "words": "災害・火災"}, {"kanji": "採", "reading": "さい", "meaning": "adopt; collect", "words": "採用・採る"}, {"kanji": "材", "reading": "ざい", "meaning": "material", "words": "材料・人材"}, {"kanji": "在", "reading": "ざい", "meaning": "exist; be located", "words": "存在・現在"}, {"kanji": "財", "reading": "ざい", "meaning": "wealth; property", "words": "財産・財政"}, {"kanji": "雑", "reading": "ざつ", "meaning": "miscellaneous; rough", "words": "雑誌・複雑"}, {"kanji": "参", "reading": "さん", "meaning": "participate; refer", "words": "参加・参考"}, {"kanji": "産", "reading": "さん", "meaning": "produce; birth", "words": "生産・産業"}, {"kanji": "残", "reading": "ざん", "meaning": "remain", "words": "残業・残る"}, {"kanji": "支", "reading": "し", "meaning": "support; branch", "words": "支援・支店"}, {"kanji": "志", "reading": "し", "meaning": "will; ambition", "words": "意志・志望"}, {"kanji": "識", "reading": "しき", "meaning": "knowledge; recognize", "words": "知識・意識"}, {"kanji": "失", "reading": "しつ", "meaning": "lose", "words": "失敗・失う"}, {"kanji": "実", "reading": "じつ", "meaning": "truth; fruit", "words": "実際・実現"}, {"kanji": "舎", "reading": "しゃ", "meaning": "building; lodge", "words": "校舎・宿舎"}, {"kanji": "若", "reading": "じゃく", "meaning": "young", "words": "若者・若い"}, {"kanji": "種", "reading": "しゅ", "meaning": "kind; seed", "words": "種類・種"}, {"kanji": "周", "reading": "しゅう", "meaning": "around", "words": "周囲・周辺"}, {"kanji": "述", "reading": "じゅつ", "meaning": "state; describe", "words": "述べる・記述"}, {"kanji": "順", "reading": "じゅん", "meaning": "order", "words": "順番・順調"}, {"kanji": "初", "reading": "しょ", "meaning": "first; beginning", "words": "初め・最初"}, {"kanji": "省", "reading": "しょう", "meaning": "omit; ministry", "words": "省略・反省"}, {"kanji": "状", "reading": "じょう", "meaning": "condition; form", "words": "状態・状況"}, {"kanji": "常", "reading": "じょう", "meaning": "usual; constant", "words": "通常・常に"}, {"kanji": "職", "reading": "しょく", "meaning": "job; occupation", "words": "職業・就職"}, {"kanji": "制", "reading": "せい", "meaning": "system; control", "words": "制度・制限"}, {"kanji": "性", "reading": "せい", "meaning": "nature; gender", "words": "性格・可能性"}, {"kanji": "政", "reading": "せい", "meaning": "politics; government", "words": "政治・行政"}, {"kanji": "精", "reading": "せい", "meaning": "spirit; precise", "words": "精神・精一杯"}, {"kanji": "製", "reading": "せい", "meaning": "manufacture", "words": "製品・製造"}, {"kanji": "責", "reading": "せき", "meaning": "responsibility; blame", "words": "責任・責める"}, {"kanji": "績", "reading": "せき", "meaning": "achievements", "words": "成績"}, {"kanji": "接", "reading": "せつ", "meaning": "contact; connect", "words": "接続・面接"}, {"kanji": "設", "reading": "せつ", "meaning": "establish; set up", "words": "設定・設計"}, {"kanji": "絶", "reading": "ぜつ", "meaning": "interrupt; absolute", "words": "絶対・絶える"}, {"kanji": "祖", "reading": "そ", "meaning": "ancestor", "words": "祖先・祖父"}, {"kanji": "素", "reading": "そ", "meaning": "element; simple", "words": "素晴らしい・素材"}, {"kanji": "総", "reading": "そう", "meaning": "total; overall", "words": "総合・総数"}, {"kanji": "増", "reading": "ぞう", "meaning": "increase", "words": "増加・増える"}, {"kanji": "態", "reading": "たい", "meaning": "condition; attitude", "words": "状態・態度"}, {"kanji": "団", "reading": "だん", "meaning": "group", "words": "団体・集団"}, {"kanji": "断", "reading": "だん", "meaning": "cut off; decide", "words": "判断・断る"}, {"kanji": "築", "reading": "ちく", "meaning": "build", "words": "建築・築く"}, {"kanji": "張", "reading": "ちょう", "meaning": "stretch; claim", "words": "主張・緊張"}, {"kanji": "調", "reading": "ちょう", "meaning": "investigate; tone", "words": "調査・調子"}, {"kanji": "程", "reading": "てい", "meaning": "extent; degree", "words": "程度・日程"}, {"kanji": "適", "reading": "てき", "meaning": "suitable", "words": "適切・適用"}, {"kanji": "統", "reading": "とう", "meaning": "unite; govern", "words": "統一・統計"}, {"kanji": "導", "reading": "どう", "meaning": "guide; lead", "words": "指導・導く"}, {"kanji": "得", "reading": "とく", "meaning": "gain; obtain", "words": "得意・取得"}, {"kanji": "独", "reading": "どく", "meaning": "alone; unique", "words": "独立・独自"}, {"kanji": "任", "reading": "にん", "meaning": "responsibility; entrust", "words": "責任・任せる"}, {"kanji": "認", "reading": "にん", "meaning": "recognize; acknowledge", "words": "確認・認める"}, {"kanji": "能", "reading": "のう", "meaning": "ability", "words": "能力・可能"}, {"kanji": "判", "reading": "はん", "meaning": "judge; seal", "words": "判断・判定"}, {"kanji": "比", "reading": "ひ", "meaning": "compare; ratio", "words": "比較・比べる"}, {"kanji": "備", "reading": "び", "meaning": "prepare; equip", "words": "準備・設備"}, {"kanji": "評", "reading": "ひょう", "meaning": "evaluate; criticism", "words": "評価・評判"}, {"kanji": "復", "reading": "ふく", "meaning": "return; recover", "words": "復習・回復"}, {"kanji": "複", "reading": "ふく", "meaning": "multiple; complex", "words": "複雑・複数"}, {"kanji": "編", "reading": "へん", "meaning": "compile; edit", "words": "編集・編む"}, {"kanji": "変", "reading": "へん", "meaning": "change; strange", "words": "変更・変化"}, {"kanji": "報", "reading": "ほう", "meaning": "report; information", "words": "報告・情報"}, {"kanji": "防", "reading": "ぼう", "meaning": "prevent; defend", "words": "防止・予防"}, {"kanji": "務", "reading": "む", "meaning": "duty; work", "words": "義務・事務"}, {"kanji": "迷", "reading": "めい", "meaning": "be lost; confuse", "words": "迷惑・迷う"}, {"kanji": "優", "reading": "ゆう", "meaning": "excellent; kind", "words": "優秀・優しい"}, {"kanji": "容", "reading": "よう", "meaning": "contain; appearance", "words": "内容・容易"}, {"kanji": "率", "reading": "りつ", "meaning": "rate; lead", "words": "確率・効率"}, {"kanji": "略", "reading": "りゃく", "meaning": "abbreviation; omit", "words": "省略・略す"}, {"kanji": "留", "reading": "りゅう", "meaning": "stay; keep", "words": "留学・留守"}, {"kanji": "領", "reading": "りょう", "meaning": "territory; receive", "words": "領域・領収書"}, {"kanji": "論", "reading": "ろん", "meaning": "argument; theory", "words": "議論・理論"}];
+const FALLBACK_VOCAB=[{"id": "f1", "word": "改善", "reading": "かいぜん", "meaning": "improvement; to improve", "example": "仕事の方法を改善する。", "translation": "Improve the way you work."}, {"id": "f2", "word": "環境", "reading": "かんきょう", "meaning": "environment", "example": "環境を守ることが大切だ。", "translation": "Protecting the environment is important."}, {"id": "f3", "word": "経験", "reading": "けいけん", "meaning": "experience", "example": "海外で働いた経験がある。", "translation": "I have experience working abroad."}, {"id": "f4", "word": "結果", "reading": "けっか", "meaning": "result", "example": "試験の結果を確認する。", "translation": "Check the exam result."}, {"id": "f5", "word": "原因", "reading": "げんいん", "meaning": "cause", "example": "事故の原因を調べる。", "translation": "Investigate the cause of the accident."}, {"id": "f6", "word": "影響", "reading": "えいきょう", "meaning": "influence; effect", "example": "天気は生活に影響する。", "translation": "Weather affects daily life."}, {"id": "f7", "word": "状況", "reading": "じょうきょう", "meaning": "situation; circumstances", "example": "現在の状況を説明してください。", "translation": "Please explain the current situation."}, {"id": "f8", "word": "情報", "reading": "じょうほう", "meaning": "information", "example": "必要な情報を集める。", "translation": "Collect the necessary information."}];
+const BUNPO=[{"id": 1, "pattern": "〜わけではない", "meaning": "It is not that; not necessarily", "example": "日本語が嫌いなわけではない。"}, {"id": 2, "pattern": "〜わけがない", "meaning": "There is no way", "example": "彼がそんなことをするわけがない。"}, {"id": 3, "pattern": "〜とは限らない", "meaning": "Not necessarily", "example": "有名だからといって良いとは限らない。"}];
+const state={xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),kanji:[...FALLBACK_KANJI],vocab:[...FALLBACK_VOCAB],bunpo:[...BUNPO],kf:'all',vf:'all',bf:'all'};
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function save(){localStorage.setItem('n2g_xp',state.xp);localStorage.setItem('n2g_mastered',JSON.stringify([...state.mastered]));}
+function addXP(n){state.xp+=n;save();stats()}
+function master(k){if(!state.mastered.has(k)){state.mastered.add(k);addXP(5)}else{save();stats()}}
+function stats(){$('#xp').textContent=state.xp;$('#mastered').textContent=state.mastered.size;const p=Math.min(100,Math.round(state.mastered.size/25*100));$('#pct').textContent=p+'%';$('#fill').style.width=Math.max(5,p)+'%'}
+function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id))}
+$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screen)))
+function dailyMessage(){const d=new Date();const start=Date.UTC(2026,0,1);const today=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());const i=Math.abs(Math.floor((today-start)/86400000))%DAILY.length;$('#dailyMessage').textContent=DAILY[i]}
+function speak(t){if(!('speechSynthesis'in window)){alert('Audio is not available in this browser.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.82;speechSynthesis.speak(u)}
+function modal(body){const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalbox"><button id="close" style="float:right;border:0;background:#f1ebef;border-radius:50%;width:40px;height:40px;font-size:20px">×</button>'+body+'</div>';$('#close').onclick=()=>m.className='modal'}
+function renderKanji(){const q=$('#kanjiSearch').value.trim().toLowerCase();const a=state.kanji.filter(x=>{const text=(x.kanji+' '+x.reading+' '+x.meaning+' '+x.words).toLowerCase();return(!q||text.includes(q))&&(state.kf==='all'||(state.kf==='mastered'&&state.mastered.has(x.kanji))||(state.kf==='unmastered'&&!state.mastered.has(x.kanji)))});$('#kanjiTotal').textContent=a.length+' study items';$('#kanjiGrid').innerHTML=a.length?a.map(x=>'<article class="card"><div class="kchar">'+esc(x.kanji)+'</div><div class="reading">'+esc(x.reading)+'</div><div class="meaning">'+esc(x.meaning)+'</div><div class="example">'+esc(x.words)+'</div><div class="actions"><button data-hear-kanji="'+esc(x.kanji)+'">🔊 Hear</button><button class="'+(state.mastered.has(x.kanji)?'mastered':'')+'" data-master-kanji="'+esc(x.kanji)+'">'+(state.mastered.has(x.kanji)?'⭐ Mastered':'☆ Master it')+'</button></div></article>').join(''):'<div class="empty">No matches. Try another search. 🌸</div>'}
+function renderVocab(){const q=$('#vocabSearch').value.trim().toLowerCase();const a=state.vocab.filter(x=>{const text=(x.word+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.example||'')).toLowerCase();const id='v'+x.id;return(!q||text.includes(q))&&(state.vf==='all'||(state.vf==='mastered'&&state.mastered.has(id))||(state.vf==='unmastered'&&!state.mastered.has(id)))});$('#vocabTotal').textContent=a.length+' study words';$('#vocabGrid').innerHTML=a.length?a.slice(0,120).map(x=>{const id='v'+x.id;return '<article class="card"><div class="kchar" style="font-size:27px">'+esc(x.word)+'</div><div class="reading">'+esc(x.reading||'')+'</div><div class="meaning">'+esc(x.meaning||'')+'</div><div class="example">'+esc(x.example||'')+'<br><small>'+esc(x.translation||'')+'</small></div><div class="actions"><button data-hear-vocab="'+esc(x.word)+'">🔊 Hear</button><button class="'+(state.mastered.has(id)?'mastered':'')+'" data-master-vocab="'+esc(id)+'">'+(state.mastered.has(id)?'⭐ Mastered':'☆ Master it')+'</button></div></article>'}).join(''):'<div class="empty">No matches. Try another search. 💬</div>'}
+function renderBunpo(){const q=$('#bunpoSearch').value.trim().toLowerCase();const a=state.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+(x.example||'')).toLowerCase().includes(q)).filter(x=>state.bf==='all'||(state.bf==='mastered'&&state.mastered.has('b'+x.id))||(state.bf==='unmastered'&&!state.mastered.has('b'+x.id)));$('#bunpoTotal').textContent=a.length+' patterns';$('#bunpoGrid').innerHTML=a.map(x=>'<article class="card"><div class="kchar" style="font-size:22px">'+esc(x.pattern)+'</div><div class="meaning">'+esc(x.meaning)+'</div><div class="example">'+esc(x.example||'')+'</div><div class="actions"><button data-study-b="'+x.id+'">📖 Study + Quiz</button><button class="'+(state.mastered.has('b'+x.id)?'mastered':'')+'" data-master-b="'+x.id+'">'+(state.mastered.has('b'+x.id)?'⭐ Mastered':'☆ Master it')+'</button></div></article>').join('')}
+function studyBunpo(id){const x=state.bunpo.find(a=>a.id==id);if(!x)return;const opts=[x,...state.bunpo.filter(a=>a.id!=id).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);modal('<div class="eyebrow" style="color:#b54974">BUNPŌ · '+x.id+'/100</div><h2>'+esc(x.pattern)+'</h2><p><b>Meaning:</b> '+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'</div><div class="quiz"><h3>🎯 Quick Check</h3><p>Which meaning matches?</p><div id="qopts"></div><div id="qfb" class="feedback"></div></div>');opts.forEach(o=>{const b=document.createElement('button');b.className='choice';b.type='button';b.textContent=o.meaning;b.onclick=()=>{if($('#qfb').dataset.done)return;$('#qfb').dataset.done='1';$('#qopts').querySelectorAll('button').forEach(z=>z.disabled=true);if(o.id===x.id){b.classList.add('correct');$('#qfb').textContent='🎉 正解！ +10 XP';addXP(10)}else{b.classList.add('wrong');$('#qfb').textContent='🌱 Not quite. The answer is '+x.meaning;$('#qopts').querySelectorAll('button').forEach(z=>{if(z.textContent===x.meaning)z.classList.add('correct')})}};$('#qopts').appendChild(b)})}
+$$('[data-hear-kanji]').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.hearKanji)));
 document.addEventListener('click',e=>{
-  let v=e.target.closest('[data-v]');if(v){let x=S.vocab.find(a=>a.id===v.dataset.v);if(x)modal(`<div class="eyebrow" style="color:#b54974">KOTOBA · N2</div><h2>${esc(x.word)}</h2><p><b>${esc(x.reading||'')}</b></p><p><b>Meaning:</b> ${esc((x.meanings||[]).join(' · '))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.word)})">🔊 Listen</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
-  let k=e.target.closest('[data-k]');if(k){let x=S.kanji.find(a=>a.id===k.dataset.k);if(x)modal(`<div class="eyebrow" style="color:#b54974">CORE N2 KANJI</div><h2 style="font-size:46px">${esc(x.character)}</h2><p><b>Onyomi:</b> ${esc((x.onyomi||[]).join(' · ')||'—')}<br><b>Kunyomi:</b> ${esc((x.kunyomi||[]).join(' · ')||'—')}<br><b>Meaning:</b> ${esc((x.meanings||[]).join(' · ')||'—')}<br><b>Strokes:</b> ${esc(String(x.strokes||'—'))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.character)})">🔊 Hear</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
-  let rk=e.target.closest('[data-rk]');if(rk){let x=S.related.find(a=>a.id===rk.dataset.rk);if(x)modal(`<div class="eyebrow" style="color:#b54974">RELATED N2 KANJI</div><h2 style="font-size:46px">${esc(x.character)}</h2><p><b>Reading:</b> ${esc(x.reading)}<br><b>Meaning:</b> ${esc(x.meaning)}</p><div class="example"><b>${esc(x.word)}</b> · ${esc(x.wordReading)}<br>${esc(x.wordMeaning)}</div><p style="font-size:11px;color:#777">N2gether supplemental study set linked to common N2 vocabulary; not an official JLPT list.</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.character)})">🔊 Hear</button><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify(x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
-  let b=e.target.closest('[data-b]');if(b){let x=S.bunpo.find(a=>a.id===Number(b.dataset.b));if(x)modal(`<div class="eyebrow" style="color:#b54974">BUNPŌ · ${x.id}/100</div><h2 style="font-size:30px">${esc(x.pattern)}</h2><p><b>Meaning:</b> ${esc(x.meaning)}</p><p><b>Formation:</b> ${esc(x.formation||'See contextual examples.')}</p><div class="example">${esc(x.example||'')}</div><p><b>💡 Tip:</b> ${esc(x.note||'Review this pattern in context.')}</p><button class="btn" style="background:#ed6f9e;color:#fff" onclick="master(${JSON.stringify('g'+x.id)});this.textContent='✅ Mastered'">⭐ Master</button>`)}
+ const hk=e.target.closest('[data-hear-kanji]');if(hk){speak(hk.dataset.hearKanji);return}
+ const mk=e.target.closest('[data-master-kanji]');if(mk){const k=mk.dataset.masterKanji;if(state.mastered.has(k))state.mastered.delete(k);else master(k);save();renderKanji();return}
+ const hv=e.target.closest('[data-hear-vocab]');if(hv){speak(hv.dataset.hearVocab);return}
+ const mv=e.target.closest('[data-master-vocab]');if(mv){const k=mv.dataset.masterVocab;if(state.mastered.has(k))state.mastered.delete(k);else master(k);save();renderVocab();return}
+ const sb=e.target.closest('[data-study-b]');if(sb){studyBunpo(sb.dataset.studyB);return}
+ const mb=e.target.closest('[data-master-b]');if(mb){const k='b'+mb.dataset.masterB;if(state.mastered.has(k))state.mastered.delete(k);else master(k);save();renderBunpo();return}
 });
+$('#kanjiSearch').addEventListener('input',renderKanji);$('#vocabSearch').addEventListener('input',renderVocab);$('#bunpoSearch').addEventListener('input',renderBunpo);
+$('#kAll').onclick=()=>{state.kf='all';renderKanji()};$('#kUn').onclick=()=>{state.kf='unmastered';renderKanji()};$('#kDone').onclick=()=>{state.kf='mastered';renderKanji()};
+$('#vAll').onclick=()=>{state.vf='all';renderVocab()};$('#vUn').onclick=()=>{state.vf='unmastered';renderVocab()};$('#vDone').onclick=()=>{state.vf='mastered';renderVocab()};$('#vRandom').onclick=()=>{const x=state.vocab[Math.floor(Math.random()*state.vocab.length)];modal('<div class="eyebrow" style="color:#b54974">🌸 RANDOM KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading||'')+'</b><br>'+esc(x.meaning||'')+'</p><div class="example">'+esc(x.example||'')+'</div><button id="randomHear" class="btn secondary">🔊 Hear</button>');$('#randomHear').onclick=()=>speak(x.word+'。'+(x.example||''))};
+$('#bAll').onclick=()=>{state.bf='all';renderBunpo()};$('#bUn').onclick=()=>{state.bf='unmastered';renderBunpo()};$('#bDone').onclick=()=>{state.bf='mastered';renderBunpo()};$('#bRandom').onclick=()=>{const x=state.bunpo[Math.floor(Math.random()*state.bunpo.length)];studyBunpo(x.id)};
 
-$('#randomVocab').onclick=()=>{if(S.vocab.length){let x=S.vocab[Math.floor(Math.random()*S.vocab.length)];modal(`<div class="eyebrow" style="color:#b54974">RANDOM KOTOBA</div><h2>${esc(x.word)}</h2><p><b>${esc(x.reading||'')}</b></p><p>${esc((x.meanings||[]).join(' · '))}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.word)})">🔊 Listen</button>`)}}
-$('#randomKanji').onclick=()=>{let a=S.kmode==='related'?S.related:S.kanji;if(a.length){let x=a[Math.floor(Math.random()*a.length)];modal(`<div class="eyebrow" style="color:#b54974">RANDOM KANJI</div><h2 style="font-size:46px">${esc(x.character)}</h2><p>${esc((x.meanings||[]).join(' · ')||x.meaning||'')}</p><button class="btn secondary" onclick="speak(${JSON.stringify(x.character)})">🔊 Hear</button>`)}}
-$('#randomBunpo').onclick=()=>{if(S.bunpo.length){let x=S.bunpo[Math.floor(Math.random()*S.bunpo.length)];modal(`<div class="eyebrow" style="color:#b54974">RANDOM BUNPŌ · ${x.id}/100</div><h2>${esc(x.pattern)}</h2><p>${esc(x.meaning)}</p><div class="example">${esc(x.example||'')}</div>`)}};
+const listen=[['Sample 1 · 予定変更','明日の会議は、午前9時からではなく、10時から始まります。',['午前8時','午前9時','午前10時','午後10時'],2],['Sample 2 · 乗り換え','この電車は新宿に行きます。ただし、次の駅で3番線の電車に乗り換えてください。',['次の駅で乗り換える','この駅で降りる','新宿で乗り換える','歩いて行く'],0],['Sample 3 · 予約','平日は予約はいりません。でも週末は混みますから、予約したほうがいいですよ。',['週末は予約したほうがいい','週末は休み','平日は予約必須','毎日空いている'],0],['Sample 4 · 最終決定','最初は赤いかばんを買うつもりでしたが、店員さんのおすすめを見て、黒いかばんにしました。',['赤','青','黒','白'],2]];
+function renderListen(){const g=$('#listenGrid');g.innerHTML='';listen.forEach((x,i)=>{const c=document.createElement('article');c.className='listen';c.innerHTML='<h3>🎧 '+x[0]+'</h3><button class="btn primary">🔊 PLAY JAPANESE</button><div class="opts"></div><div class="feedback" id="lf'+i+'"></div><button class="btn secondary">Show transcript</button><div class="script">'+esc(x[1])+'</div>';g.appendChild(c);c.querySelector('.primary').onclick=()=>speak(x[1]);c.querySelector('.secondary').onclick=()=>{const s=c.querySelector('.script');s.style.display=s.style.display==='block'?'none':'block'};x[2].forEach((a,j)=>{const b=document.createElement('button');b.className='choice';b.textContent=a;b.type='button';b.onclick=()=>{if(b.dataset.done)return;b.dataset.done='1';c.querySelectorAll('.choice').forEach(z=>z.disabled=true);if(j===x[3]){b.classList.add('correct');$('#lf'+i).textContent='🎉 正解！ +10 XP';addXP(10)}else{b.classList.add('wrong');c.querySelectorAll('.choice')[x[3]].classList.add('correct');$('#lf'+i).textContent='🌱 Not quite. Listen again.'}};c.querySelector('.opts').appendChild(b)})})}
+let mockIndex=0,mockScore=0;const mock=[['忙しい（　　）、毎日勉強している。',['ものの','ながらも','ばかりか','ことから'],1],['初心者（　　）作られた教材です。',['向けに','向きに','として','際に'],0],['努力した（　　）、合格できた。',['結果','わけ','ばかり','際'],0]];
+function mockRender(){const x=mock[mockIndex];$('#mockTitle').textContent='Question '+(mockIndex+1)+' / '+mock.length;$('#mockArea').innerHTML='<div class="quiz"><p>'+x[0]+'</p>'+x[1].map((a,i)=>'<button class="choice" data-mi="'+i+'">'+a+'</button>').join('')+'<div id="mfb" class="feedback"></div></div>';$('#mockArea').querySelectorAll('[data-mi]').forEach(b=>b.onclick=()=>{$('#mockArea').querySelectorAll('.choice').forEach(z=>z.disabled=true);const i=+b.dataset.mi;if(i===x[2]){mockScore++;addXP(10);b.classList.add('correct');$('#mfb').textContent='🎉 Correct! +10 XP'}else{b.classList.add('wrong');$('#mockArea').querySelectorAll('.choice')[x[2]].classList.add('correct');$('#mfb').textContent='🌱 Review this grammar point.'}setTimeout(()=>{mockIndex++;if(mockIndex>=mock.length){$('#mockArea').innerHTML='<div class="result"><h2>🏆 Complete!</h2><p>Score: <b>'+mockScore+'/'+mock.length+'</b></p></div>'}else mockRender()},650)})}
+$('#startMock').onclick=()=>{mockIndex=0;mockScore=0;mockRender()};
 
-const n2KanjiExtra=[{"kanji": "愛", "reading": "あい", "meaning": "love", "words": "愛情・愛する"}, {"kanji": "案", "reading": "あん", "meaning": "plan; proposal", "words": "案内・提案"}, {"kanji": "位", "reading": "い", "meaning": "rank; position", "words": "位置・順位"}, {"kanji": "囲", "reading": "い", "meaning": "surround", "words": "囲む・範囲"}, {"kanji": "委", "reading": "い", "meaning": "committee; entrust", "words": "委員・委ねる"}, {"kanji": "異", "reading": "い", "meaning": "different", "words": "異常・異なる"}, {"kanji": "移", "reading": "い", "meaning": "move; transfer", "words": "移動・移る"}, {"kanji": "維", "reading": "い", "meaning": "maintain", "words": "維持"}, {"kanji": "永", "reading": "えい", "meaning": "eternal", "words": "永遠・永久"}, {"kanji": "営", "reading": "えい", "meaning": "manage; operate", "words": "営業・経営"}, {"kanji": "衛", "reading": "えい", "meaning": "defense; guard", "words": "衛生・防衛"}, {"kanji": "易", "reading": "えき", "meaning": "easy; change", "words": "容易・貿易"}, {"kanji": "益", "reading": "えき", "meaning": "benefit; profit", "words": "利益・有益"}, {"kanji": "液", "reading": "えき", "meaning": "liquid", "words": "液体・血液"}, {"kanji": "演", "reading": "えん", "meaning": "perform; present", "words": "演技・講演"}, {"kanji": "応", "reading": "おう", "meaning": "respond; suit", "words": "対応・応援"}, {"kanji": "往", "reading": "おう", "meaning": "go; travel", "words": "往復・往来"}, {"kanji": "桜", "reading": "おう", "meaning": "cherry blossom", "words": "桜・桜色"}, {"kanji": "可", "reading": "か", "meaning": "possible; acceptable", "words": "可能・許可"}, {"kanji": "価", "reading": "か", "meaning": "value; price", "words": "価格・価値"}, {"kanji": "果", "reading": "か", "meaning": "result; fruit", "words": "結果・効果"}, {"kanji": "過", "reading": "か", "meaning": "exceed; pass", "words": "過去・過ぎる"}, {"kanji": "解", "reading": "かい", "meaning": "solve; understand", "words": "解決・理解"}, {"kanji": "格", "reading": "かく", "meaning": "status; standard", "words": "価格・資格"}, {"kanji": "確", "reading": "かく", "meaning": "certain; confirm", "words": "確認・確実"}, {"kanji": "額", "reading": "がく", "meaning": "amount; forehead", "words": "金額・額"}, {"kanji": "刊", "reading": "かん", "meaning": "publish", "words": "刊行・週刊"}, {"kanji": "幹", "reading": "かん", "meaning": "trunk; main", "words": "幹部・幹線"}, {"kanji": "観", "reading": "かん", "meaning": "observe; view", "words": "観光・観察"}, {"kanji": "関", "reading": "かん", "meaning": "connection; barrier", "words": "関係・機関"}, {"kanji": "含", "reading": "がん", "meaning": "contain", "words": "含む・含有"}, {"kanji": "岸", "reading": "がん", "meaning": "shore", "words": "海岸・対岸"}, {"kanji": "希", "reading": "き", "meaning": "hope; rare", "words": "希望・希少"}, {"kanji": "機", "reading": "き", "meaning": "machine; opportunity", "words": "機会・機械"}, {"kanji": "規", "reading": "き", "meaning": "rule; standard", "words": "規則・規模"}, {"kanji": "技", "reading": "ぎ", "meaning": "skill; technique", "words": "技術・技能"}, {"kanji": "義", "reading": "ぎ", "meaning": "justice; meaning", "words": "義務・定義"}, {"kanji": "逆", "reading": "ぎゃく", "meaning": "reverse; opposite", "words": "逆に・逆転"}, {"kanji": "久", "reading": "きゅう", "meaning": "long time", "words": "久しぶり・永久"}, {"kanji": "旧", "reading": "きゅう", "meaning": "old; former", "words": "旧友・旧式"}, {"kanji": "居", "reading": "きょ", "meaning": "reside; be", "words": "居住・居る"}, {"kanji": "許", "reading": "きょ", "meaning": "permit; forgive", "words": "許可・許す"}, {"kanji": "境", "reading": "きょう", "meaning": "boundary; environment", "words": "環境・境界"}, {"kanji": "興", "reading": "きょう", "meaning": "interest; prosper", "words": "興味・興奮"}, {"kanji": "勤", "reading": "きん", "meaning": "work; diligent", "words": "勤務・勤める"}, {"kanji": "禁", "reading": "きん", "meaning": "prohibit", "words": "禁止・禁煙"}, {"kanji": "句", "reading": "く", "meaning": "phrase; sentence", "words": "句読点・文句"}, {"kanji": "群", "reading": "ぐん", "meaning": "group; flock", "words": "群れ・群集"}, {"kanji": "経", "reading": "けい", "meaning": "pass through; manage", "words": "経験・経済"}, {"kanji": "景", "reading": "けい", "meaning": "scenery", "words": "景色・光景"}, {"kanji": "芸", "reading": "げい", "meaning": "art; skill", "words": "芸術・芸能"}, {"kanji": "欠", "reading": "けつ", "meaning": "lack; miss", "words": "欠席・欠ける"}, {"kanji": "結", "reading": "けつ", "meaning": "tie; result", "words": "結果・結局"}, {"kanji": "件", "reading": "けん", "meaning": "matter; case", "words": "事件・条件"}, {"kanji": "険", "reading": "けん", "meaning": "dangerous; steep", "words": "危険・険しい"}, {"kanji": "減", "reading": "げん", "meaning": "decrease", "words": "減少・減る"}, {"kanji": "限", "reading": "げん", "meaning": "limit", "words": "制限・限る"}, {"kanji": "現", "reading": "げん", "meaning": "appear; present", "words": "現在・現れる"}, {"kanji": "個", "reading": "こ", "meaning": "individual", "words": "個人・個性"}, {"kanji": "故", "reading": "こ", "meaning": "reason; late", "words": "故障・事故"}, {"kanji": "候", "reading": "こう", "meaning": "weather; condition", "words": "気候・候補"}, {"kanji": "講", "reading": "こう", "meaning": "lecture; teach", "words": "講義・講演"}, {"kanji": "構", "reading": "こう", "meaning": "construct; structure", "words": "構造・構う"}, {"kanji": "鉱", "reading": "こう", "meaning": "ore; mineral", "words": "鉱山・鉱物"}, {"kanji": "効", "reading": "こう", "meaning": "effect", "words": "効果・有効"}, {"kanji": "混", "reading": "こん", "meaning": "mix; confuse", "words": "混雑・混ぜる"}, {"kanji": "再", "reading": "さい", "meaning": "again", "words": "再確認・再び"}, {"kanji": "災", "reading": "さい", "meaning": "disaster", "words": "災害・火災"}, {"kanji": "採", "reading": "さい", "meaning": "adopt; collect", "words": "採用・採る"}, {"kanji": "材", "reading": "ざい", "meaning": "material", "words": "材料・人材"}, {"kanji": "在", "reading": "ざい", "meaning": "exist; be located", "words": "存在・現在"}, {"kanji": "財", "reading": "ざい", "meaning": "wealth; property", "words": "財産・財政"}, {"kanji": "雑", "reading": "ざつ", "meaning": "miscellaneous; rough", "words": "雑誌・複雑"}, {"kanji": "参", "reading": "さん", "meaning": "participate; refer", "words": "参加・参考"}, {"kanji": "産", "reading": "さん", "meaning": "produce; birth", "words": "生産・産業"}, {"kanji": "残", "reading": "ざん", "meaning": "remain", "words": "残業・残る"}, {"kanji": "支", "reading": "し", "meaning": "support; branch", "words": "支援・支店"}, {"kanji": "志", "reading": "し", "meaning": "will; ambition", "words": "意志・志望"}, {"kanji": "識", "reading": "しき", "meaning": "knowledge; recognize", "words": "知識・意識"}, {"kanji": "失", "reading": "しつ", "meaning": "lose", "words": "失敗・失う"}, {"kanji": "実", "reading": "じつ", "meaning": "truth; fruit", "words": "実際・実現"}, {"kanji": "舎", "reading": "しゃ", "meaning": "building; lodge", "words": "校舎・宿舎"}, {"kanji": "若", "reading": "じゃく", "meaning": "young", "words": "若者・若い"}, {"kanji": "種", "reading": "しゅ", "meaning": "kind; seed", "words": "種類・種"}, {"kanji": "周", "reading": "しゅう", "meaning": "around", "words": "周囲・周辺"}, {"kanji": "述", "reading": "じゅつ", "meaning": "state; describe", "words": "述べる・記述"}, {"kanji": "順", "reading": "じゅん", "meaning": "order", "words": "順番・順調"}, {"kanji": "初", "reading": "しょ", "meaning": "first; beginning", "words": "初め・最初"}, {"kanji": "省", "reading": "しょう", "meaning": "omit; ministry", "words": "省略・反省"}, {"kanji": "状", "reading": "じょう", "meaning": "condition; form", "words": "状態・状況"}, {"kanji": "常", "reading": "じょう", "meaning": "usual; constant", "words": "通常・常に"}, {"kanji": "職", "reading": "しょく", "meaning": "job; occupation", "words": "職業・就職"}, {"kanji": "制", "reading": "せい", "meaning": "system; control", "words": "制度・制限"}, {"kanji": "性", "reading": "せい", "meaning": "nature; gender", "words": "性格・可能性"}, {"kanji": "政", "reading": "せい", "meaning": "politics; government", "words": "政治・行政"}, {"kanji": "精", "reading": "せい", "meaning": "spirit; precise", "words": "精神・精一杯"}, {"kanji": "製", "reading": "せい", "meaning": "manufacture", "words": "製品・製造"}, {"kanji": "責", "reading": "せき", "meaning": "responsibility; blame", "words": "責任・責める"}, {"kanji": "績", "reading": "せき", "meaning": "achievements", "words": "成績"}, {"kanji": "接", "reading": "せつ", "meaning": "contact; connect", "words": "接続・面接"}, {"kanji": "設", "reading": "せつ", "meaning": "establish; set up", "words": "設定・設計"}, {"kanji": "絶", "reading": "ぜつ", "meaning": "interrupt; absolute", "words": "絶対・絶える"}, {"kanji": "祖", "reading": "そ", "meaning": "ancestor", "words": "祖先・祖父"}, {"kanji": "素", "reading": "そ", "meaning": "element; simple", "words": "素晴らしい・素材"}, {"kanji": "総", "reading": "そう", "meaning": "total; overall", "words": "総合・総数"}, {"kanji": "増", "reading": "ぞう", "meaning": "increase", "words": "増加・増える"}, {"kanji": "態", "reading": "たい", "meaning": "condition; attitude", "words": "状態・態度"}, {"kanji": "団", "reading": "だん", "meaning": "group", "words": "団体・集団"}, {"kanji": "断", "reading": "だん", "meaning": "cut off; decide", "words": "判断・断る"}, {"kanji": "築", "reading": "ちく", "meaning": "build", "words": "建築・築く"}, {"kanji": "張", "reading": "ちょう", "meaning": "stretch; claim", "words": "主張・緊張"}, {"kanji": "調", "reading": "ちょう", "meaning": "investigate; tone", "words": "調査・調子"}, {"kanji": "程", "reading": "てい", "meaning": "extent; degree", "words": "程度・日程"}, {"kanji": "適", "reading": "てき", "meaning": "suitable", "words": "適切・適用"}, {"kanji": "統", "reading": "とう", "meaning": "unite; govern", "words": "統一・統計"}, {"kanji": "導", "reading": "どう", "meaning": "guide; lead", "words": "指導・導く"}, {"kanji": "得", "reading": "とく", "meaning": "gain; obtain", "words": "得意・取得"}, {"kanji": "独", "reading": "どく", "meaning": "alone; unique", "words": "独立・独自"}, {"kanji": "任", "reading": "にん", "meaning": "responsibility; entrust", "words": "責任・任せる"}, {"kanji": "認", "reading": "にん", "meaning": "recognize; acknowledge", "words": "確認・認める"}, {"kanji": "能", "reading": "のう", "meaning": "ability", "words": "能力・可能"}, {"kanji": "判", "reading": "はん", "meaning": "judge; seal", "words": "判断・判定"}, {"kanji": "比", "reading": "ひ", "meaning": "compare; ratio", "words": "比較・比べる"}, {"kanji": "備", "reading": "び", "meaning": "prepare; equip", "words": "準備・設備"}, {"kanji": "評", "reading": "ひょう", "meaning": "evaluate; criticism", "words": "評価・評判"}, {"kanji": "復", "reading": "ふく", "meaning": "return; recover", "words": "復習・回復"}, {"kanji": "複", "reading": "ふく", "meaning": "multiple; complex", "words": "複雑・複数"}, {"kanji": "編", "reading": "へん", "meaning": "compile; edit", "words": "編集・編む"}, {"kanji": "変", "reading": "へん", "meaning": "change; strange", "words": "変更・変化"}, {"kanji": "報", "reading": "ほう", "meaning": "report; information", "words": "報告・情報"}, {"kanji": "防", "reading": "ぼう", "meaning": "prevent; defend", "words": "防止・予防"}, {"kanji": "務", "reading": "む", "meaning": "duty; work", "words": "義務・事務"}, {"kanji": "迷", "reading": "めい", "meaning": "be lost; confuse", "words": "迷惑・迷う"}, {"kanji": "優", "reading": "ゆう", "meaning": "excellent; kind", "words": "優秀・優しい"}, {"kanji": "容", "reading": "よう", "meaning": "contain; appearance", "words": "内容・容易"}, {"kanji": "率", "reading": "りつ", "meaning": "rate; lead", "words": "確率・効率"}, {"kanji": "略", "reading": "りゃく", "meaning": "abbreviation; omit", "words": "省略・略す"}, {"kanji": "留", "reading": "りゅう", "meaning": "stay; keep", "words": "留学・留守"}, {"kanji": "領", "reading": "りょう", "meaning": "territory; receive", "words": "領域・領収書"}, {"kanji": "論", "reading": "ろん", "meaning": "argument; theory", "words": "議論・理論"}];
-const listenQuestions=[{"title": "Sample 1 · 予定変更", "audio": "明日の会議は、午前9時からではなく、10時から始まります。部長が出張から戻るのが遅くなるためです。", "q": "会議は何時から始まりますか？", "opts": ["午前8時", "午前9時", "午前10時", "午後10時"], "ans": 2}, {"title": "Sample 2 · 乗り換え", "audio": "この電車は新宿に行きます。ただし、次の駅で3番線の電車に乗り換えてください。", "q": "新宿へ行くにはどうしますか？", "opts": ["次の駅で乗り換える", "この駅で降りる", "3番線から乗る", "新宿で乗り換える"], "ans": 0}, {"title": "Sample 3 · 到着時間", "audio": "田中さんは午前中は別の仕事があるので、午後2時ごろ来るそうです。", "q": "田中さんはいつ来ますか？", "opts": ["午前中", "午後1時", "午後2時ごろ", "夜"], "ans": 2}, {"title": "Sample 4 · 予約", "audio": "この店は平日なら予約はいりません。でも、土曜日と日曜日は混みますから、予約したほうがいいですよ。", "q": "週末について正しいのはどれですか？", "opts": ["予約はいらない", "店が休みになる", "予約したほうがいい", "平日より空いている"], "ans": 2}, {"title": "Sample 5 · 理由", "audio": "今日は雨が強くなるそうなので、試合は来週に延期されました。", "q": "試合はなぜ延期されましたか？", "opts": ["選手がいないから", "雨が強くなるから", "来週は晴れるから", "会場が遠いから"], "ans": 1}, {"title": "Sample 6 · 買い物", "audio": "赤いかばんを買うつもりでしたが、店員さんのおすすめを見て、黒いかばんにしました。", "q": "最終的に何色のかばんを買いましたか？", "opts": ["赤", "青", "白", "黒"], "ans": 3}, {"title": "Sample 7 · 連絡", "audio": "もし明日の朝までに返事がなかったら、私の携帯に電話してください。", "q": "返事がない場合、どうしますか？", "opts": ["メールを送る", "携帯に電話する", "会社へ行く", "午後まで待つ"], "ans": 1}, {"title": "Sample 8 · 変更", "audio": "最初は電車で行く予定でしたが、時間がかかりそうなので、駅までタクシーで行くことにしました。", "q": "駅まで何で行くことにしましたか？", "opts": ["電車", "バス", "タクシー", "徒歩"], "ans": 2}];
-const legacyListen=[
-['明日の会議は何時からですか？',['8時からです。','駅からです。','昨日からです。'],0,'明日の会議は、午前9時からではなく、10時から始まります。'],
-['この電車は新宿に行きますか？',['はい、行きます。','10分です。','右です。'],0,'はい、新宿に行きます。ただし、次の駅で乗り換えてください。'],
-['田中さんは今日来ますか？',['はい、午後から来るそうです。','二階の部屋です。','来週の資料です。'],0,'田中さんは、午前中は別の仕事があるので、午後から来るそうです。'],
-['この店、予約が必要ですか？',['今日は必要ありません。','駅の近くです。','三人でした。'],0,'今日は予約がいっぱいなので必要ありませんが、週末は予約したほうがいいですよ。']
-];
-function renderListen(){
-  const grid=$('#listenGrid');
-  grid.innerHTML='';
-  listen.forEach((x,i)=>{
-    const card=document.createElement('div');card.className='listen';
-    const h=document.createElement('h3');h.textContent='🎧 Sample '+(i+1);card.appendChild(h);
-    const p=document.createElement('p');p.textContent=x[0];card.appendChild(p);
-
-    const play=document.createElement('button');play.className='btn primary';play.type='button';play.textContent='🔊 PLAY JAPANESE';
-    play.addEventListener('click',()=>speak(x[3],.8));card.appendChild(play);
-
-    const q=document.createElement('div');q.id='lq'+i;
-    x[1].forEach((answer,j)=>{
-      const b=document.createElement('button');b.className='choice';b.type='button';b.textContent=answer;
-      b.addEventListener('click',()=>answerListen(i,j,b,q));q.appendChild(b);
-    });
-    card.appendChild(q);
-
-    const feedback=document.createElement('div');feedback.className='feedback';feedback.id='lf'+i;feedback.setAttribute('aria-live','polite');card.appendChild(feedback);
-
-    const scriptBtn=document.createElement('button');scriptBtn.className='btn secondary';scriptBtn.type='button';scriptBtn.textContent='Show transcript';
-    const script=document.createElement('div');script.className='script';script.id='sc'+i;script.textContent=x[3];
-    scriptBtn.addEventListener('click',()=>{script.style.display=script.style.display==='block'?'none':'block';scriptBtn.textContent=script.style.display==='block'?'Hide transcript':'Show transcript';});
-    card.appendChild(scriptBtn);card.appendChild(script);
-
-    grid.appendChild(card);
-  });
-}
-function answerListen(i,j,clicked,q){
-  const x=listen[i],f=$('#lf'+i);
-  if(f.dataset.done)return;
-  f.dataset.done='1';
-  q.querySelectorAll('.choice').forEach(b=>b.disabled=true);
-  if(j===x[2]){f.textContent='🎉 正解！ +10 XP';addXP(10);clicked.classList.add('correct')}
-  else{f.textContent='🌱 Not quite. Listen again and check the transcript.';clicked.classList.add('wrong');q.querySelectorAll('.choice')[x[2]].classList.add('correct')}
-}
-
-
-let listenIndex=0, listenCorrect=0, listenAnswered=false, listenPlaying=false;
-function currentListen(){return listenQuestions[listenIndex]}
-function listenSpeak(rate=.82){
- const x=currentListen(); if(!x)return;
- const ok=speak(x.audio,rate);
- listenPlaying=ok;
-}
-function renderListenQuestion(){
- const x=currentListen();if(!x)return;
- listenAnswered=false;
- $('#listenTitle').textContent=x.title;
- $('#listenPrompt').textContent=x.q;
- $('#listenFeedback').textContent='';
- $('#listenFeedback').dataset.done='';
- $('#listenScript').style.display='none';$('#listenScript').textContent=x.audio;
- $('#listenTranscript').textContent='Show transcript';
- $('#listenNext').style.display='none';
- $('#listenChoices').innerHTML='';
- x.opts.forEach((o,i)=>{
-   const b=document.createElement('button');b.className='qchoice';b.type='button';b.textContent=o;
-   b.addEventListener('click',()=>answerListenNew(i,b));
-   $('#listenChoices').appendChild(b);
- });
- $('#listenScore').textContent=listenCorrect+' / '+listenQuestions.length;
-}
-function answerListenNew(i,button){
- if(listenAnswered)return;
- listenAnswered=true;
- const x=currentListen();
- $('#listenChoices').querySelectorAll('button').forEach((b,n)=>{b.disabled=true;if(n===x.ans)b.classList.add('correct')});
- if(i===x.ans){button.classList.add('correct');$('#listenFeedback').textContent='🎉 正解！ +10 XP';listenCorrect++;addXP(10)}
- else{button.classList.add('wrong');$('#listenFeedback').textContent='🌱 Not quite. Listen again and check the transcript.'}
- $('#listenScore').textContent=listenCorrect+' / '+listenQuestions.length;
- $('#listenNext').style.display='block';
-}
-function nextListen(){
- if(listenIndex<listenQuestions.length-1){listenIndex++;renderListenQuestion()}
- else{
-   $('#listenTitle').textContent='🎉 Chōkai Complete!';
-   $('#listenPrompt').textContent='Score: '+listenCorrect+' / '+listenQuestions.length+' — もう一回やってみる？';
-   $('#listenChoices').innerHTML='';
-   $('#listenFeedback').textContent='Every listen makes your ear stronger. ❤️';
-   $('#listenNext').textContent='↻ START AGAIN';$('#listenNext').style.display='block';
-   $('#listenNext').onclick=()=>{listenIndex=0;listenCorrect=0;$('#listenNext').textContent='NEXT →';renderListenQuestion();$('#listenNext').onclick=nextListen};
- }
-}
-document.getElementById('listenPlay').addEventListener('click',()=>listenSpeak(.82));
-document.getElementById('listenReplay').addEventListener('click',()=>listenSpeak(.82));
-document.getElementById('listenSlow').addEventListener('click',()=>listenSpeak(.58));
-document.getElementById('listenTranscript').addEventListener('click',()=>{
- const s=$('#listenScript');const show=s.style.display!=='block';s.style.display=show?'block':'none';$('#listenTranscript').textContent=show?'Hide transcript':'Show transcript';
-});
-document.getElementById('listenNext').addEventListener('click',nextListen);
-renderListenQuestion();
-
-let mockQ=[['彼は忙しい（　　）、毎日勉強している。',['ものの','ながらも','ばかりか','ことから'],1],['この教材は初心者（　　）作られている。',['向けに','向きに','として','に際して'],0],['努力した（　　）、合格できた。',['結果','わけ','ばかり','際'],0]],mi=0,ms=0,sec=300,timer=null;
-$('#startMock').onclick=()=>{if(timer)return;$('#startMock').style.display='none';mi=0;ms=0;sec=300;timer=setInterval(()=>{sec--;let m=String(Math.floor(sec/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');$('#mockTimer').textContent=m+':'+s;if(sec<=0)finishMock()},1000);renderMQ()}
-function renderMQ(){let q=mockQ[mi];$('#mockTitle').textContent='Question '+(mi+1)+' / '+mockQ.length;$('#mockArea').innerHTML='<div class="lesson"><p style="font-weight:900">'+q[0]+'</p>'+q[1].map((a,i)=>`<button class="choice" data-mi="${i}">${a}</button>`).join('')+'<div id="mf" class="feedback"></div></div>'}
-$('#mockArea').onclick=e=>{let b=e.target.closest('[data-mi]');if(!b)return;let q=mockQ[mi],i=+b.dataset.mi;$('#mockArea').querySelectorAll('.choice').forEach(x=>x.disabled=true);if(i===q[2]){ms++;addXP(10);$('#mf').textContent='🎉 Correct! +10 XP'}else $('#mf').textContent='🌱 Review this grammar point.';setTimeout(()=>{mi++;if(mi>=mockQ.length)finishMock();else renderMQ()},650)}
-function finishMock(){if(timer)clearInterval(timer);timer=null;$('#mockTimer').textContent='DONE';$('#mockTitle').textContent='Result';$('#mockArea').innerHTML=`<div class="result"><h2>🏆 Mini Mock Complete</h2><p>Score: <b>${ms}/${mockQ.length}</b></p><p>Every mistake is a study clue. ♡</p><button class="btn primary" onclick="location.reload()">TRY AGAIN</button></div>`}
-
-if('speechSynthesis' in window){
-  speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged=()=>{};
-}
-$('#testJapanese').addEventListener('click',()=>{
-  const ok=speak('こんにちは。N2getherへようこそ。一緒に頑張ろう。',.8);
-  if(ok)setAudioStatus('🔊 Test started. If you hear こんにちは, Chōkai is ready!');
-});
-
-let kanjiFilter='all';
-function kanjiKey(k){return 'n2g-kanji-'+k}
-function isKanjiMastered(k){return localStorage.getItem(kanjiKey(k))==='1'}
-function renderKanji(){
-  const grid=$('#kanjiGrid'); if(!grid)return;
-  const q=($('#kanjiSearch')?.value||'').trim().toLowerCase();
-  let items=n2KanjiExtra.filter(x=>{
-    const text=(x.kanji+' '+x.reading+' '+x.meaning+' '+x.words).toLowerCase();
-    const search=!q||text.includes(q);
-    const filter=kanjiFilter==='all'||(kanjiFilter==='mastered'&&isKanjiMastered(x.kanji))||(kanjiFilter==='unmastered'&&!isKanjiMastered(x.kanji));
-    return search&&filter;
-  });
-  $('#kanjiCount').textContent=items.length+' study entries';
-  grid.innerHTML='';
-  items.forEach(x=>{
-    const c=document.createElement('article');c.className='kcard';
-    c.innerHTML='<div class="kmain"><div><div class="kchar">'+x.kanji+'</div><div class="kreading">'+x.reading+'</div></div><div>🈶</div></div>'+
-      '<div class="kmeaning">'+x.meaning+'</div><div class="kwords">Words: '+x.words+'</div>';
-    const actions=document.createElement('div');actions.className='kactions';
-    const hear=document.createElement('button');hear.type='button';hear.textContent='🔊 Hear';hear.onclick=()=>speak(x.kanji+'。'+x.words,.78);
-    const master=document.createElement('button');master.type='button';master.textContent=isKanjiMastered(x.kanji)?'⭐ Mastered':'☆ Master it';
-    if(isKanjiMastered(x.kanji))master.classList.add('mastered');
-    master.onclick=()=>{
-      const now=!isKanjiMastered(x.kanji);
-      if(now){localStorage.setItem(kanjiKey(x.kanji),'1');addXP(5)}else localStorage.removeItem(kanjiKey(x.kanji));
-      renderKanji();
-    };
-    actions.append(hear,master);c.appendChild(actions);grid.appendChild(c);
-  });
-}
-document.addEventListener('input',e=>{if(e.target.id==='kanjiSearch')renderKanji()});
-document.addEventListener('click',e=>{
- const b=e.target.closest('[data-kfilter]');if(!b)return;
- S.kfilter=b.dataset.kfilter;document.querySelectorAll('[data-kfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderK();
-});
-
-
-let vocabFilter='all';
-function vocabKey(id){return 'n2g-vocab-'+id}
-function vocabMastered(id){return localStorage.getItem(vocabKey(id))==='1'}
-function renderKotoba(){
- const grid=$('#vocabGrid');if(!grid)return;
- const q=($('#vocabSearch')?.value||'').trim().toLowerCase();
- let a=S.vocab.filter(x=>{
-   const text=(x.word+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.example||'')).toLowerCase();
-   return (!q||text.includes(q)) &&
-     (vocabFilter==='all'||(vocabFilter==='mastered'&&vocabMastered(x.id))||(vocabFilter==='unmastered'&&!vocabMastered(x.id)));
- });
- $('#vocabCount').textContent=a.length+' study words';
- grid.innerHTML='';
- a.slice(0,80).forEach(x=>{
-   const c=document.createElement('article');c.className='vcard';
-   c.innerHTML='<div class="vword">'+esc(x.word)+'</div><div class="vread">'+esc(x.reading||'')+'</div><div class="vmeaning">'+esc(x.meaning||'')+'</div><div class="vexample">'+esc(x.example||'')+'</div><div class="vtranslation">'+esc(x.translation||'')+'</div>';
-   const actions=document.createElement('div');actions.className='vactions';
-   const hear=document.createElement('button');hear.type='button';hear.textContent='🔊 Hear';hear.onclick=()=>speak(x.word+'。'+(x.example||''),.78);
-   const master=document.createElement('button');master.type='button';master.textContent=vocabMastered(x.id)?'⭐ Mastered':'☆ Master it';if(vocabMastered(x.id))master.classList.add('mastered');
-   master.onclick=()=>{if(vocabMastered(x.id)){localStorage.removeItem(vocabKey(x.id))}else{localStorage.setItem(vocabKey(x.id),'1');addXP(5)}renderKotoba()};
-   actions.append(hear,master);c.appendChild(actions);grid.appendChild(c);
- });
-}
-function randomKotoba(){
- if(!S.vocab.length)return;
- const x=S.vocab[Math.floor(Math.random()*S.vocab.length)];
- modal('<div class="eyebrow" style="color:#b54974">🌸 TODAY\'S KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading||'')+'</b><br>'+esc(x.meaning||'')+'</p><div class="example">'+esc(x.example||'')+'<br><small>'+esc(x.translation||'')+'</small></div><button class="btn secondary" id="rkHear">🔊 Hear</button>');
- $('#rkHear').onclick=()=>speak(x.word+'。'+(x.example||''),.78);
-}
-document.addEventListener('input',e=>{if(e.target.id==='vocabSearch')renderKotoba()});
-document.addEventListener('click',e=>{
- const b=e.target.closest('[data-vfilter]');if(!b)return;
- const f=b.dataset.vfilter;
- if(f==='daily'){randomKotoba();return}
- vocabFilter=f;document.querySelectorAll('[data-vfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderKotoba();
-});
-
-
-let bunpoFilter='all';
-function bunpoMastered(id){return localStorage.getItem('n2g-bunpo-'+id)==='1'}
-function renderBunpo(){
- const grid=$('#bunpoGrid');if(!grid)return;
- const q=($('#bunpoSearch')?.value||'').trim().toLowerCase();
- const a=S.bunpo.filter(x=>{
-   const text=(x.pattern+' '+x.meaning+' '+(x.example||'')+' '+(x.note||'')).toLowerCase();
-   return (!q||text.includes(q)) && (bunpoFilter==='all'||(bunpoFilter==='mastered'&&bunpoMastered(x.id))||(bunpoFilter==='unmastered'&&!bunpoMastered(x.id)));
- });
- $('#bunpoCount').textContent=a.length+' patterns';
- grid.innerHTML='';
- a.forEach(x=>{
-   const c=document.createElement('article');c.className='bcard';
-   c.innerHTML='<div class="bpattern">'+esc(x.pattern)+'</div><div class="bmeaning">'+esc(x.meaning)+'</div><div class="bexample">'+esc(x.example||'')+'</div>';
-   const actions=document.createElement('div');actions.className='bactions';
-   const study=document.createElement('button');study.type='button';study.textContent='📖 Study';
-   study.onclick=()=>openBunpoStudy(x);
-   const master=document.createElement('button');master.type='button';master.textContent=bunpoMastered(x.id)?'⭐ Mastered':'☆ Master it';if(bunpoMastered(x.id))master.classList.add('mastered');
-   master.onclick=()=>{const key='n2g-bunpo-'+x.id;if(bunpoMastered(x.id)){localStorage.removeItem(key)}else{localStorage.setItem(key,'1');addXP(5)}renderBunpo()};
-   actions.append(study,master);c.appendChild(actions);grid.appendChild(c);
- });
-}
-function openBunpoStudy(x){
- const distractors=S.bunpo.filter(a=>a.id!==x.id).sort(()=>Math.random()-.5).slice(0,3);
- const opts=[x,...distractors].sort(()=>Math.random()-.5);
- modal('<div class="eyebrow" style="color:#b54974">BUNPŌ · '+esc(String(x.id))+'/100</div><h2>'+esc(x.pattern)+'</h2><p><b>Meaning:</b> '+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'</div><div class="quizbox"><h3>🎯 Quick Check</h3><p>Which option matches this grammar pattern?</p><div id="bqopts"></div><div id="bqfeedback" class="qfeedback"></div></div>');
- const box=$('#bqopts');
- opts.forEach(o=>{
-   const b=document.createElement('button');b.className='qchoice';b.type='button';b.textContent=o.meaning;b.onclick=()=>{
-     if($('#bqfeedback').dataset.done)return;
-     $('#bqfeedback').dataset.done='1';box.querySelectorAll('button').forEach(z=>z.disabled=true);
-     if(o.id===x.id){b.classList.add('correct');$('#bqfeedback').textContent='🎉 正解！ +10 XP';addXP(10)}
-     else{b.classList.add('wrong');$('#bqfeedback').textContent='🌱 Not quite. The answer is: '+x.meaning;box.querySelectorAll('button').forEach(z=>{if(z.textContent===x.meaning)z.classList.add('correct')})}
-   };box.appendChild(b);
- });
-}
-function randomBunpoQuiz(){
- if(!S.bunpo.length)return;
- const x=S.bunpo[Math.floor(Math.random()*S.bunpo.length)];
- openBunpoStudy(x);
-}
-document.addEventListener('input',e=>{if(e.target.id==='bunpoSearch')renderBunpo()});
-document.addEventListener('click',e=>{
- const b=e.target.closest('[data-bfilter]');if(!b)return;
- bunpoFilter=b.dataset.bfilter;document.querySelectorAll('[data-bfilter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderBunpo();
-});
-
-stats();daily();renderK();renderKotoba();renderBunpo();document.getElementById('bunpoRandom')?.addEventListener('click',randomBunpoQuiz);load();
+stats();dailyMessage();renderKanji();renderVocab();renderBunpo();renderListen();
 </script>
-</body></html>
+</body>
+</html>
