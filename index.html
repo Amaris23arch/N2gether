@@ -54,7 +54,7 @@ button,input{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:aut
 <div class="eyebrow">日本語能力試験 N2</div>
 <h1>おかえり、未来のN2合格者。🌸</h1>
 <p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
-<div class="love">💌 <b>From your girlfriend:</b><br><span id="dailyMessage"></span>
+<div class="love">💌 <b>From your wife:</b><br><span id="dailyMessage"></span>
 <div class="lang-toggle" aria-label="Message language">
   <button id="msgEN" class="active" type="button">English</button>
   <button id="msgID" type="button">Bahasa Indonesia</button>
@@ -104,8 +104,13 @@ button,input{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:aut
 </section>
 
 <section id="choukai" class="screen">
-<div class="head"><h2>🎧 Chōkai Sample Lab</h2><span>Original practice</span></div>
+<div class="head"><h2>🎧 Chōkai Listening Lab · 50</h2><span id="listenTotal">50 samples</span></div>
+<div class="lesson">
+<p>Listen first, choose an answer, then check the transcript. 🌸</p>
+<p class="notice">10 samples per page • 5 pages total</p>
+</div>
 <div class="listen-grid" id="listenGrid"></div>
+<div class="pagination"><button id="lPrev" type="button">← Previous</button><span class="pageinfo" id="lPage">Page 1 / 5</span><button id="lNext" type="button">Next →</button></div>
 </section>
 
 <section id="mock" class="screen">
@@ -164,29 +169,52 @@ $('#vAll').onclick=()=>{state.vf='all';state.vp=1;renderVocab()};$('#vUn').oncli
 $('#vRandom').onclick=()=>{if(!state.vocab.length)return;const x=state.vocab[Math.floor(Math.random()*state.vocab.length)];modal('<div class="eyebrow" style="color:#b54974">🌸 RANDOM KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading)+'</b><br>'+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'<br><small>'+esc(x.translation||'')+'</small></div><button id="rvh" class="btn secondary">🔊 Hear</button>');$('#rvh').onclick=()=>speak(x.word+'。'+(x.example||''))}
 $('#bAll').onclick=()=>{state.bf='all';state.bp=1;renderBunpo()};$('#bUn').onclick=()=>{state.bf='unmastered';state.bp=1;renderBunpo()};$('#bDone').onclick=()=>{state.bf='mastered';state.bp=1;renderBunpo()};$('#bRandom').onclick=()=>{if(state.bunpo.length)bunpoQuiz(state.bunpo[Math.floor(Math.random()*state.bunpo.length)].id)};
 
-const listen=[["Sample 1 · 予定変更", "明日の会議は、午前9時からではなく、10時から始まります。部長が出張から戻るのが遅くなるためです。", ["午前8時", "午前9時", "午前10時", "午後10時"], 2], ["Sample 2 · 乗り換え", "この電車は新宿に行きます。ただし、次の駅で3番線の電車に乗り換えてください。", ["次の駅で乗り換える", "この駅で降りる", "新宿で乗り換える", "歩いて行く"], 0], ["Sample 3 · 予約", "この店は平日なら予約はいりません。でも土曜日と日曜日は混みますから、予約したほうがいいですよ。", ["週末は予約したほうがいい", "週末は休みになる", "平日は予約が必要", "毎日空いている"], 0], ["Sample 4 · 最終決定", "最初は赤いかばんを買うつもりでしたが、店員さんのおすすめを見て、黒いかばんにしました。", ["赤", "青", "黒", "白"], 2], ["Sample 5 · 理由", "今日は雨が強くなるそうなので、試合は来週に延期されました。", ["選手がいないから", "雨が強くなるから", "来週は晴れるから", "会場が遠いから"], 1], ["Sample 6 · 連絡", "もし明日の朝までに返事がなかったら、私の携帯に電話してください。", ["メールを送る", "携帯に電話する", "会社へ行く", "午後まで待つ"], 1], ["Sample 7 · 買い物", "こちらの青いシャツは三千円ですが、白いシャツはセールで二千円になっています。", ["青いシャツを買う", "白いシャツを買う", "両方買う", "何も買わない"], 1], ["Sample 8 · 集合時間", "集合は駅の前に午後1時です。ただ、遅れる人は直接会場に来てもいいそうです。", ["駅の前に12時", "駅の前に1時", "会場に1時半", "家に1時"], 1]];
-function renderListen(){const g=$('#listenGrid');g.innerHTML='';listen.forEach((x,i)=>{const c=document.createElement('article');c.className='listen';c.innerHTML='<h3>🎧 '+x[0]+'</h3><button class="btn primary">🔊 PLAY JAPANESE</button><div class="opts"></div><div class="feedback" id="lf'+i+'"></div><button class="btn secondary">Show transcript</button><div class="script">'+esc(x[1])+'</div>';g.appendChild(c);c.querySelector('.primary').onclick=()=>speak(x[1]);c.querySelector('.secondary').onclick=()=>{const s=c.querySelector('.script');s.style.display=s.style.display==='block'?'none':'block'};x[2].forEach((a,j)=>{const b=document.createElement('button');b.className='choice';b.type='button';b.textContent=a;b.onclick=()=>{if(b.dataset.done)return;b.dataset.done='1';c.querySelectorAll('.choice').forEach(z=>z.disabled=true);if(j===x[3]){b.classList.add('correct');$('#lf'+i).textContent='🎉 正解！ +10 XP';addXP(10)}else{b.classList.add('wrong');c.querySelectorAll('.choice')[x[3]].classList.add('correct');$('#lf'+i).textContent='🌱 Not quite. Listen again.'}};c.querySelector('.opts').appendChild(b)})})}
-let mockIndex=0,mockScore=0;const mock=[['忙しい（　　）、毎日勉強している。',['ものの','ながらも','ばかりか','ことから'],1],['初心者（　　）作られた教材です。',['向けに','向きに','として','際に'],0],['努力した（　　）、合格できた。',['結果','わけ','ばかり','際'],0]];
-function renderMock(){const x=mock[mockIndex];$('#mockTitle').textContent='Question '+(mockIndex+1)+' / '+mock.length;$('#mockArea').innerHTML='<div class="quiz"><p>'+x[0]+'</p>'+x[1].map((a,i)=>'<button class="choice" data-mi="'+i+'">'+a+'</button>').join('')+'<div id="mfb" class="feedback"></div></div>';$('#mockArea').querySelectorAll('[data-mi]').forEach(b=>b.onclick=()=>{$('#mockArea').querySelectorAll('.choice').forEach(z=>z.disabled=true);const i=+b.dataset.mi;if(i===x[2]){mockScore++;addXP(10);b.classList.add('correct');$('#mfb').textContent='🎉 Correct! +10 XP'}else{b.classList.add('wrong');$('#mockArea').querySelectorAll('.choice')[x[2]].classList.add('correct');$('#mfb').textContent='🌱 Review this grammar point.'};setTimeout(()=>{mockIndex++;if(mockIndex>=mock.length){$('#mockArea').innerHTML='<div class="lesson"><h2>🏆 Complete!</h2><p>Score: <b>'+mockScore+'/'+mock.length+'</b></p></div>'}else renderMock()},650)})}
-$('#startMock').onclick=()=>{mockIndex=0;mockScore=0;renderMock()};
-
-async function loadLibraries(){
- try{
-   const [v,k,n1]=await Promise.all([fetch(N2V).then(r=>r.json()),fetch(N2K).then(r=>r.json()),fetch(N1K).then(r=>r.json())]);
-   state.vocab=v.slice(0,1000).map(normalizeVocab);
-   const core=k.map((x,i)=>({...x,id:'n2'+i}));
-   const seen=new Set(core.map(x=>x.character));
-   const extra=n1.filter(x=>!seen.has(x.character)).slice(0,133).map((x,i)=>({...x,id:'r'+i,related:true}));
-   state.kanji=[...core,...extra].slice(0,500);
- }catch(err){
-   console.error(err);
-   state.vocab=FALLBACK_VOCAB;
-   state.kanji=FALLBACK_KANJI;
-   $('#kotoba .notice').textContent='Could not load the online N2 vocabulary library. Showing offline fallback words. Check your internet connection and refresh.';
-   $('#kanji .notice').textContent='Could not load the online kanji library. Showing offline fallback characters.';
- }
- renderKanji();renderVocab();renderBunpo();
+const listen=[["Sample 1 · 予定変更", "明日の会議は、午前9時からではなく、10時から始まります。部長が出張から戻るのが遅くなるためです。", ["午前8時", "午前9時", "午前10時", "午後10時"], 2], ["Sample 2 · 乗り換え", "この電車は新宿に行きます。ただし、次の駅で3番線の電車に乗り換えてください。", ["次の駅で乗り換える", "この駅で降りる", "新宿で乗り換える", "歩いて行く"], 0], ["Sample 3 · 予約", "この店は平日なら予約はいりません。でも土曜日と日曜日は混みますから、予約したほうがいいですよ。", ["週末は予約したほうがいい", "週末は休みになる", "平日は予約が必要", "毎日空いている"], 0], ["Sample 4 · 最終決定", "最初は赤いかばんを買うつもりでしたが、店員さんのおすすめを見て、黒いかばんにしました。", ["赤", "青", "黒", "白"], 2], ["Sample 5 · 理由", "今日は雨が強くなるそうなので、試合は来週に延期されました。", ["選手がいないから", "雨が強くなるから", "来週は晴れるから", "会場が遠いから"], 1], ["Sample 6 · 連絡", "もし明日の朝までに返事がなかったら、私の携帯に電話してください。", ["メールを送る", "携帯に電話する", "会社へ行く", "午後まで待つ"], 1], ["Sample 7 · 買い物", "こちらの青いシャツは三千円ですが、白いシャツはセールで二千円になっています。", ["青いシャツを買う", "白いシャツを買う", "両方買う", "何も買わない"], 1], ["Sample 8 · 集合時間", "集合は駅の前に午後1時です。ただ、遅れる人は直接会場に来てもいいそうです。", ["駅の前に12時", "駅の前に1時", "会場に1時半", "家に1時"], 1], ["Sample 9 · 図書館", "図書館は今週から夜8時まで利用できます。ただし、土曜日は午後5時に閉まります。", ["毎日5時まで", "平日は8時まで", "土曜日は8時まで", "日曜日だけ8時まで"], 1], ["Sample 10 · 提出期限", "レポートの締め切りは金曜日でしたが、先生の都合で月曜日まで延長されました。", ["木曜日", "金曜日", "日曜日", "月曜日"], 3], ["Sample 11 · 天気予報", "午後から雪になる可能性がありますので、車で出かける人は早めに出発してください。", ["雨になるから", "雪になる可能性があるから", "道路が工事中だから", "電車が止まるから"], 1], ["Sample 12 · 忘れ物", "会議室に傘を忘れたかもしれません。黒くて、持ち手が木でできています。", ["白い傘", "青い傘", "黒い傘", "透明な傘"], 2], ["Sample 13 · 電車遅延", "事故の影響で電車が20分ほど遅れています。急ぐ方は別の路線をご利用ください。", ["5分", "10分", "20分", "30分"], 2], ["Sample 14 · 仕事の分担", "資料の印刷は私がしますので、田中さんは会議室の準備をお願いします。", ["資料を作る", "資料を印刷する", "会議室を準備する", "電話をする"], 2], ["Sample 15 · 病院", "診察は午後2時からですが、初めての方は30分前までに受付を済ませてください。", ["1時", "1時30分", "2時", "2時30分"], 1], ["Sample 16 · 映画", "映画は7時に始まります。6時半までに席に着いてください。", ["6時", "6時半", "7時", "7時半"], 1], ["Sample 17 · 旅行", "ホテルは駅から歩いて10分ほどです。チェックインは午後3時からできます。", ["駅から30分", "駅から20分", "駅から10分", "駅から5分"], 2], ["Sample 18 · 食事", "昼食は12時に食べますが、今日は会議があるので1時に変更します。", ["11時", "12時", "1時", "2時"], 2], ["Sample 19 · 学校行事", "文化祭は雨天の場合でも体育館で行われますので、中止にはなりません。", ["中止になる", "体育館で行われる", "来週になる", "オンラインになる"], 1], ["Sample 20 · 電話", "鈴木さんから電話がありました。戻ってきたら、今日中に連絡してほしいそうです。", ["明日連絡する", "来週連絡する", "今日中に連絡する", "連絡しなくていい"], 2], ["Sample 21 · 家事", "今日は私が料理をするから、あなたは洗濯物を取り込んでくれる？", ["料理をする", "買い物をする", "洗濯物を取り込む", "掃除をする"], 2], ["Sample 22 · 荷物", "この荷物は重いので、二人で運んだほうが安全ですよ。", ["一人で運ぶ", "二人で運ぶ", "送らない", "捨てる"], 1], ["Sample 23 · 料金", "学生証を見せれば、入館料が半額になります。", ["料金が無料になる", "半額になる", "倍になる", "変更されない"], 1], ["Sample 24 · 営業時間", "この店は通常9時開店ですが、明日は10時からです。", ["8時", "9時", "10時", "11時"], 2], ["Sample 25 · 電話番号", "問い合わせ先の電話番号は、案内の最後に書いてあります。", ["最初", "中央", "表紙", "最後"], 3], ["Sample 26 · 注文", "コーヒーを一つとサンドイッチを二つお願いします。", ["コーヒー2つ", "サンドイッチ1つ", "コーヒー1つとサンドイッチ2つ", "両方2つ"], 2], ["Sample 27 · 会議室", "会議室Aが使用中なので、今日の打ち合わせはBに変更します。", ["A", "B", "C", "中止"], 1], ["Sample 28 · 引っ越し", "新しい部屋は来月1日から使えますが、荷物を入れられるのは3日からです。", ["1日から荷物を入れる", "2日から", "3日から", "来月末から"], 2], ["Sample 29 · 薬", "この薬は食後に一日三回飲んでください。", ["食前に一回", "食後に三回", "寝る前に三回", "食事中に二回"], 1], ["Sample 30 · 駅の出口", "目的地に近いのは東口です。西口から出ると少し遠くなります。", ["北口", "南口", "東口", "西口"], 2], ["Sample 31 · メール", "資料を確認したら、問題がなくても一言返信してください。", ["返信しない", "問題がある時だけ返信", "必ず一言返信", "電話だけする"], 2], ["Sample 32 · 休日", "今週は土曜日に出勤する代わりに、月曜日が休みになります。", ["土曜日", "日曜日", "月曜日", "火曜日"], 2], ["Sample 33 · 講座", "この講座は初心者向けですが、簡単な漢字が読めることが条件です。", ["上級者だけ", "初心者で漢字が読める人", "子どもだけ", "日本語を話せない人"], 1], ["Sample 34 · 買い替え", "古いパソコンは修理するより、新しいものを買ったほうが安いそうです。", ["修理する", "新しいものを買う", "何もしない", "友達から借りる"], 1], ["Sample 35 · 忘年会", "忘年会は駅前の店で行います。参加者は6時45分までに集合してください。", ["6時", "6時30分", "6時45分", "7時"], 2], ["Sample 36 · 予約変更", "美容院の予約を3時から4時に変更したいのですが、空いていますか。", ["2時", "3時", "4時", "5時"], 2], ["Sample 37 · 説明会", "説明会では最初に会社の説明があり、その後で質問の時間があります。", ["質問が最初", "会社説明が最初", "試験が最初", "休憩が最初"], 1], ["Sample 38 · 交通規制", "マラソン大会のため、午前中はこの道路を通れません。午後1時には解除されます。", ["午前だけ通れない", "午後も通れない", "一日中通れない", "夜だけ通れない"], 0], ["Sample 39 · 荷物の受け取り", "宅配便は明日の午後2時から4時の間に届く予定です。", ["午前中", "午後2時から4時", "午後5時から7時", "夜10時"], 1], ["Sample 40 · 映画館", "この映画は字幕版が6時、吹き替え版が7時半からです。", ["字幕は7時半", "吹き替えは6時", "字幕は6時", "両方6時"], 2], ["Sample 41 · 仕事の開始", "新しいシステムは来週月曜日から使い始めます。今週は今までの方法でお願いします。", ["今日から", "今週金曜から", "来週月曜から", "来月から"], 2], ["Sample 42 · 店の場所", "パン屋は銀行の隣です。駅の反対側ではありません。", ["銀行の隣", "駅の中", "公園の前", "学校の隣"], 0], ["Sample 43 · 講師変更", "今日の授業は先生が体調不良のため、別の先生が担当します。", ["授業が中止", "先生が変わる", "時間が変わる", "教室が閉まる"], 1], ["Sample 44 · 写真", "写真撮影は自由ですが、フラッシュは禁止されています。", ["写真は禁止", "フラッシュだけ禁止", "動画だけ禁止", "何でも禁止"], 1], ["Sample 45 · 会計", "お会計は現金だけでなく、カードでもできます。", ["現金だけ", "カードだけ", "現金とカードが使える", "電子マネーだけ"], 2], ["Sample 46 · 公園", "公園では犬を連れて入れますが、必ずリードをつけてください。", ["犬は禁止", "リードが必要", "猫だけ可能", "リードは不要"], 1], ["Sample 47 · 仕事の依頼", "この資料は今日中でなく、明日の午前中までに完成すれば大丈夫です。", ["今日の朝", "今日の夜", "明日の午前中", "来週"], 2], ["Sample 48 · 学校の休み", "学校は祝日のため休みです。授業は火曜日から再開します。", ["月曜日", "火曜日", "水曜日", "金曜日"], 1], ["Sample 49 · 料理教室", "料理教室では包丁を使うので、長い爪の方は短くしてきてください。", ["髪を切る", "爪を短くする", "靴を替える", "制服を着る"], 1], ["Sample 50 · 集合場所", "雨の場合は駅前ではなく、駅の中のカフェに集合してください。", ["駅前", "公園", "駅の中のカフェ", "学校"], 2]];
+function renderListen(){
+ const grid=$('#listenGrid');
+ const perPage=10;
+ const pages=Math.max(1,Math.ceil(listen.length/perPage));
+ window.listenPage=Math.min(Math.max(window.listenPage||1,1),pages);
+ $('#listenTotal').textContent=listen.length+' samples';
+ $('#lPage').textContent='Page '+window.listenPage+' / '+pages;
+ $('#lPrev').disabled=window.listenPage<=1;
+ $('#lNext').disabled=window.listenPage>=pages;
+ const start=(window.listenPage-1)*perPage;
+ const items=listen.slice(start,start+perPage);
+ grid.innerHTML='';
+ items.forEach((x,local)=>{
+   const i=start+local;
+   const c=document.createElement('article');
+   c.className='listen';
+   c.innerHTML='<h3>🎧 '+x[0]+'</h3><button class="btn primary" type="button">🔊 PLAY JAPANESE</button><div class="opts"></div><div class="feedback" id="lf'+i+'"></div><button class="btn secondary" type="button">Show transcript</button><div class="script">'+esc(x[1])+'</div>';
+   grid.appendChild(c);
+   c.querySelector('.primary').onclick=()=>speak(x[1],.8);
+   c.querySelector('.secondary').onclick=()=>{const s=c.querySelector('.script');s.style.display=s.style.display==='block'?'none':'block'};
+   x[2].forEach((a,j)=>{
+     const b=document.createElement('button');
+     b.className='choice';
+     b.type='button';
+     b.textContent=a;
+     b.onclick=()=>{
+       if(b.dataset.done)return;
+       b.dataset.done='1';
+       c.querySelectorAll('.choice').forEach(z=>z.disabled=true);
+       if(j===x[3]){
+         b.classList.add('correct');
+         $('#lf'+i).textContent='🎉 正解！ +10 XP';
+         addXP(10);
+       }else{
+         b.classList.add('wrong');
+         c.querySelectorAll('.choice')[x[3]].classList.add('correct');
+         $('#lf'+i).textContent='🌱 Not quite. Listen again and check the transcript.';
+       }
+     };
+     c.querySelector('.opts').appendChild(b);
+   });
+ });
 }
+document.getElementById('lPrev').onclick=()=>{window.listenPage=Math.max(1,(window.listenPage||1)-1);renderListen()};
+document.getElementById('lNext').onclick=()=>{window.listenPage=(window.listenPage||1)+1;renderListen()};
 stats();dailyMessage();renderListen();renderKanji();renderVocab();renderBunpo();loadLibraries();
 </script>
 
