@@ -1,0 +1,4 @@
+N2gether uses OpenJLPT data for N2 vocabulary and kanji.
+Source: https://github.com/evanclan/OpenJLPT
+License: CC BY-SA 4.0
+Please retain attribution when redistributing.
