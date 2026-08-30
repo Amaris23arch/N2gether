@@ -215,6 +215,117 @@ function renderListen(){
 }
 document.getElementById('lPrev').onclick=()=>{window.listenPage=Math.max(1,(window.listenPage||1)-1);renderListen()};
 document.getElementById('lNext').onclick=()=>{window.listenPage=(window.listenPage||1)+1;renderListen()};
+
+async function loadLibraries(){
+  const timeout = (ms) => new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('timeout')), ms)
+  );
+
+  async function getJSON(url){
+    const res = await Promise.race([
+      fetch(url, {cache:'no-store'}),
+      timeout(9000)
+    ]);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return res.json();
+  }
+
+  function normalizeKanji(rows){
+    return (Array.isArray(rows)?rows:[]).map((x,i)=>({
+      id:x.id||('openjlpt-k-'+i),
+      character:x.character||x.kanji||'',
+      reading:x.reading||'',
+      meaning:Array.isArray(x.meanings)?x.meanings.join('; '):(x.meaning||''),
+      meanings:Array.isArray(x.meanings)?x.meanings:(x.meaning?[x.meaning]:[]),
+      onyomi:Array.isArray(x.onyomi)?x.onyomi:(x.onyomi?[x.onyomi]:[]),
+      kunyomi:Array.isArray(x.kunyomi)?x.kunyomi:(x.kunyomi?[x.kunyomi]:[]),
+      word:x.word||'',
+      wordReading:x.wordReading||'',
+      wordMeaning:x.wordMeaning||''
+    })).filter(x=>x.character);
+  }
+
+  function normalizeVocab(rows){
+    return (Array.isArray(rows)?rows:[]).map((x,i)=>{
+      const ex=Array.isArray(x.examples)&&x.examples.length?x.examples[0]:null;
+      return {
+        id:x.id||('openjlpt-v-'+i),
+        word:x.word||'',
+        reading:x.reading||'',
+        meaning:Array.isArray(x.meanings)?x.meanings.join('; '):(x.meaning||''),
+        example:x.example||(ex&&ex.ja)||'',
+        translation:x.translation||(ex&&ex.en)||''
+      };
+    }).filter(x=>x.word);
+  }
+
+  try{
+    const [remoteV,remoteK,remoteK1] = await Promise.all([
+      getJSON(N2V),
+      getJSON(N2K),
+      getJSON(N1K)
+    ]);
+
+    const k2=normalizeKanji(remoteK);
+    const k1=normalizeKanji(remoteK1);
+    const related=Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[];
+
+    // Keep the N2 set first, then add related characters until 500.
+    const seen=new Set();
+    state.kanji=[];
+    [...k2,...related,...k1].forEach(x=>{
+      const c=x.character;
+      if(c && !seen.has(c) && state.kanji.length<500){
+        seen.add(c); state.kanji.push(x);
+      }
+    });
+
+    state.vocab=normalizeVocab(remoteV).slice(0,1000);
+
+    // If the remote dataset ever changes, never leave the screen stuck.
+    if(state.kanji.length<500){
+      const local=(Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[]);
+      local.forEach(x=>{
+        if(state.kanji.length>=500)return;
+        if(x.character && !seen.has(x.character)){
+          seen.add(x.character); state.kanji.push(normalizeKanji([x])[0]);
+        }
+      });
+    }
+    if(state.vocab.length<1000){
+      const local=await getJSON('kotoba.json').catch(()=>[]);
+      const existing=new Set(state.vocab.map(x=>x.word));
+      normalizeVocab(local).forEach(x=>{
+        if(state.vocab.length<1000 && !existing.has(x.word)){
+          existing.add(x.word); state.vocab.push(x);
+        }
+      });
+    }
+  }catch(err){
+    // Offline/local fallback: load the files already bundled with N2gether.
+    const [localK,localV]=await Promise.all([
+      getJSON('kanji-related.json').catch(()=>[]),
+      getJSON('kotoba.json').catch(()=>[])
+    ]);
+
+    const seen=new Set();
+    state.kanji=[];
+    [...(Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[]),...(Array.isArray(localK)?localK:[])].forEach(x=>{
+      const n=normalizeKanji([x])[0];
+      if(n && n.character && !seen.has(n.character) && state.kanji.length<500){
+        seen.add(n.character); state.kanji.push(n);
+      }
+    });
+    state.vocab=normalizeVocab(localV).slice(0,1000);
+  }
+
+  // Always finish rendering — no infinite "Loading..." state.
+  if(!state.kanji.length) $('#kanjiGrid').innerHTML='<div class="empty">Kanji could not be loaded. Please refresh once.</div>';
+  if(!state.vocab.length) $('#vocabGrid').innerHTML='<div class="empty">Kotoba could not be loaded. Please refresh once.</div>';
+  renderKanji();
+  renderVocab();
+}
+
 stats();dailyMessage();renderListen();renderKanji();renderVocab();renderBunpo();loadLibraries();
 </script>
 
