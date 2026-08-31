@@ -1,271 +1,359 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eef0ff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="NEXUS">
-<title>NEXUS — Personal Life Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N2gether — 頑張ろう、一緒に。</title>
 <style>
-:root{
-  --bg1:#f4f4ff; --bg2:#edf3ff; --text:#151525; --muted:#707083;
-  --card:#ffffff; --line:#e5e4ee; --purple:#6047ff; --blue:#338cff;
-  --shadow:0 12px 35px rgba(83,79,170,.10);
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text);background:linear-gradient(180deg,var(--bg1),var(--bg2))}
-body{padding-bottom:100px}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-#app{max-width:560px;margin:auto;padding:26px 18px 110px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
-.brand-row{display:flex;align-items:center;gap:12px}
-.logo-box{width:56px;height:56px;border-radius:17px;background:linear-gradient(135deg,#5c55ff,#3d8cff);color:#fff;display:flex;align-items:center;justify-content:center;font-size:31px;font-weight:900;box-shadow:0 10px 30px rgba(77,92,255,.20)}
-.logo-text{font-weight:900;font-size:24px;letter-spacing:.03em}
-.settings-btn{width:46px;height:46px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.72);border-radius:15px;font-size:20px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-.hero h1{font-size:46px;line-height:1.02;margin:0 0 10px;font-weight:850;letter-spacing:-.045em}
-.hero .sub{font-size:21px;line-height:1.25;color:#77778a;max-width:440px}
-.hero .date{color:#8b8b99;font-size:14px;margin-top:12px}
-.glow-card{margin-top:26px;border-radius:29px;padding:28px 25px;color:#fff;background:linear-gradient(135deg,#4d2fb8 0%,#6552ff 55%,#6d73ff 100%);box-shadow:0 18px 40px rgba(94,71,255,.22)}
-.glow-card .eyebrow{font-size:13px;font-weight:900;letter-spacing:.13em;opacity:.86;text-transform:uppercase}
-.glow-card h2{font-size:34px;line-height:1.05;margin:14px 0 9px}
-.glow-card p{font-size:17px;line-height:1.55;margin:0 0 18px;color:rgba(255,255,255,.93)}
-.glow-actions{display:flex;gap:9px;flex-wrap:wrap}
-.glow-actions button{border:0;background:rgba(255,255,255,.94);color:#35258c;border-radius:14px;padding:11px 14px;font-weight:850}
-.section{margin:27px 0 10px;font-size:14px;font-weight:900;letter-spacing:.14em;color:#67677a}
-.card{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:24px;padding:16px;box-shadow:var(--shadow)}
-.item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
-.item:last-child{border-bottom:0}
-.dot{width:11px;height:11px;border-radius:50%;background:#9a9aa8;margin-top:6px;flex:none}
-.dot.high{background:#ff355d}.dot.medium{background:#8c63ff}.dot.low{background:#49b98b}
-.item-main{flex:1}.item-title{font-size:15px;font-weight:800}.meta{margin-top:4px;color:#858594;font-size:12px}
-.chip{display:inline-block;margin-left:5px;padding:4px 7px;border-radius:999px;background:#f0eff7;color:#66677a;font-size:10px;font-weight:800}
-.done{border:1px solid var(--line);background:white;color:#444;border-radius:10px;padding:7px 9px;font-size:11px;font-weight:800}
-.empty{text-align:center;color:#8a8a99;font-size:13px;padding:15px 5px}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.quick{border:0;border-radius:20px;padding:19px 12px;color:white;font-weight:900;font-size:15px;min-height:94px;text-align:left;box-shadow:0 10px 25px rgba(80,80,100,.10)}
-.quick.p{background:linear-gradient(135deg,#6a46ff,#7068ff)} .quick.b{background:linear-gradient(135deg,#35a7ff,#3b72ff)}
-.quick.g{background:linear-gradient(135deg,#2cc694,#29b88d)} .quick.o{background:linear-gradient(135deg,#ffb14a,#f58c32)}
-.quick small{display:block;font-size:11px;font-weight:750;opacity:.88;margin-top:7px}
-.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tool{background:white;border:1px solid var(--line);border-radius:16px;padding:13px;font-weight:800;text-align:left;color:#252535}
-.bottom{position:fixed;z-index:10;left:0;right:0;bottom:0;background:rgba(255,255,255,.86);backdrop-filter:blur(15px);border-top:1px solid rgba(0,0,0,.06);padding:10px 18px calc(10px + env(safe-area-inset-bottom))}
-.bottom button{width:min(524px,100%);display:block;margin:auto;border:0;border-radius:19px;background:#111;color:#fff;padding:16px;font-weight:900}
-.overlay{display:none;position:fixed;z-index:20;inset:0;background:rgba(18,16,35,.45);align-items:flex-end}
-.overlay.show{display:flex}
-.sheet{width:min(560px,100%);max-height:93vh;overflow:auto;background:#f7f7fb;border-radius:28px 28px 0 0;padding:18px 18px 31px;box-shadow:0 -10px 50px rgba(30,20,60,.22)}
-.handle{width:40px;height:4px;background:#d1d1db;border-radius:99px;margin:0 auto 17px}
-.sheet h2{font-size:26px;margin:0 0 5px}.sheet .sub{font-size:13px;color:var(--muted);margin:0 0 15px}
-.sheet textarea,.sheet input,.sheet select{width:100%;border:1px solid #dcdce5;background:white;border-radius:16px;padding:14px;margin:7px 0;outline:none}
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.big-action{border:1px solid var(--line);background:#fff;color:#222;border-radius:17px;padding:16px;font-weight:900}.big-action.primary{background:#111;color:white;border-color:#111}
-.row{display:flex;gap:10px;margin-top:10px}.row button{flex:1;padding:14px;border-radius:15px;border:1px solid var(--line);background:#fff;font-weight:850}.row .primary{background:#111;color:#fff;border-color:#111}
-.feedback{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:13px}.feedback h3{margin:0 0 8px;font-size:16px}.feedback p{margin:6px 0;line-height:1.48;color:#40404e}
-.badge{display:inline-block;padding:6px 9px;border-radius:999px;background:#f0eff8;font-size:11px;font-weight:850;color:#57576b;margin:2px 4px 2px 0}
-.preview{width:100%;max-height:290px;object-fit:contain;border-radius:17px;background:#ececf3;margin:10px 0}
-.notice{background:#efeff5;border-radius:16px;padding:12px 13px;font-size:12px;line-height:1.5;margin:12px 0}
-.settings-line{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.settings-line:last-child{border-bottom:0}
-.settings-label{font-weight:850}.settings-help{font-size:11px;color:var(--muted);margin-top:3px}
-.switch{appearance:none;width:48px;height:28px;background:#c9c9d3;border-radius:30px;position:relative}.switch:checked{background:#111}.switch:after{content:"";position:absolute;width:22px;height:22px;background:white;border-radius:50%;top:3px;left:3px;transition:.2s}.switch:checked:after{transform:translateX(20px)}
-.lang-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:240px;overflow:auto;margin-top:8px}.lang{border:1px solid var(--line);background:white;border-radius:13px;padding:10px;font-size:12px;font-weight:750;text-align:left}.lang.sel{background:#111;color:#fff}
-.toast{position:fixed;z-index:50;left:50%;bottom:105px;transform:translate(-50%,20px);opacity:0;background:#111;color:#fff;padding:11px 14px;border-radius:13px;font-size:12px;font-weight:850;transition:.22s;pointer-events:none}.toast.show{transform:translate(-50%,0);opacity:1}
-@media(max-width:390px){.hero h1{font-size:39px}.glow-card h2{font-size:29px}}
+:root{--bg:#09090b;--panel:#151317;--card:#fff;--text:#f7f3f6;--muted:#aaa2aa;--pink:#ed6f9e;--soft:#351a28;--line:#302b33;--good:#55b77f;--bad:#e36d78}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto;padding:15px 13px 55px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.logo{font-size:25px;font-weight:950}.logo span{color:var(--pink)}.streak{padding:8px 12px;background:#1a1116;border:1px solid #49303c;border-radius:999px;color:#ffc5d8;font-size:12px;font-weight:900}
+.nav{display:flex;gap:8px;overflow:auto;margin-bottom:15px}.nav button{white-space:nowrap;border:1px solid var(--line);background:#111114;color:#d1c8d0;border-radius:999px;padding:10px 14px;font-weight:800}.nav button.active{background:var(--soft);border-color:#694457;color:#ffb8d1}
+.screen{display:none}.screen.active{display:block}
+.hero{background:linear-gradient(135deg,#171217,#21151d);border:1px solid #3b2831;border-radius:27px;padding:22px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#f28cb3;font-weight:900}
+.hero h1{margin:7px 0;font-size:31px;line-height:1.06}.hero p{color:#bab0ba;line-height:1.6}.love{margin-top:15px;background:#fff;color:#584857;border-radius:17px;padding:13px 15px;line-height:1.55}.love b{color:#b54974}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{background:#17151a;border:1px solid #2f2a32;border-radius:15px;padding:10px;text-align:center}.stat strong{display:block;font-size:19px}.stat small{color:#938a95;font-size:10px}.bar{height:8px;background:#302a31;border-radius:99px;overflow:hidden;margin-top:12px}.fill{height:100%;width:5%;background:var(--pink);transition:.25s}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 0 10px}.head h2{margin:0;font-size:19px}.head span{font-size:12px;color:var(--muted)}
+.path{position:relative}.connector{position:absolute;left:27px;top:30px;bottom:30px;width:3px;background:#342f36}.node{display:grid;grid-template-columns:55px minmax(0,1fr);gap:11px;margin-bottom:12px}.dot{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#151419;border:2px solid #3a353d;z-index:1}.jcard{background:#fff;color:#1c191e;border-radius:18px;padding:15px}.jtop{display:flex;justify-content:space-between;gap:8px}.jtop h3{margin:0;font-size:16px}.jtop p{margin:4px 0 0;color:#776c77;font-size:12px}.tag{font-size:10px;background:#f2edf0;color:#96506c;border-radius:99px;padding:6px 8px;font-weight:900;white-space:nowrap}
+.btn{border-radius:13px;padding:11px 13px;font-weight:900}.primary{border:0;background:var(--pink);color:#fff;width:100%;margin-top:10px}.secondary{border:1px solid #3b343d;background:#151318;color:#f5eff3}
+.lesson{background:var(--soft);border:1px solid #4f2b3c;border-radius:20px;padding:18px}.lesson p{color:#eadde5;line-height:1.55}
+.search{width:100%;padding:13px 14px;border:1px solid #ded8de;border-radius:14px;background:#fff;color:#222;outline:none;margin-top:7px}
+.controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.filter{border:1px solid #ddd;background:#fafafa;color:#222;border-radius:999px;padding:8px 12px;font-weight:800;white-space:nowrap}
+.library{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.card{background:#fff;color:#1d191e;border:1px solid #e3dfe3;border-radius:18px;padding:15px}.bigjp{font-size:40px;font-weight:950;line-height:1}.reading{margin-top:5px;color:#98506e;font-weight:900}.meaning{margin-top:7px;font-weight:800}.example{margin-top:8px;color:#706771;font-size:12px;line-height:1.55}
+.actions{display:flex;gap:7px;margin-top:12px}.actions button{flex:1;border:1px solid #ddd;background:#fafafa;color:#222;border-radius:12px;padding:10px;font-weight:800}.actions button.mastered{background:#f5d9ea;border-color:#ed6fbe}
+.pagination{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:15px}.pagination button{border:1px solid #3b353d;background:#151318;color:#fff;border-radius:11px;padding:9px 13px;font-weight:900}.pagination button:disabled{opacity:.35;cursor:not-allowed}.pageinfo{font-size:12px;color:#b7adb6;min-width:95px;text-align:center}
+.notice{color:#a89da7;font-size:11px;line-height:1.5;margin-top:10px}.empty{grid-column:1/-1;border:1px dashed #3d3640;border-radius:17px;padding:22px;text-align:center;color:#a89ea8}
+.quiz{background:#17131a;border:1px solid #332c35;border-radius:18px;padding:17px;color:#fff;margin-top:10px}.choice{display:block;width:100%;background:#fff;color:#1d191e;border:1px solid #ddd;border-radius:12px;padding:11px;text-align:left;margin:7px 0;font-weight:700}.choice.correct{background:#effaf3;border-color:var(--good)}.choice.wrong{background:#fff0f2;border-color:var(--bad)}.feedback{min-height:22px;font-weight:900;margin-top:7px}
+.listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.listen{background:#111114;border:1px solid var(--line);border-radius:18px;padding:16px}.script{display:none;background:#17151a;border:1px solid #2e2931;border-radius:13px;padding:11px;color:#ddd4db;margin-top:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:15px;z-index:50}.modal.open{display:flex}.modalbox{max-width:650px;width:100%;max-height:86vh;overflow:auto;background:#fff;color:#1d191e;border-radius:22px;padding:20px}
+.loading{grid-column:1/-1;text-align:center;padding:30px;color:#aaa2aa}
+@media(max-width:800px){.library{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}.listen-grid{grid-template-columns:1fr}}
+@media(max-width:470px){.library{grid-template-columns:1fr}.hero h1{font-size:27px}.node{grid-template-columns:48px minmax(0,1fr)}.dot{width:45px;height:45px}.connector{left:22px}}
+
+.lang-toggle{display:flex;gap:6px;justify-content:flex-end;margin:8px 0 0}
+.lang-toggle button{padding:7px 10px;border-radius:999px;border:1px solid #ddd;background:#fff;color:#333;cursor:pointer;font-weight:800}
+.lang-toggle button.active{background:#ed6f9e;color:#fff;border-color:#ed6f9e}
+
 </style>
 </head>
 <body>
-<div id="app"></div>
-<div class="bottom"><button onclick="openTell()">＋ Tell Nexus</button></div>
+<div class="app">
+<header class="top"><div class="logo">N2<span>gether</span> 🌸</div><div class="streak">🔥 7 day streak</div></header>
+<nav class="nav">
+<button class="active" data-screen="home">🏠 Home</button>
+<button data-screen="kanji">🈶 Kanji</button>
+<button data-screen="kotoba">💬 Kotoba</button>
+<button data-screen="bunpo">📝 Bunpō</button>
+<button data-screen="choukai">🎧 Chōkai</button>
+<button data-screen="mock">🧪 Mock</button>
+</nav>
 
-<div class="overlay" id="tellOverlay" onclick="outsideClose(event,'tellOverlay')">
-<div class="sheet">
-<div class="handle"></div>
-<h2>Tell Nexus</h2>
-<p class="sub">Type it, say it, or show it. Nexus will turn it into something useful.</p>
-<div class="action-grid">
-<button class="big-action" onclick="startSpeech('tellText')">🎙️ Speak</button>
-<label class="big-action" style="text-align:center">📸 Take photo<input id="camera" type="file" accept="image/*" capture="environment" hidden></label>
+<section id="home" class="screen active">
+<div class="hero">
+<div class="eyebrow">日本語能力試験 N2</div>
+<h1>おかえり、未来のN2合格者。🌸</h1>
+<p>頑張ろう、一緒に。 One lesson. One step. One day closer to 合格.</p>
+<div class="love">💌 <b>From your wife:</b><br><span id="dailyMessage"></span>
+<div class="lang-toggle" aria-label="Message language">
+  <button id="msgEN" class="active" type="button">English</button>
+  <button id="msgID" type="button">Bahasa Indonesia</button>
 </div>
-<textarea id="tellText" rows="4" placeholder="Tomorrow facial appointment"></textarea>
-<div id="photoArea"></div>
-<div id="typingFeedback"></div>
-<div class="row"><button onclick="closeSheet('tellOverlay')">Cancel</button><button class="primary" onclick="professionalSetUp()">Set it up</button></div>
-</div></div>
-
-<div class="overlay" id="askOverlay" onclick="outsideClose(event,'askOverlay')">
-<div class="sheet">
-<div class="handle"></div>
-<h2>Ask Nexus</h2>
-<p class="sub">Talk about your life or just talk to Nexus.</p>
-<textarea id="askText" rows="3" placeholder="What do I need to do today? Or: what should I eat?"></textarea>
-<div class="row"><button onclick="startSpeech('askText')">🎙️ Speak</button><button class="primary" onclick="answerNexus()">Ask Nexus</button></div>
-<div id="askFeedback"></div>
-</div></div>
-
-<div class="overlay" id="scanOverlay" onclick="outsideClose(event,'scanOverlay')">
-<div class="sheet"><div class="handle"></div><h2>Document Scanner</h2><p class="sub">Nexus reads the page and proposes the useful parts.</p><div id="scanContent"></div></div>
+<br><small>Now go study. I believe in you. 😌❤️</small></div>
+<div class="stats"><div class="stat"><strong id="xp">120</strong><small>XP ✨</small></div><div class="stat"><strong>7 🔥</strong><small>STREAK</small></div><div class="stat"><strong id="mastered">0</strong><small>MASTERED</small></div><div class="stat"><strong id="pct">0%</strong><small>PROGRESS</small></div></div><div class="bar"><div class="fill" id="fill"></div></div>
 </div>
-
-<div class="overlay" id="settingsOverlay" onclick="outsideClose(event,'settingsOverlay')">
-<div class="sheet">
-<div class="handle"></div><h2>Nexus Settings</h2><p class="sub">Personalize how Nexus speaks, looks at your life, and helps you.</p>
-<div class="card">
-<div class="settings-line"><div><div class="settings-label">Your name</div><div class="settings-help">Used in greetings</div></div><input id="setName" style="width:140px" value="Sam"></div>
-<div class="settings-line"><div><div class="settings-label">Greeting voice</div><div class="settings-help">Speak when Nexus opens</div></div><input id="setVoice" class="switch" type="checkbox"></div>
-<div class="settings-line"><div><div class="settings-label">Professional mode</div><div class="settings-help">Polished feedback & structured titles</div></div><input id="setPro" class="switch" type="checkbox"></div>
-<div class="settings-line"><div><div class="settings-label">Evening check-in</div><div class="settings-help">Ask how your day went</div></div><input id="setNight" type="time" style="width:120px"></div>
-<div style="padding-top:14px"><div class="settings-label">Language</div><div class="settings-help">Choose your preferred Nexus language</div><div id="languageList" class="lang-list"></div></div>
+<div class="head"><h2>🗺️ N2 Journey</h2><span>Everything in one place ♡</span></div>
+<div class="path"><div class="connector"></div>
+<div class="node"><div class="dot">🌱</div><div class="jcard"><div class="jtop"><div><h3>01 · はじめまして</h3><p>Your N2 story starts here.</p></div><div class="tag">DONE ✓</div></div></div></div>
+<div class="node"><div class="dot">🈶</div><div class="jcard"><div class="jtop"><div><h3>02 · 漢字 Kanji</h3><p>30 cards per page. No search needed.</p></div><div class="tag">500</div></div><button class="btn primary" data-screen="kanji">START KANJI →</button></div></div>
+<div class="node"><div class="dot">💬</div><div class="jcard"><div class="jtop"><div><h3>03 · 言葉 Kotoba</h3><p>1,000 study words. Browse first, search anytime.</p></div><div class="tag">1000</div></div><button class="btn primary" data-screen="kotoba">OPEN KOTOBA →</button></div></div>
+<div class="node"><div class="dot">📝</div><div class="jcard"><div class="jtop"><div><h3>04 · 文法 Bunpō</h3><p>100 important patterns with quizzes.</p></div><div class="tag">100</div></div><button class="btn primary" data-screen="bunpo">OPEN BUNPŌ →</button></div></div>
+<div class="node"><div class="dot">🎧</div><div class="jcard"><div class="jtop"><div><h3>05 · 聴解 Chōkai</h3><p>Listen, answer, repeat.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="choukai">OPEN CHŌKAI →</button></div></div>
+<div class="node"><div class="dot">🧪</div><div class="jcard"><div class="jtop"><div><h3>06 · 模擬試験 Mock</h3><p>Quick N2-style practice.</p></div><div class="tag">READY</div></div><button class="btn secondary" data-screen="mock">START MOCK →</button></div></div>
+<div class="node"><div class="dot">🏆</div><div class="jcard"><div class="jtop"><div><h3>07 · N2合格</h3><p>The screenshot we want. 😭❤️</p></div><div class="tag">GOAL</div></div></div></div>
 </div>
-<div class="notice"><b>Private by design:</b> this beta keeps saved list data in this browser. Production Nexus still needs encrypted storage, secure authentication, document access controls, and explicit delete/retention controls before sensitive documents are trusted to it.</div>
-<div class="row"><button class="primary" onclick="saveSettings()">Save settings</button></div>
-</div></div>
+</section>
 
-<div class="toast" id="toast"></div>
+<section id="kanji" class="screen">
+<div class="head"><h2>🈶 N2 Kanji · 500 Study Set</h2><span id="kanjiTotal"></span></div>
+<div class="lesson"><div class="eyebrow">367 N2 + 133 related advanced characters</div>
+<input id="kanjiSearch" class="search" placeholder="Search kanji, reading, meaning, or word…">
+<div class="controls"><button class="filter" id="kAll">All</button><button class="filter" id="kUn">Unmastered</button><button class="filter" id="kDone">Mastered ⭐</button></div>
+<div class="notice">The JLPT does not publish an official fixed post-2010 kanji master list. The 500 here is a N2 study set: OpenJLPT's N2 set first, then additional related characters to reach 500.</div></div>
+<div id="kanjiGrid" class="library"><div class="loading">Loading your 500 kanji… 🌸</div></div>
+<div class="pagination"><button id="kPrev">←</button><span class="pageinfo" id="kPage"></span><button id="kNext">→</button></div>
+</section>
+
+<section id="kotoba" class="screen">
+<div class="head"><h2>💬 N2 Kotoba · 1,000 Study Words</h2><span id="vocabTotal"></span></div>
+<div class="lesson"><div class="eyebrow">Browse first • search anytime</div>
+<input id="vocabSearch" class="search" placeholder="Search Japanese, reading, English, or example…">
+<div class="controls"><button class="filter" id="vAll">All</button><button class="filter" id="vUn">Unmastered</button><button class="filter" id="vDone">Mastered ⭐</button><button class="filter" id="vRandom">🌸 Random</button></div>
+<div class="notice">The first 1,000 items are taken from OpenJLPT's 1,793-entry N2 vocabulary dataset. This is a study collection, not an official JLPT vocabulary list.</div></div>
+<div id="vocabGrid" class="library"><div class="loading">Loading 1,000 words… 💬</div></div>
+<div class="pagination"><button id="vPrev">←</button><span class="pageinfo" id="vPage"></span><button id="vNext">→</button></div>
+</section>
+
+<section id="bunpo" class="screen">
+<div class="head"><h2>📝 100 Important N2 Bunpō</h2><span id="bunpoTotal"></span></div>
+<div class="lesson"><div class="eyebrow">Browse first • search anytime</div>
+<input id="bunpoSearch" class="search" placeholder="Search grammar, meaning, or example…">
+<div class="controls"><button class="filter" id="bAll">All</button><button class="filter" id="bUn">Unmastered</button><button class="filter" id="bDone">Mastered ⭐</button><button class="filter" id="bRandom">🎲 Random Quiz</button></div></div>
+<div id="bunpoGrid" class="library"></div>
+<div class="pagination"><button id="bPrev">←</button><span class="pageinfo" id="bPage"></span><button id="bNext">→</button></div>
+</section>
+
+<section id="choukai" class="screen">
+<div class="head"><h2>🎧 Chōkai Listening Lab · 50</h2><span id="listenTotal">50 samples</span></div>
+<div class="lesson">
+<p>Listen first, choose an answer, then check the transcript. 🌸</p>
+<p class="notice">10 samples per page • 5 pages total</p>
+</div>
+<div class="listen-grid" id="listenGrid"></div>
+<div class="pagination"><button id="lPrev" type="button">← Previous</button><span class="pageinfo" id="lPage">Page 1 / 5</span><button id="lNext" type="button">Next →</button></div>
+</section>
+
+<section id="mock" class="screen">
+<div class="head"><h2>🧪 Mini N2 Mock</h2><span>Quick practice</span></div>
+<div class="lesson"><h2 id="mockTitle">Ready?</h2><p>Let's test what you've learned. 👀</p><button class="btn primary" id="startMock">START MINI MOCK</button></div>
+<div id="mockArea"></div>
+</section>
+</div>
+<div id="modal" class="modal"></div>
 
 <script>
-const STORE='nexus_final_v2_items', SETTINGS='nexus_final_v2_settings';
-let items=JSON.parse(localStorage.getItem(STORE)||'[]');
-let settings=Object.assign({name:'Sam',voice:true,pro:true,lang:'en-US',night:'18:00'},JSON.parse(localStorage.getItem(SETTINGS)||'{}'));
-const langs=[
-['English','en-US'],['日本語','ja-JP'],['Filipino','fil-PH'],['中文（普通话）','zh-CN'],['廣東話','zh-HK'],['한국어','ko-KR'],
-['Español','es-ES'],['Français','fr-FR'],['Deutsch','de-DE'],['Italiano','it-IT'],['Português','pt-PT'],['Русский','ru-RU'],
-['العربية','ar-SA'],['हिन्दी','hi-IN'],['বাংলা','bn-BD'],['اردو','ur-PK'],['Bahasa Indonesia','id-ID'],['Bahasa Melayu','ms-MY'],
-['Tiếng Việt','vi-VN'],['ไทย','th-TH'],['Türkçe','tr-TR'],['Nederlands','nl-NL'],['Polski','pl-PL'],['Українська','uk-UA'],
-['Svenska','sv-SE'],['Dansk','da-DK'],['Norsk','nb-NO'],['Suomi','fi-FI'],['Čeština','cs-CZ'],['Magyar','hu-HU'],
-['Română','ro-RO'],['Ελληνικά','el-GR'],['עברית','he-IL'],['Català','ca-ES'],['Slovenčina','sk-SK'],['Български','bg-BG'],
-['Hrvatski','hr-HR'],['Srpski','sr-RS'],['Slovenščina','sl-SI'],['Lietuvių','lt-LT'],['Latviešu','lv-LV'],
-['Eesti','et-EE'],['Kiswahili','sw-KE'],['Afrikaans','af-ZA'],['தமிழ்','ta-IN'],['తెలుగు','te-IN'],['मराठी','mr-IN'],
-['ગુજરાતી','gu-IN'],['ਪੰਜਾਬੀ','pa-IN'],['नेपाली','ne-NP'],['සිංහල','si-LK'],['অসমীয়া','as-IN']
-];
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function today(){return new Date().toISOString().slice(0,10)}
-function pad(n){return String(n).padStart(2,'0')}
-function fmt(d){if(!d)return 'No date';const x=new Date(d+'T12:00:00');return x.toLocaleDateString(undefined,{month:'short',day:'numeric',year:x.getFullYear()!==new Date().getFullYear()?'numeric':undefined})}
-function save(){localStorage.setItem(STORE,JSON.stringify(items));render()}
-function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-function closeSheet(id){document.getElementById(id).classList.remove('show')}
-function outsideClose(e,id){if(e.target===e.currentTarget)closeSheet(id)}
-function openTell(){
- document.getElementById('tellOverlay').classList.add('show');
- document.getElementById('tellText').value='';
- document.getElementById('typingFeedback').innerHTML='';
- document.getElementById('photoArea').innerHTML='';
- document.getElementById('camera').value='';
- setTimeout(()=>document.getElementById('tellText').focus(),80);
-}
-function openAsk(){document.getElementById('askOverlay').classList.add('show');document.getElementById('askText').value='';document.getElementById('askFeedback').innerHTML='';setTimeout(()=>document.getElementById('askText').focus(),80)}
-function openSettings(){
- const o=document.getElementById('settingsOverlay');o.classList.add('show');
- document.getElementById('setName').value=settings.name;document.getElementById('setVoice').checked=settings.voice;document.getElementById('setPro').checked=settings.pro;document.getElementById('setNight').value=settings.night;
- document.getElementById('languageList').innerHTML=langs.map(([n,c])=>`<button class="lang ${c===settings.lang?'sel':''}" onclick="chooseLang('${c}')">${n}</button>`).join('');
-}
-function chooseLang(code){settings.lang=code;document.querySelectorAll('.lang').forEach(b=>b.classList.remove('sel'));[...document.querySelectorAll('.lang')].find(b=>b.getAttribute('onclick')===`chooseLang('${code}')`)?.classList.add('sel')}
-function saveSettings(){settings.name=document.getElementById('setName').value.trim()||'Sam';settings.voice=document.getElementById('setVoice').checked;settings.pro=document.getElementById('setPro').checked;settings.night=document.getElementById('setNight').value||'18:00';localStorage.setItem(SETTINGS,JSON.stringify(settings));closeSheet('settingsOverlay');render();toast('Settings saved');if(settings.voice)speak(`Settings saved. I’m ready, ${settings.name}.`)}
-function parseDate(text){
- const l=text.toLowerCase(),now=new Date();
- if(/\btomorrow\b/.test(l)){const d=new Date(now);d.setDate(d.getDate()+1);return d.toISOString().slice(0,10)}
- if(/\btoday\b/.test(l))return today();
- const months={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
- const m=text.match(/\b(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d{1,2})(?:,?\s*(20\d{2}))?/i);
- if(m){const mo=months[m[1].slice(0,3).toLowerCase()],y=+(m[3]||now.getFullYear());return `${y}-${pad(mo)}-${pad(+m[2])}`}
- const iso=text.match(/\b(20\d{2})[-\/](\d{1,2})[-\/](\d{1,2})\b/);if(iso)return `${iso[1]}-${pad(+iso[2])}-${pad(+iso[3])}`;return null
-}
-function amount(text){const m=text.match(/(?:¥|￥)\s*[\d,]+|(?:\d[\d,]*)\s*(?:yen|円)/i);return m?m[0]:''}
-function category(text){
- const l=text.toLowerCase();if(/appointment|facial|doctor|dentist|meeting|class|interview/.test(l))return 'Appointments';
- if(/pay|bill|tax|payment|tuition|fee/.test(l))return 'Bills & Payments';
- if(/study|learn|practice|exam|japanese|n2|skill|course/.test(l))return 'Skills & Learning';
- if(/buy|grocery|shopping|pick up|errand/.test(l))return 'Errands & Shopping';
- if(/passport|residence|license|document|renew|renewal|expire/.test(l))return 'Documents & Renewals';
- if(/work|shift|job/.test(l))return 'Work';return 'Personal'
-}
-function professionalTitle(text){
- const l=text.toLowerCase().trim().replace(/[.!?。]+$/,'');
- if(/\bfacial\b.*\bappointment\b|\bappointment\b.*\bfacial\b/.test(l))return '🛑 Facial Appointment';
- if(/\btomorrow\b.*\bappointment\b|\bappointment\b.*\btomorrow\b/.test(l))return '🛑 Appointment';
- if(/\bpay\b.*\b(jitsumusha|tuition|school|class)\b/.test(l))return '💳 Tuition Payment';
- if(/\b(jitsumusha)\b/.test(l))return '📚 Jitsumusha';
- if(/\b(study|studying|practice)\b/.test(l))return '📚 Study Session';
- if(/\belectricity\b.*\bbill\b|\bbill\b.*\belectricity\b/.test(l))return '💡 Electricity Bill';
- if(/\brenew\b|\brenewal\b/.test(l))return '🔄 Renewal';
- return '📌 '+l.charAt(0).toUpperCase()+l.slice(1)
-}
-function priority(text,date){
- const l=text.toLowerCase();
- if(/\btomorrow\b|urgent|asap|deadline|due|tax|bill|pay|payment|expire|renew|appointment|important|required/.test(l))return 'high';
- if(date)return 'medium';return 'low'
-}
-function addUnique(title,date,source,extra,raw){
- const exists=items.some(x=>!x.done && x.title.toLowerCase()===title.toLowerCase() && (x.date||'')===(date||''));
- if(exists){toast('Nexus already has this on your list.');return false}
- items.push({id:String(Date.now()+Math.random()),title,date,source,extra,raw,priority:priority(raw||title,date),category:category(raw||title),done:false,createdAt:Date.now()});
- save();return true
-}
-function professionalSetUp(){
- const raw=document.getElementById('tellText').value.trim();if(!raw){toast('Tell Nexus something first.');return}
- const date=parseDate(raw),title=professionalTitle(raw),amt=amount(raw),added=addUnique(title,date,'You',amt,raw);
- let msg=added?`Sure! Let me set that up for you. I added <b>${esc(title)}</b>${date?' for <b>'+esc(fmt(date))+'</b>':''}.`:`I already have that one saved, so I won’t create a duplicate.`;
- document.getElementById('typingFeedback').innerHTML=`<div class="feedback"><h3>Nexus</h3><p>${msg}</p><p>Is there anything else?</p><div class="row"><button onclick="closeSheet('tellOverlay');toast('Sure thing!')">No, that’s all</button><button class="primary" onclick="resetTell()">Yes</button></div></div>`;
- if(settings.voice)speak(added?'Sure! Let me set that up for you. Is there anything else?':'I already have that saved, so I won’t create a duplicate. Is there anything else?')
-}
-function resetTell(){document.getElementById('tellText').value='';document.getElementById('typingFeedback').innerHTML='';document.getElementById('photoArea').innerHTML='';document.getElementById('camera').value='';document.getElementById('tellText').focus()}
-function speak(text){if(!settings.voice||!('speechSynthesis' in window))return;const u=new SpeechSynthesisUtterance(text);u.lang=settings.lang;window.speechSynthesis.cancel();window.speechSynthesis.speak(u)}
-function startSpeech(target){
- const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){toast('Voice input is not supported in this browser.');return}
- const r=new R();r.lang=settings.lang;r.interimResults=false;r.continuous=false;r.onresult=e=>{document.getElementById(target).value=e.results[0][0].transcript};r.onerror=()=>toast('I couldn’t hear that. Try again.');r.start()
-}
-function answerNexus(){
- const q=document.getElementById('askText').value.trim(),l=q.toLowerCase(),active=items.filter(x=>!x.done).sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));
- let ans='';
- if(!q)ans='I’m here. Tell me what’s on your mind.';
- else if(/today|do i need|need to do/.test(l)){const a=active.filter(x=>!x.date||x.date===today()).slice(0,6);ans=a.length?`Today I’m watching: ${a.map(x=>x.title).join(', ')}.`:'You’re clear today. Nothing urgent is saved.'}
- else if(/forget|forgot|miss/.test(l)){ans=active.length?`I’m watching these for you: ${active.slice(0,7).map(x=>x.title+(x.date?' on '+fmt(x.date):'')).join('; ')}.`:'Nothing is currently waiting in your list.'}
- else if(/eat|food|dinner|lunch|breakfast/.test(l))ans='What do you have at home? Tell me a few ingredients and I’ll help you choose something.';
- else if(/study|n2|japanese/.test(l))ans='For a study day, I’d keep it simple: one focused session, one short review, then stop before it becomes overwhelming. I can help you make a plan.';
- else ans=settings.pro?`Absolutely, ${settings.name}. We can talk normally, or I can connect the conversation to your life and your list. Tell me more.`:`Sure — tell me more.`;
- document.getElementById('askFeedback').innerHTML=`<div class="feedback"><h3>Nexus</h3><p>${esc(ans)}</p></div>`;if(settings.voice)speak(ans)
-}
-function completeItem(id){items=items.map(x=>x.id==id?{...x,done:true}:x);save();toast('Done. Nexus cleared it from your active list.')}
-function itemHTML(x){return `<div class="item"><span class="dot ${x.priority}"></span><div class="item-main"><div class="item-title">${esc(x.title)}</div><div class="meta">${fmt(x.date)} · ${esc(x.category||'Personal')}${x.extra?' · '+esc(x.extra):''}</div></div><button class="done" onclick="completeItem('${x.id}')">Done</button></div>`}
-function render(){
- const h=new Date().getHours(),greet=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
- const active=items.filter(x=>!x.done).sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')),t=active.filter(x=>!x.date||x.date===today()).slice(0,5),att=active.filter(x=>x.priority==='high').slice(0,5),up=active.filter(x=>x.date>today()).slice(0,7);
- document.getElementById('app').innerHTML=`
- <div class="top"><div class="brand-row"><div class="logo-box">N</div><div class="logo-text">NEXUS</div></div><button class="settings-btn" onclick="openSettings()">⚙️</button></div>
- <div class="hero"><h1>${esc(greet)}, ${esc(settings.name)}.</h1><div class="sub">Let's make today clear, calm, and manageable.</div><div class="date">${new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'})}</div></div>
- <div class="glow-card"><div class="eyebrow">YOUR DAY, AT A GLANCE</div><h2>I’m here with you.</h2><p>Tell NEXUS what you want to add, plan, remember, or understand.</p><div class="glow-actions"><button onclick="openTell()">＋ Tell Nexus</button><button onclick="openAsk()">🧠 Ask</button></div></div>
- <div class="section">NEEDS YOUR ATTENTION</div><div class="card">${att.length?att.map(itemHTML).join(''):'<div class="empty">Nothing needs your attention right now.</div>'}</div>
- <div class="section">COMING UP</div><div class="card">${up.length?up.map(itemHTML).join(''):'<div class="empty">Your timeline is clear.</div>'}</div>
- <div class="section">QUICK ACTIONS</div><div class="quick-grid">
- <button class="quick p" onclick="openAsk()">✨ Plan my day<small>Let Nexus prioritize your list</small></button>
- <button class="quick b" onclick="openAsk()">📅 Today’s plan<small>Hear what matters today</small></button>
- <button class="quick g" onclick="openTell()">✓ Add something<small>Type, speak, or show it</small></button>
- <button class="quick o" onclick="openSettings()">⚙️ NEXUS settings<small>Name, voice, language, mode</small></button>
- </div>
- <div class="section">SKILLS & LIFE TOOLS</div><div class="card"><div class="tools-grid">
- <button class="tool" onclick="openTell();document.getElementById('tellText').value='I want to practice a skill'">🧠 Skills & Learning</button>
- <button class="tool" onclick="openTell();document.getElementById('tellText').value='I need to organize equipment'">🧰 Equipment & Things</button>
- <button class="tool" onclick="openTell();document.getElementById('tellText').value='I have an errand'">🛒 Errands</button>
- <button class="tool" onclick="openTell();document.getElementById('tellText').value='I have an appointment'">📅 Appointments</button>
- </div></div>`;
-}
-document.getElementById('camera').addEventListener('change',async e=>{
- const f=e.target.files[0];if(!f)return;
- const url=URL.createObjectURL(f);closeSheet('tellOverlay');document.getElementById('scanOverlay').classList.add('show');
- document.getElementById('scanContent').innerHTML=`<img class="preview" src="${url}"><div class="notice">🔎 Nexus is reading the document. It will propose dates, amounts, and actions for your approval.</div><p style="color:#888;font-size:12px">For the beta, OCR runs in your browser using Tesseract.js. Please do not use highly sensitive documents yet.</p>`;
- try{
-   const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';document.head.appendChild(s);
-   await new Promise((res,rej)=>{s.onload=res;s.onerror=rej});
-   const {data:{text}}=await Tesseract.recognize(f,'eng');
-   const d=parseDate(text),a=amount(text);
-   let label=/renew|renewal|expire/i.test(text)?'🔄 Renewal':/appointment|meeting|class/i.test(text)?'📅 Appointment':/bill|payment|pay|tax/i.test(text)?'💳 Payment':'📄 Document action';
-   document.getElementById('scanContent').innerHTML+=`<div class="feedback"><h3>Here’s what Nexus found</h3><p><span class="badge">${esc(label)}</span>${d?` <span class="badge">📅 ${fmt(d)}</span>`:''}${a?` <span class="badge">💴 ${esc(a)}</span>`:''}</p><p>${esc(text.trim().slice(0,650)||'No reliable text found.')}</p><div class="row"><button onclick="closeSheet('scanOverlay')">Don’t add</button><button class="primary" onclick="addScanned('${esc(label)}','${d||''}','${esc(a)}')">＋ Add to my list</button></div><div class="row"><button class="primary" onclick="explainScan()">Do you want me to explain the details?</button></div></div>`;
- }catch(err){
-   document.getElementById('scanContent').innerHTML+=`<div class="feedback"><h3>Let’s try again</h3><p>I couldn’t read this clearly enough to safely create a reminder.</p><div class="row"><button class="primary" onclick="closeSheet('scanOverlay');openTell()">Retake photo</button></div></div>`;
- }
+const dailyMessages = ["I’m proud of you, love. Even a little study today is still progress. 💗", "Take your time, baby. You don’t have to be perfect—you just have to keep going. 🌸", "I believe in you more than you know. One word, one kanji, one step closer. 🥰", "You worked hard today. Be gentle with yourself, then let’s try one more little thing together. ❤️", "Future N2 passers don’t give up—and neither does my favorite girl. You’ve got this. 🌷", "If today feels heavy, breathe. I’m right here cheering for you. 頑張ろうね。💞", "I’m so proud of how far you’ve come. Keep going, my love. Your effort will become your confidence. ✨", "No pressure, sweetheart. We’re learning together, one day at a time. 💕", "You don’t need a perfect study day. Just give yourself a small win today. I love you. 🌸", "Look at you, still trying. That’s exactly why I know you can do this. 頑張って、愛しい人。❤️", "Study a little, rest a little, smile a little. Your wife is always on your team. 🫶", "I know you can pass N2. But more importantly, I’m proud of you regardless of the score. 💗", "Come on, love. Let’s make today’s tiny effort count. I’m cheering for you from here. 🌷", "You’ve already overcome so much. This N2 journey is just another thing we’ll conquer together. 💕", "Drink some water, take a breath, and start with one card. I believe in you, baby. 🥹❤️", "Your future self will thank you for studying today. And your wife is already proud of you. 🌸", "It’s okay if you forget. That’s why we review. Keep going, sweetheart. 💞", "One day you’ll look back at this journey and smile. Until then, I’ll keep cheering you on. ✨", "You are capable, hardworking, and stronger than you think. Now go get one more little win. 🥰", "I love seeing you chase your goals. 頑張ろう、一緒に。❤️", "Even ten minutes counts. Even one kanji counts. Your effort matters, my love. 🌷", "Don’t compare your progress with anyone else’s. Your journey is yours, and I’m proud of it. 💗", "If you’re tired, rest without guilt. Then come back when you’re ready. I’ll be here. 🫶", "N2 is a goal, not a measure of your worth. But I know you can reach it. I believe in you. 🌸", "Good morning, love. Let’s make today a little brighter and a little closer to your dream. ☀️💕", "Good night, sweetheart. You did enough today. Tomorrow, we’ll take another small step. 🌙❤️", "You don’t have to do everything today. Just do the next thing. I’m cheering for you. 💞", "My favorite study partner, your effort makes me so proud. Now, one more kotoba? 🥰", "I’m your wife, your biggest cheerleader, and your personal 頑張って隊長. Go, baby! 🌸", "Whatever happens on exam day, remember this: I already believe you’re amazing. Now let’s study. ❤️"];
+const dailyMessagesID = ["Aku bangga padamu, sayang. Belajar sedikit hari ini pun tetap sebuah kemajuan. 💗", "Pelan-pelan saja, sayang. Kamu tidak harus sempurna—kamu hanya perlu terus melangkah. 🌸", "Aku percaya padamu lebih dari yang kamu tahu. Satu kata, satu kanji, satu langkah lebih dekat. 🥰", "Kamu sudah bekerja keras hari ini. Jangan terlalu keras pada dirimu sendiri, lalu kita coba satu hal kecil lagi bersama. ❤️", "Orang yang akan lulus N2 tidak mudah menyerah—begitu juga gadisku tersayang. Kamu pasti bisa! 🌷", "Kalau hari ini terasa berat, tarik napas. Aku di sini untuk terus menyemangatimu. 頑張ろうね。💞", "Aku sangat bangga melihat sejauh apa kamu sudah berkembang. Teruskan, sayang. Usahamu akan menjadi kepercayaan dirimu. ✨", "Tidak perlu terburu-buru, sayang. Kita belajar bersama, satu hari demi satu hari. 💕", "Kamu tidak perlu belajar dengan sempurna hari ini. Berikan dirimu satu kemenangan kecil saja. Aku mencintaimu. 🌸", "Lihat dirimu, masih terus berusaha. Itu alasan aku tahu kamu bisa. 頑張って、愛しい人。❤️", "Belajar sedikit, istirahat sedikit, tersenyum sedikit. Istrimu selalu berada di pihakmu. 🫶", "Aku tahu kamu bisa lulus N2. Tapi yang lebih penting, aku tetap bangga padamu apa pun nilainya. 💗", "Ayo, sayang. Mari jadikan usaha kecil hari ini berarti. Aku menyemangatimu dari sini. 🌷", "Kamu sudah melewati begitu banyak hal. Perjalanan N2 ini juga akan kita taklukkan bersama. 💕", "Minum air, tarik napas, lalu mulai dari satu kartu. Aku percaya padamu, sayang. 🥹❤️", "Dirimu di masa depan akan berterima kasih karena kamu belajar hari ini. Dan istrimu sudah bangga padamu. 🌸", "Tidak apa-apa kalau kamu lupa. Itu sebabnya kita mengulang. Teruslah berusaha, sayang. 💞", "Suatu hari nanti kamu akan melihat kembali perjalanan ini dan tersenyum. Sampai saat itu, aku akan terus menyemangatimu. ✨", "Kamu mampu, pekerja keras, dan lebih kuat dari yang kamu kira. Sekarang, raih satu kemenangan kecil lagi. 🥰", "Aku suka melihatmu mengejar impianmu. 頑張ろう、一緒に。❤️", "Bahkan sepuluh menit tetap berarti. Bahkan satu kanji tetap berarti. Usahamu penting, sayang. 🌷", "Jangan bandingkan kemajuanmu dengan orang lain. Perjalanan ini milikmu, dan aku bangga melihatnya. 💗", "Kalau kamu lelah, beristirahatlah tanpa rasa bersalah. Kembalilah saat kamu siap. Aku akan tetap di sini. 🫶", "N2 adalah tujuan, bukan ukuran nilai dirimu. Tapi aku tahu kamu bisa mencapainya. Aku percaya padamu. 🌸", "Selamat pagi, sayang. Mari buat hari ini sedikit lebih cerah dan sedikit lebih dekat dengan impianmu. ☀️💕", "Selamat malam, sayang. Kamu sudah melakukan cukup banyak hari ini. Besok, kita ambil satu langkah kecil lagi. 🌙❤️", "Kamu tidak harus melakukan semuanya hari ini. Cukup lakukan hal berikutnya. Aku menyemangatimu. 💞", "Partner belajarku tersayang, usahamu membuatku sangat bangga. Sekarang, satu kotoba lagi? 🥰", "Aku istrimu, pendukungmu nomor satu, dan ketua tim 頑張って pribadimu. Ayo, sayang! 🌸", "Apa pun yang terjadi di hari ujian, ingat ini: bagiku kamu sudah luar biasa. Sekarang, mari belajar. ❤️"];
+
+const DAILY=["おはよう、かわいい。🌸 今日も一緒に一歩ずつ。N2は逃げないよ。", "今日もえらい。🥹 10分でも勉強したら、それは前進。", "焦らなくていいよ。❤️ わからないところは、未来の自分に教えてる途中。", "You don't need a perfect study day. You just need a real one. 🌷", "今日はちょっとだけでもいい。続けるあなたが、いちばん強い。", "ねえ、N2。うちの彼女に勝てると思ってる？ 😌", "One page. One word. One grammar point. That's enough for today. ♡", "疲れてるなら、ゆっくりでいい。休むのも合格への準備だよ。🌙", "今日も一緒に頑張ろう。合格した日の私たち、きっと泣く。😭❤️"];
+const BUNPO=[{"id": 1, "pattern": "〜際（に）", "meaning": "When; on the occasion of", "formation": "接続は文脈に応じて確認する。", "example": "帰国の際に、空港でお土産を買った。", "note": "N2gether high-priority study point."}, {"id": 2, "pattern": "〜に際して", "meaning": "On the occasion of", "formation": "接続は文脈に応じて確認する。", "example": "入学に際して、必要な書類を提出してください。", "note": "N2gether high-priority study point."}, {"id": 3, "pattern": "〜にあたって", "meaning": "At the time of; in preparation for", "formation": "接続は文脈に応じて確認する。", "example": "新しい仕事を始めるにあたって、目標を決めた。", "note": "N2gether high-priority study point."}, {"id": 4, "pattern": "〜に伴って", "meaning": "Along with; as changes", "formation": "接続は文脈に応じて確認する。", "example": "人口の増加に伴って、交通量も増えた。", "note": "N2gether high-priority study point."}, {"id": 5, "pattern": "〜につれて", "meaning": "As; in proportion as", "formation": "接続は文脈に応じて確認する。", "example": "春になるにつれて、暖かくなってきた。", "note": "N2gether high-priority study point."}, {"id": 6, "pattern": "〜に従って", "meaning": "As; according to", "formation": "接続は文脈に応じて確認する。", "example": "説明書に従って、機械を操作してください。", "note": "N2gether high-priority study point."}, {"id": 7, "pattern": "〜とともに", "meaning": "Together with; as", "formation": "接続は文脈に応じて確認する。", "example": "技術の進歩とともに、生活も便利になった。", "note": "N2gether high-priority study point."}, {"id": 8, "pattern": "〜たびに", "meaning": "Every time", "formation": "接続は文脈に応じて確認する。", "example": "この写真を見るたびに、旅行を思い出す。", "note": "N2gether high-priority study point."}, {"id": 9, "pattern": "〜つつ", "meaning": "While; although", "formation": "接続は文脈に応じて確認する。", "example": "音楽を聞きつつ、レポートを書いた。", "note": "N2gether high-priority study point."}, {"id": 10, "pattern": "〜つつある", "meaning": "Be in the process of", "formation": "接続は文脈に応じて確認する。", "example": "社会は少しずつ変わりつつある。", "note": "N2gether high-priority study point."}, {"id": 11, "pattern": "〜か〜ないかのうちに", "meaning": "Just as; no sooner...than", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜か〜ないかのうちに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 12, "pattern": "〜次第", "meaning": "As soon as", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜次第」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 13, "pattern": "〜て以来", "meaning": "Ever since", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜て以来」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 14, "pattern": "〜ぶりに", "meaning": "For the first time in", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ぶりに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 15, "pattern": "〜をきっかけに", "meaning": "Taking ... as an opportunity", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜をきっかけに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 16, "pattern": "〜を通じて", "meaning": "Through; throughout", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜を通じて」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 17, "pattern": "〜を通して", "meaning": "Through; by means of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜を通して」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 18, "pattern": "〜において", "meaning": "In; at (formal)", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜において」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 19, "pattern": "〜における", "meaning": "In; regarding (formal)", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜における」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 20, "pattern": "〜にわたって", "meaning": "Over; throughout", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にわたって」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 21, "pattern": "〜をめぐって", "meaning": "Concerning; over", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜をめぐって」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 22, "pattern": "〜に関して", "meaning": "Regarding; concerning", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に関して」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 23, "pattern": "〜に対して", "meaning": "Toward; in contrast to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に対して」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 24, "pattern": "〜に応じて", "meaning": "According to; in response to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に応じて」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 25, "pattern": "〜に基づいて", "meaning": "Based on", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に基づいて」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 26, "pattern": "〜をもとに", "meaning": "Based on", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜をもとに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 27, "pattern": "〜を中心に", "meaning": "Centered around", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜を中心に」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 28, "pattern": "〜をはじめ", "meaning": "Beginning with; including", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜をはじめ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 29, "pattern": "〜はもちろん", "meaning": "Not only ... but of course", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜はもちろん」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 30, "pattern": "〜はともかく", "meaning": "Setting ... aside", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜はともかく」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 31, "pattern": "〜はさておき", "meaning": "Putting ... aside", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜はさておき」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 32, "pattern": "〜にかかわらず", "meaning": "Regardless of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にかかわらず」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 33, "pattern": "〜にかかわりなく", "meaning": "Regardless of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にかかわりなく」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 34, "pattern": "〜を問わず", "meaning": "Regardless of; irrespective of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜を問わず」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 35, "pattern": "〜に限らず", "meaning": "Not limited to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に限らず」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 36, "pattern": "〜に限って", "meaning": "Only when; especially", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に限って」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 37, "pattern": "〜に限り", "meaning": "Limited to; only", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に限り」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 38, "pattern": "〜に限っては", "meaning": "As far as ... is concerned", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に限っては」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 39, "pattern": "〜わけではない", "meaning": "It is not that; not necessarily", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜わけではない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 40, "pattern": "〜わけがない", "meaning": "There is no way", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜わけがない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 41, "pattern": "〜わけにはいかない", "meaning": "Cannot afford to; cannot", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜わけにはいかない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 42, "pattern": "〜ないわけにはいかない", "meaning": "Cannot not; must", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ないわけにはいかない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 43, "pattern": "〜というわけではない", "meaning": "It doesn't mean that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜というわけではない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 44, "pattern": "〜というものではない", "meaning": "It is not simply the case that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜というものではない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 45, "pattern": "〜ことから", "meaning": "From the fact that; because", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことから」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 46, "pattern": "〜ことだから", "meaning": "Because it is; judging from", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことだから」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 47, "pattern": "〜ものだから", "meaning": "Because; the reason is", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ものだから」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 48, "pattern": "〜ものの", "meaning": "Although; though", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ものの」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 49, "pattern": "〜とは限らない", "meaning": "Not necessarily", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜とは限らない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 50, "pattern": "〜に違いない", "meaning": "Must be; surely", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に違いない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 51, "pattern": "〜に決まっている", "meaning": "Must be; definitely", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に決まっている」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 52, "pattern": "〜に相違ない", "meaning": "There is no doubt", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に相違ない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 53, "pattern": "〜どころか", "meaning": "Far from; let alone", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜どころか」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 54, "pattern": "〜どころではない", "meaning": "Not in a state to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜どころではない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 55, "pattern": "〜ばかりか", "meaning": "Not only...but also", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ばかりか」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 56, "pattern": "〜ばかりに", "meaning": "Just because; only because", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ばかりに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 57, "pattern": "〜さえ", "meaning": "Even; as long as", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜さえ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 58, "pattern": "〜さえ〜ば", "meaning": "As long as; if only", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜さえ〜ば」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 59, "pattern": "〜すら", "meaning": "Even (formal)", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜すら」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 60, "pattern": "〜まで", "meaning": "Even; to the extent that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜まで」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 61, "pattern": "〜こそ", "meaning": "Precisely; exactly", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜こそ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 62, "pattern": "〜からこそ", "meaning": "Precisely because", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜からこそ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 63, "pattern": "〜あまり", "meaning": "So much...that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜あまり」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 64, "pattern": "〜あげく", "meaning": "After all; in the end", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜あげく」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 65, "pattern": "〜末に", "meaning": "After; finally", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜末に」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 66, "pattern": "〜結果", "meaning": "As a result", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜結果」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 67, "pattern": "〜上で", "meaning": "After; based on", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜上で」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 68, "pattern": "〜上に", "meaning": "In addition; moreover", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜上に」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 69, "pattern": "〜上は", "meaning": "Now that; since", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜上は」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 70, "pattern": "〜限り", "meaning": "As long as; as far as", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜限り」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 71, "pattern": "〜限りでは", "meaning": "As far as ...", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜限りでは」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 72, "pattern": "〜限りにおいて", "meaning": "As long as; within limits", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜限りにおいて」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 73, "pattern": "〜ないことには", "meaning": "Unless; without doing", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ないことには」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 74, "pattern": "〜ことなく", "meaning": "Without doing", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことなく」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 75, "pattern": "〜ことに", "meaning": "To one's ...", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 76, "pattern": "〜ことになっている", "meaning": "Be scheduled; be decided", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことになっている」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 77, "pattern": "〜こととなっている", "meaning": "It has been decided (formal)", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜こととなっている」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 78, "pattern": "〜ことはない", "meaning": "There is no need to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことはない」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 79, "pattern": "〜ことだ", "meaning": "Should; it is important to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ことだ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 80, "pattern": "〜ようでは", "meaning": "If things are like that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ようでは」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 81, "pattern": "〜ように見える", "meaning": "Appear to; seem", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ように見える」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 82, "pattern": "〜かのようだ", "meaning": "As if", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜かのようだ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 83, "pattern": "〜にしては", "meaning": "Considering; for", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にしては」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 84, "pattern": "〜わりに", "meaning": "Although; considering", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜わりに」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 85, "pattern": "〜にしても", "meaning": "Even if; even considering", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にしても」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 86, "pattern": "〜としても", "meaning": "Even if", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜としても」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 87, "pattern": "〜としたら", "meaning": "If; assuming", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜としたら」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 88, "pattern": "〜とすれば", "meaning": "If that is the case", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜とすれば」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 89, "pattern": "〜ならでは", "meaning": "Unique to; characteristic of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ならでは」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 90, "pattern": "〜向け", "meaning": "Intended for", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜向け」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 91, "pattern": "〜向き", "meaning": "Suitable for", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜向き」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 92, "pattern": "〜に反して", "meaning": "Contrary to", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に反して」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 93, "pattern": "〜に代わって", "meaning": "Instead of; on behalf of", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜に代わって」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 94, "pattern": "〜にかけて", "meaning": "From...through...", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にかけて」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 95, "pattern": "〜からすると", "meaning": "Judging from", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜からすると」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 96, "pattern": "〜から見ると", "meaning": "Judging from; from viewpoint", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜から見ると」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 97, "pattern": "〜にせよ", "meaning": "Whether; even if", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にせよ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 98, "pattern": "〜にせよ〜にせよ", "meaning": "Whether...or...", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜にせよ〜にせよ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 99, "pattern": "〜というより", "meaning": "Rather than saying", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜というより」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}, {"id": 100, "pattern": "〜ということだ", "meaning": "I hear that; it means that", "formation": "接続は文脈に応じて確認する。", "example": "この文法「〜ということだ」を使って、N2レベルの文を作ってみましょう。", "note": "N2gether high-priority study point."}];
+const FALLBACK_KANJI=[{"kanji": "愛", "reading": "あい", "meaning": "love", "words": "愛情・愛する"}, {"kanji": "案", "reading": "あん", "meaning": "plan; proposal", "words": "案内・提案"}, {"kanji": "位", "reading": "い", "meaning": "rank; position", "words": "位置・順位"}, {"kanji": "囲", "reading": "い", "meaning": "surround", "words": "囲む・範囲"}, {"kanji": "委", "reading": "い", "meaning": "committee; entrust", "words": "委員・委ねる"}, {"kanji": "異", "reading": "い", "meaning": "different", "words": "異常・異なる"}, {"kanji": "移", "reading": "い", "meaning": "move; transfer", "words": "移動・移る"}, {"kanji": "維", "reading": "い", "meaning": "maintain", "words": "維持"}, {"kanji": "永", "reading": "えい", "meaning": "eternal", "words": "永遠・永久"}, {"kanji": "営", "reading": "えい", "meaning": "manage; operate", "words": "営業・経営"}, {"kanji": "衛", "reading": "えい", "meaning": "defense; guard", "words": "衛生・防衛"}, {"kanji": "易", "reading": "えき", "meaning": "easy; change", "words": "容易・貿易"}, {"kanji": "益", "reading": "えき", "meaning": "benefit; profit", "words": "利益・有益"}, {"kanji": "液", "reading": "えき", "meaning": "liquid", "words": "液体・血液"}, {"kanji": "演", "reading": "えん", "meaning": "perform; present", "words": "演技・講演"}, {"kanji": "応", "reading": "おう", "meaning": "respond; suit", "words": "対応・応援"}, {"kanji": "往", "reading": "おう", "meaning": "go; travel", "words": "往復・往来"}, {"kanji": "桜", "reading": "おう", "meaning": "cherry blossom", "words": "桜・桜色"}, {"kanji": "可", "reading": "か", "meaning": "possible; acceptable", "words": "可能・許可"}, {"kanji": "価", "reading": "か", "meaning": "value; price", "words": "価格・価値"}, {"kanji": "果", "reading": "か", "meaning": "result; fruit", "words": "結果・効果"}, {"kanji": "過", "reading": "か", "meaning": "exceed; pass", "words": "過去・過ぎる"}, {"kanji": "解", "reading": "かい", "meaning": "solve; understand", "words": "解決・理解"}, {"kanji": "格", "reading": "かく", "meaning": "status; standard", "words": "価格・資格"}, {"kanji": "確", "reading": "かく", "meaning": "certain; confirm", "words": "確認・確実"}, {"kanji": "額", "reading": "がく", "meaning": "amount; forehead", "words": "金額・額"}, {"kanji": "刊", "reading": "かん", "meaning": "publish", "words": "刊行・週刊"}, {"kanji": "幹", "reading": "かん", "meaning": "trunk; main", "words": "幹部・幹線"}, {"kanji": "観", "reading": "かん", "meaning": "observe; view", "words": "観光・観察"}, {"kanji": "関", "reading": "かん", "meaning": "connection; barrier", "words": "関係・機関"}, {"kanji": "含", "reading": "がん", "meaning": "contain", "words": "含む・含有"}, {"kanji": "岸", "reading": "がん", "meaning": "shore", "words": "海岸・対岸"}, {"kanji": "希", "reading": "き", "meaning": "hope; rare", "words": "希望・希少"}, {"kanji": "機", "reading": "き", "meaning": "machine; opportunity", "words": "機会・機械"}, {"kanji": "規", "reading": "き", "meaning": "rule; standard", "words": "規則・規模"}, {"kanji": "技", "reading": "ぎ", "meaning": "skill; technique", "words": "技術・技能"}, {"kanji": "義", "reading": "ぎ", "meaning": "justice; meaning", "words": "義務・定義"}, {"kanji": "逆", "reading": "ぎゃく", "meaning": "reverse; opposite", "words": "逆に・逆転"}, {"kanji": "久", "reading": "きゅう", "meaning": "long time", "words": "久しぶり・永久"}, {"kanji": "旧", "reading": "きゅう", "meaning": "old; former", "words": "旧友・旧式"}, {"kanji": "居", "reading": "きょ", "meaning": "reside; be", "words": "居住・居る"}, {"kanji": "許", "reading": "きょ", "meaning": "permit; forgive", "words": "許可・許す"}, {"kanji": "境", "reading": "きょう", "meaning": "boundary; environment", "words": "環境・境界"}, {"kanji": "興", "reading": "きょう", "meaning": "interest; prosper", "words": "興味・興奮"}, {"kanji": "勤", "reading": "きん", "meaning": "work; diligent", "words": "勤務・勤める"}, {"kanji": "禁", "reading": "きん", "meaning": "prohibit", "words": "禁止・禁煙"}, {"kanji": "句", "reading": "く", "meaning": "phrase; sentence", "words": "句読点・文句"}, {"kanji": "群", "reading": "ぐん", "meaning": "group; flock", "words": "群れ・群集"}, {"kanji": "経", "reading": "けい", "meaning": "pass through; manage", "words": "経験・経済"}, {"kanji": "景", "reading": "けい", "meaning": "scenery", "words": "景色・光景"}, {"kanji": "芸", "reading": "げい", "meaning": "art; skill", "words": "芸術・芸能"}, {"kanji": "欠", "reading": "けつ", "meaning": "lack; miss", "words": "欠席・欠ける"}, {"kanji": "結", "reading": "けつ", "meaning": "tie; result", "words": "結果・結局"}, {"kanji": "件", "reading": "けん", "meaning": "matter; case", "words": "事件・条件"}, {"kanji": "険", "reading": "けん", "meaning": "dangerous; steep", "words": "危険・険しい"}, {"kanji": "減", "reading": "げん", "meaning": "decrease", "words": "減少・減る"}, {"kanji": "限", "reading": "げん", "meaning": "limit", "words": "制限・限る"}, {"kanji": "現", "reading": "げん", "meaning": "appear; present", "words": "現在・現れる"}, {"kanji": "個", "reading": "こ", "meaning": "individual", "words": "個人・個性"}, {"kanji": "故", "reading": "こ", "meaning": "reason; late", "words": "故障・事故"}, {"kanji": "候", "reading": "こう", "meaning": "weather; condition", "words": "気候・候補"}, {"kanji": "講", "reading": "こう", "meaning": "lecture; teach", "words": "講義・講演"}, {"kanji": "構", "reading": "こう", "meaning": "construct; structure", "words": "構造・構う"}, {"kanji": "鉱", "reading": "こう", "meaning": "ore; mineral", "words": "鉱山・鉱物"}, {"kanji": "効", "reading": "こう", "meaning": "effect", "words": "効果・有効"}, {"kanji": "混", "reading": "こん", "meaning": "mix; confuse", "words": "混雑・混ぜる"}, {"kanji": "再", "reading": "さい", "meaning": "again", "words": "再確認・再び"}, {"kanji": "災", "reading": "さい", "meaning": "disaster", "words": "災害・火災"}, {"kanji": "採", "reading": "さい", "meaning": "adopt; collect", "words": "採用・採る"}, {"kanji": "材", "reading": "ざい", "meaning": "material", "words": "材料・人材"}, {"kanji": "在", "reading": "ざい", "meaning": "exist; be located", "words": "存在・現在"}, {"kanji": "財", "reading": "ざい", "meaning": "wealth; property", "words": "財産・財政"}, {"kanji": "雑", "reading": "ざつ", "meaning": "miscellaneous; rough", "words": "雑誌・複雑"}, {"kanji": "参", "reading": "さん", "meaning": "participate; refer", "words": "参加・参考"}, {"kanji": "産", "reading": "さん", "meaning": "produce; birth", "words": "生産・産業"}, {"kanji": "残", "reading": "ざん", "meaning": "remain", "words": "残業・残る"}, {"kanji": "支", "reading": "し", "meaning": "support; branch", "words": "支援・支店"}, {"kanji": "志", "reading": "し", "meaning": "will; ambition", "words": "意志・志望"}, {"kanji": "識", "reading": "しき", "meaning": "knowledge; recognize", "words": "知識・意識"}, {"kanji": "失", "reading": "しつ", "meaning": "lose", "words": "失敗・失う"}, {"kanji": "実", "reading": "じつ", "meaning": "truth; fruit", "words": "実際・実現"}, {"kanji": "舎", "reading": "しゃ", "meaning": "building; lodge", "words": "校舎・宿舎"}, {"kanji": "若", "reading": "じゃく", "meaning": "young", "words": "若者・若い"}, {"kanji": "種", "reading": "しゅ", "meaning": "kind; seed", "words": "種類・種"}, {"kanji": "周", "reading": "しゅう", "meaning": "around", "words": "周囲・周辺"}, {"kanji": "述", "reading": "じゅつ", "meaning": "state; describe", "words": "述べる・記述"}, {"kanji": "順", "reading": "じゅん", "meaning": "order", "words": "順番・順調"}, {"kanji": "初", "reading": "しょ", "meaning": "first; beginning", "words": "初め・最初"}, {"kanji": "省", "reading": "しょう", "meaning": "omit; ministry", "words": "省略・反省"}, {"kanji": "状", "reading": "じょう", "meaning": "condition; form", "words": "状態・状況"}, {"kanji": "常", "reading": "じょう", "meaning": "usual; constant", "words": "通常・常に"}, {"kanji": "職", "reading": "しょく", "meaning": "job; occupation", "words": "職業・就職"}, {"kanji": "制", "reading": "せい", "meaning": "system; control", "words": "制度・制限"}, {"kanji": "性", "reading": "せい", "meaning": "nature; gender", "words": "性格・可能性"}, {"kanji": "政", "reading": "せい", "meaning": "politics; government", "words": "政治・行政"}, {"kanji": "精", "reading": "せい", "meaning": "spirit; precise", "words": "精神・精一杯"}, {"kanji": "製", "reading": "せい", "meaning": "manufacture", "words": "製品・製造"}, {"kanji": "責", "reading": "せき", "meaning": "responsibility; blame", "words": "責任・責める"}, {"kanji": "績", "reading": "せき", "meaning": "achievements", "words": "成績"}, {"kanji": "接", "reading": "せつ", "meaning": "contact; connect", "words": "接続・面接"}, {"kanji": "設", "reading": "せつ", "meaning": "establish; set up", "words": "設定・設計"}, {"kanji": "絶", "reading": "ぜつ", "meaning": "interrupt; absolute", "words": "絶対・絶える"}, {"kanji": "祖", "reading": "そ", "meaning": "ancestor", "words": "祖先・祖父"}, {"kanji": "素", "reading": "そ", "meaning": "element; simple", "words": "素晴らしい・素材"}, {"kanji": "総", "reading": "そう", "meaning": "total; overall", "words": "総合・総数"}, {"kanji": "増", "reading": "ぞう", "meaning": "increase", "words": "増加・増える"}, {"kanji": "態", "reading": "たい", "meaning": "condition; attitude", "words": "状態・態度"}, {"kanji": "団", "reading": "だん", "meaning": "group", "words": "団体・集団"}, {"kanji": "断", "reading": "だん", "meaning": "cut off; decide", "words": "判断・断る"}, {"kanji": "築", "reading": "ちく", "meaning": "build", "words": "建築・築く"}, {"kanji": "張", "reading": "ちょう", "meaning": "stretch; claim", "words": "主張・緊張"}, {"kanji": "調", "reading": "ちょう", "meaning": "investigate; tone", "words": "調査・調子"}, {"kanji": "程", "reading": "てい", "meaning": "extent; degree", "words": "程度・日程"}, {"kanji": "適", "reading": "てき", "meaning": "suitable", "words": "適切・適用"}, {"kanji": "統", "reading": "とう", "meaning": "unite; govern", "words": "統一・統計"}, {"kanji": "導", "reading": "どう", "meaning": "guide; lead", "words": "指導・導く"}, {"kanji": "得", "reading": "とく", "meaning": "gain; obtain", "words": "得意・取得"}, {"kanji": "独", "reading": "どく", "meaning": "alone; unique", "words": "独立・独自"}, {"kanji": "任", "reading": "にん", "meaning": "responsibility; entrust", "words": "責任・任せる"}, {"kanji": "認", "reading": "にん", "meaning": "recognize; acknowledge", "words": "確認・認める"}, {"kanji": "能", "reading": "のう", "meaning": "ability", "words": "能力・可能"}, {"kanji": "判", "reading": "はん", "meaning": "judge; seal", "words": "判断・判定"}, {"kanji": "比", "reading": "ひ", "meaning": "compare; ratio", "words": "比較・比べる"}, {"kanji": "備", "reading": "び", "meaning": "prepare; equip", "words": "準備・設備"}, {"kanji": "評", "reading": "ひょう", "meaning": "evaluate; criticism", "words": "評価・評判"}, {"kanji": "復", "reading": "ふく", "meaning": "return; recover", "words": "復習・回復"}, {"kanji": "複", "reading": "ふく", "meaning": "multiple; complex", "words": "複雑・複数"}, {"kanji": "編", "reading": "へん", "meaning": "compile; edit", "words": "編集・編む"}, {"kanji": "変", "reading": "へん", "meaning": "change; strange", "words": "変更・変化"}, {"kanji": "報", "reading": "ほう", "meaning": "report; information", "words": "報告・情報"}, {"kanji": "防", "reading": "ぼう", "meaning": "prevent; defend", "words": "防止・予防"}, {"kanji": "務", "reading": "む", "meaning": "duty; work", "words": "義務・事務"}, {"kanji": "迷", "reading": "めい", "meaning": "be lost; confuse", "words": "迷惑・迷う"}, {"kanji": "優", "reading": "ゆう", "meaning": "excellent; kind", "words": "優秀・優しい"}, {"kanji": "容", "reading": "よう", "meaning": "contain; appearance", "words": "内容・容易"}, {"kanji": "率", "reading": "りつ", "meaning": "rate; lead", "words": "確率・効率"}, {"kanji": "略", "reading": "りゃく", "meaning": "abbreviation; omit", "words": "省略・略す"}, {"kanji": "留", "reading": "りゅう", "meaning": "stay; keep", "words": "留学・留守"}, {"kanji": "領", "reading": "りょう", "meaning": "territory; receive", "words": "領域・領収書"}, {"kanji": "論", "reading": "ろん", "meaning": "argument; theory", "words": "議論・理論"}];
+const FALLBACK_VOCAB=[];
+const N2V='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/vocab/n2.json';
+const N2K='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n2.json';
+const N1K='https://cdn.jsdelivr.net/gh/evanclan/OpenJLPT@main/data/json/kanji/n1.json';
+const state={xp:Number(localStorage.getItem('n2g_xp')||120),mastered:new Set(JSON.parse(localStorage.getItem('n2g_mastered')||'[]')),kanji:[],vocab:[],bunpo:BUNPO,kf:'all',vf:'all',bf:'all',kp:1,vp:1,bp:1,kq:'',vq:'',bq:''};
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function save(){localStorage.setItem('n2g_xp',String(state.xp));localStorage.setItem('n2g_mastered',JSON.stringify([...state.mastered]))}
+function addXP(n){state.xp+=n;save();stats()}
+function stats(){$('#xp').textContent=state.xp;$('#mastered').textContent=state.mastered.size;const p=Math.min(100,Math.round(state.mastered.size/25*100));$('#pct').textContent=p+'%';$('#fill').style.width=Math.max(5,p)+'%'}
+function speak(t,rate=.82){if(!('speechSynthesis' in window)){alert('Japanese audio is not available in this browser.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t));u.lang='ja-JP';u.rate=rate;speechSynthesis.speak(u)}
+function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='kanji')renderKanji();if(id==='kotoba')renderVocab();if(id==='bunpo')renderBunpo()}
+$$('[data-screen]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screen)));
+function dailyMessage(){const d=new Date();const start=Date.UTC(2026,0,1);const now=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());const i=Math.abs(Math.floor((now-start)/86400000))%DAILY.length;$('#dailyMessage').textContent=DAILY[i]}
+function masterKey(type,id){return type+String(id)}
+function toggleMaster(type,id){const k=masterKey(type,id);if(state.mastered.has(k))state.mastered.delete(k);else{state.mastered.add(k);addXP(5)}save();stats()}
+function renderKanji(){const grid=$('#kanjiGrid');if(!state.kanji.length){grid.innerHTML='<div class="loading">Loading your 500 kanji… 🌸</div>';return}const q=state.kq.trim().toLowerCase();let a=state.kanji.filter(x=>{const text=(x.character+' '+(x.onyomi||[]).join(' ')+' '+(x.kunyomi||[]).join(' ')+' '+(x.meanings||[]).join(' ')+' '+(x.reading||'')+' '+(x.meaning||'')+' '+(x.word||'')).toLowerCase();return(!q||text.includes(q))&&(state.kf==='all'||(state.kf==='mastered'&&state.mastered.has(masterKey('k',x.character)))||(state.kf==='unmastered'&&!state.mastered.has(masterKey('k',x.character))))});const pages=Math.max(1,Math.ceil(a.length/30));state.kp=Math.min(state.kp,pages);$('#kanjiTotal').textContent=a.length+' items';$('#kPage').textContent='Page '+state.kp+' / '+pages;$('#kPrev').disabled=state.kp<=1;$('#kNext').disabled=state.kp>=pages;const items=a.slice((state.kp-1)*30,state.kp*30);grid.innerHTML=items.length?items.map(x=>{const id=x.character;const read=(x.onyomi||[]).join(' · ')||x.reading||'—';const mean=(x.meanings||[]).slice(0,3).join(' · ')||x.meaning||'—';const words=x.word?(x.word+' · '+(x.wordReading||'')+' · '+(x.wordMeaning||'')):'';const done=state.mastered.has(masterKey('k',id));return '<article class="card"><div class="bigjp">'+esc(x.character)+'</div><div class="reading">'+esc(read)+'</div><div class="meaning">'+esc(mean)+'</div><div class="example">'+esc(words)+'</div><div class="actions"><button data-hear-k="'+esc(x.character)+'">🔊 Hear</button><button class="'+(done?'mastered':'')+'" data-master-k="'+esc(id)+'">'+(done?'⭐ Mastered':'☆ Master it')+'</button></div></article>'}).join(''):'<div class="empty">No matches. Try another search. 🌸</div>'}
+function normalizeVocab(x,i){const examples=Array.isArray(x.examples)?x.examples:[];return{id:x.word||('v'+i),word:x.word||'',reading:x.reading||'',meaning:Array.isArray(x.meanings)?x.meanings.join(' · '):(x.meaning||''),example:examples[0]?.ja||'',translation:examples[0]?.en||''}}
+function renderVocab(){const grid=$('#vocabGrid');if(!state.vocab.length){grid.innerHTML='<div class="loading">Loading 1,000 words… 💬</div>';return}const q=state.vq.trim().toLowerCase();let a=state.vocab.filter(x=>{const text=(x.word+' '+x.reading+' '+x.meaning+' '+x.example+' '+x.translation).toLowerCase();return(!q||text.includes(q))&&(state.vf==='all'||(state.vf==='mastered'&&state.mastered.has(masterKey('v',x.id)))||(state.vf==='unmastered'&&!state.mastered.has(masterKey('v',x.id))))});const pages=Math.max(1,Math.ceil(a.length/30));state.vp=Math.min(state.vp,pages);$('#vocabTotal').textContent=a.length+' words';$('#vPage').textContent='Page '+state.vp+' / '+pages;$('#vPrev').disabled=state.vp<=1;$('#vNext').disabled=state.vp>=pages;const items=a.slice((state.vp-1)*30,state.vp*30);grid.innerHTML=items.length?items.map(x=>{const done=state.mastered.has(masterKey('v',x.id));return '<article class="card"><div class="bigjp" style="font-size:27px">'+esc(x.word)+'</div><div class="reading">'+esc(x.reading)+'</div><div class="meaning">'+esc(x.meaning)+'</div><div class="example">'+esc(x.example)+(x.translation?'<br><small>'+esc(x.translation)+'</small>':'')+'</div><div class="actions"><button data-hear-v="'+esc(x.word)+'">🔊 Hear</button><button class="'+(done?'mastered':'')+'" data-master-v="'+esc(x.id)+'">'+(done?'⭐ Mastered':'☆ Master it')+'</button></div></article>'}).join(''):'<div class="empty">No matches. Try another search. 💬</div>'}
+function renderBunpo(){const grid=$('#bunpoGrid');const q=state.bq.trim().toLowerCase();let a=state.bunpo.filter(x=>(x.pattern+' '+x.meaning+' '+(x.example||'')).toLowerCase().includes(q)).filter(x=>state.bf==='all'||(state.bf==='mastered'&&state.mastered.has(masterKey('b',x.id)))||(state.bf==='unmastered'&&!state.mastered.has(masterKey('b',x.id))));const pages=Math.max(1,Math.ceil(a.length/30));state.bp=Math.min(state.bp,pages);$('#bunpoTotal').textContent=a.length+' patterns';$('#bPage').textContent='Page '+state.bp+' / '+pages;$('#bPrev').disabled=state.bp<=1;$('#bNext').disabled=state.bp>=pages;grid.innerHTML=a.slice((state.bp-1)*30,state.bp*30).map(x=>{const done=state.mastered.has(masterKey('b',x.id));return '<article class="card"><div class="bigjp" style="font-size:22px">'+esc(x.pattern)+'</div><div class="meaning">'+esc(x.meaning)+'</div><div class="example">'+esc(x.example||'')+'</div><div class="actions"><button data-study-b="'+x.id+'">📖 Study + Quiz</button><button class="'+(done?'mastered':'')+'" data-master-b="'+x.id+'">'+(done?'⭐ Mastered':'☆ Master it')+'</button></div></article>'}).join('')}
+function modal(body){const m=$('#modal');m.className='modal open';m.innerHTML='<div class="modalbox"><button id="closeM" style="float:right;border:0;background:#f1ebef;border-radius:50%;width:40px;height:40px;font-size:20px">×</button>'+body+'</div>';$('#closeM').onclick=()=>m.className='modal'}
+function bunpoQuiz(id){const x=state.bunpo.find(a=>a.id==id);if(!x)return;const opts=[x,...state.bunpo.filter(a=>a.id!=id).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);modal('<div class="eyebrow" style="color:#b54974">BUNPŌ · '+x.id+'/100</div><h2>'+esc(x.pattern)+'</h2><p><b>Meaning:</b> '+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'</div><div class="quiz"><h3>🎯 Quick Check</h3><p>Which meaning matches?</p><div id="bopts"></div><div id="bfb" class="feedback"></div></div>');opts.forEach(o=>{const b=document.createElement('button');b.className='choice';b.type='button';b.textContent=o.meaning;b.onclick=()=>{if($('#bfb').dataset.done)return;$('#bfb').dataset.done='1';$('#bopts').querySelectorAll('button').forEach(z=>z.disabled=true);if(o.id===x.id){b.classList.add('correct');$('#bfb').textContent='🎉 正解！ +10 XP';addXP(10)}else{b.classList.add('wrong');$('#bfb').textContent='🌱 Not quite. The answer is '+x.meaning;$('#bopts').querySelectorAll('button').forEach(z=>{if(z.textContent===x.meaning)z.classList.add('correct')})}};$('#bopts').appendChild(b)})}
+document.addEventListener('click',e=>{
+ const hk=e.target.closest('[data-hear-k]');if(hk){speak(hk.dataset.hearK);return}
+ const mk=e.target.closest('[data-master-k]');if(mk){toggleMaster('k',mk.dataset.masterK);renderKanji();return}
+ const hv=e.target.closest('[data-hear-v]');if(hv){speak(hv.dataset.hearV);return}
+ const mv=e.target.closest('[data-master-v]');if(mv){toggleMaster('v',mv.dataset.masterV);renderVocab();return}
+ const sb=e.target.closest('[data-study-b]');if(sb){bunpoQuiz(sb.dataset.studyB);return}
+ const mb=e.target.closest('[data-master-b]');if(mb){toggleMaster('b',mb.dataset.masterB);renderBunpo();return}
 });
-function addScanned(label,date,amt){addUnique(label,date,'Document Scanner',amt,label);closeSheet('scanOverlay');toast('Added to your list');if(settings.voice)speak('Sure! I added that to your list.')}
-function explainScan(){const x=document.createElement('div');x.className='notice';x.innerHTML='<b>Nexus explanation</b><br>I can explain the text I was able to read. Before creating reminders, Nexus should always ask you to confirm important dates and actions.';document.getElementById('scanContent').appendChild(x);if(settings.voice)speak('Sure! I can explain the details I was able to read.')}
-render();
+$('#kanjiSearch').addEventListener('input',e=>{state.kq=e.target.value;state.kp=1;renderKanji()})
+$('#vocabSearch').addEventListener('input',e=>{state.vq=e.target.value;state.vp=1;renderVocab()})
+$('#bunpoSearch').addEventListener('input',e=>{state.bq=e.target.value;state.bp=1;renderBunpo()})
+$('#kPrev').onclick=()=>{state.kp=Math.max(1,state.kp-1);renderKanji()};$('#kNext').onclick=()=>{state.kp++;renderKanji()}
+$('#vPrev').onclick=()=>{state.vp=Math.max(1,state.vp-1);renderVocab()};$('#vNext').onclick=()=>{state.vp++;renderVocab()}
+$('#bPrev').onclick=()=>{state.bp=Math.max(1,state.bp-1);renderBunpo()};$('#bNext').onclick=()=>{state.bp++;renderBunpo()}
+$('#kAll').onclick=()=>{state.kf='all';state.kp=1;renderKanji()};$('#kUn').onclick=()=>{state.kf='unmastered';state.kp=1;renderKanji()};$('#kDone').onclick=()=>{state.kf='mastered';state.kp=1;renderKanji()}
+$('#vAll').onclick=()=>{state.vf='all';state.vp=1;renderVocab()};$('#vUn').onclick=()=>{state.vf='unmastered';state.vp=1;renderVocab()};$('#vDone').onclick=()=>{state.vf='mastered';state.vp=1;renderVocab()}
+$('#vRandom').onclick=()=>{if(!state.vocab.length)return;const x=state.vocab[Math.floor(Math.random()*state.vocab.length)];modal('<div class="eyebrow" style="color:#b54974">🌸 RANDOM KOTOBA</div><h2>'+esc(x.word)+'</h2><p><b>'+esc(x.reading)+'</b><br>'+esc(x.meaning)+'</p><div class="example">'+esc(x.example||'')+'<br><small>'+esc(x.translation||'')+'</small></div><button id="rvh" class="btn secondary">🔊 Hear</button>');$('#rvh').onclick=()=>speak(x.word+'。'+(x.example||''))}
+$('#bAll').onclick=()=>{state.bf='all';state.bp=1;renderBunpo()};$('#bUn').onclick=()=>{state.bf='unmastered';state.bp=1;renderBunpo()};$('#bDone').onclick=()=>{state.bf='mastered';state.bp=1;renderBunpo()};$('#bRandom').onclick=()=>{if(state.bunpo.length)bunpoQuiz(state.bunpo[Math.floor(Math.random()*state.bunpo.length)].id)};
+
+const listen=[["Sample 1 · 予定変更", "明日の会議は、午前9時からではなく、10時から始まります。部長が出張から戻るのが遅くなるためです。", ["午前8時", "午前9時", "午前10時", "午後10時"], 2], ["Sample 2 · 乗り換え", "この電車は新宿に行きます。ただし、次の駅で3番線の電車に乗り換えてください。", ["次の駅で乗り換える", "この駅で降りる", "新宿で乗り換える", "歩いて行く"], 0], ["Sample 3 · 予約", "この店は平日なら予約はいりません。でも土曜日と日曜日は混みますから、予約したほうがいいですよ。", ["週末は予約したほうがいい", "週末は休みになる", "平日は予約が必要", "毎日空いている"], 0], ["Sample 4 · 最終決定", "最初は赤いかばんを買うつもりでしたが、店員さんのおすすめを見て、黒いかばんにしました。", ["赤", "青", "黒", "白"], 2], ["Sample 5 · 理由", "今日は雨が強くなるそうなので、試合は来週に延期されました。", ["選手がいないから", "雨が強くなるから", "来週は晴れるから", "会場が遠いから"], 1], ["Sample 6 · 連絡", "もし明日の朝までに返事がなかったら、私の携帯に電話してください。", ["メールを送る", "携帯に電話する", "会社へ行く", "午後まで待つ"], 1], ["Sample 7 · 買い物", "こちらの青いシャツは三千円ですが、白いシャツはセールで二千円になっています。", ["青いシャツを買う", "白いシャツを買う", "両方買う", "何も買わない"], 1], ["Sample 8 · 集合時間", "集合は駅の前に午後1時です。ただ、遅れる人は直接会場に来てもいいそうです。", ["駅の前に12時", "駅の前に1時", "会場に1時半", "家に1時"], 1], ["Sample 9 · 図書館", "図書館は今週から夜8時まで利用できます。ただし、土曜日は午後5時に閉まります。", ["毎日5時まで", "平日は8時まで", "土曜日は8時まで", "日曜日だけ8時まで"], 1], ["Sample 10 · 提出期限", "レポートの締め切りは金曜日でしたが、先生の都合で月曜日まで延長されました。", ["木曜日", "金曜日", "日曜日", "月曜日"], 3], ["Sample 11 · 天気予報", "午後から雪になる可能性がありますので、車で出かける人は早めに出発してください。", ["雨になるから", "雪になる可能性があるから", "道路が工事中だから", "電車が止まるから"], 1], ["Sample 12 · 忘れ物", "会議室に傘を忘れたかもしれません。黒くて、持ち手が木でできています。", ["白い傘", "青い傘", "黒い傘", "透明な傘"], 2], ["Sample 13 · 電車遅延", "事故の影響で電車が20分ほど遅れています。急ぐ方は別の路線をご利用ください。", ["5分", "10分", "20分", "30分"], 2], ["Sample 14 · 仕事の分担", "資料の印刷は私がしますので、田中さんは会議室の準備をお願いします。", ["資料を作る", "資料を印刷する", "会議室を準備する", "電話をする"], 2], ["Sample 15 · 病院", "診察は午後2時からですが、初めての方は30分前までに受付を済ませてください。", ["1時", "1時30分", "2時", "2時30分"], 1], ["Sample 16 · 映画", "映画は7時に始まります。6時半までに席に着いてください。", ["6時", "6時半", "7時", "7時半"], 1], ["Sample 17 · 旅行", "ホテルは駅から歩いて10分ほどです。チェックインは午後3時からできます。", ["駅から30分", "駅から20分", "駅から10分", "駅から5分"], 2], ["Sample 18 · 食事", "昼食は12時に食べますが、今日は会議があるので1時に変更します。", ["11時", "12時", "1時", "2時"], 2], ["Sample 19 · 学校行事", "文化祭は雨天の場合でも体育館で行われますので、中止にはなりません。", ["中止になる", "体育館で行われる", "来週になる", "オンラインになる"], 1], ["Sample 20 · 電話", "鈴木さんから電話がありました。戻ってきたら、今日中に連絡してほしいそうです。", ["明日連絡する", "来週連絡する", "今日中に連絡する", "連絡しなくていい"], 2], ["Sample 21 · 家事", "今日は私が料理をするから、あなたは洗濯物を取り込んでくれる？", ["料理をする", "買い物をする", "洗濯物を取り込む", "掃除をする"], 2], ["Sample 22 · 荷物", "この荷物は重いので、二人で運んだほうが安全ですよ。", ["一人で運ぶ", "二人で運ぶ", "送らない", "捨てる"], 1], ["Sample 23 · 料金", "学生証を見せれば、入館料が半額になります。", ["料金が無料になる", "半額になる", "倍になる", "変更されない"], 1], ["Sample 24 · 営業時間", "この店は通常9時開店ですが、明日は10時からです。", ["8時", "9時", "10時", "11時"], 2], ["Sample 25 · 電話番号", "問い合わせ先の電話番号は、案内の最後に書いてあります。", ["最初", "中央", "表紙", "最後"], 3], ["Sample 26 · 注文", "コーヒーを一つとサンドイッチを二つお願いします。", ["コーヒー2つ", "サンドイッチ1つ", "コーヒー1つとサンドイッチ2つ", "両方2つ"], 2], ["Sample 27 · 会議室", "会議室Aが使用中なので、今日の打ち合わせはBに変更します。", ["A", "B", "C", "中止"], 1], ["Sample 28 · 引っ越し", "新しい部屋は来月1日から使えますが、荷物を入れられるのは3日からです。", ["1日から荷物を入れる", "2日から", "3日から", "来月末から"], 2], ["Sample 29 · 薬", "この薬は食後に一日三回飲んでください。", ["食前に一回", "食後に三回", "寝る前に三回", "食事中に二回"], 1], ["Sample 30 · 駅の出口", "目的地に近いのは東口です。西口から出ると少し遠くなります。", ["北口", "南口", "東口", "西口"], 2], ["Sample 31 · メール", "資料を確認したら、問題がなくても一言返信してください。", ["返信しない", "問題がある時だけ返信", "必ず一言返信", "電話だけする"], 2], ["Sample 32 · 休日", "今週は土曜日に出勤する代わりに、月曜日が休みになります。", ["土曜日", "日曜日", "月曜日", "火曜日"], 2], ["Sample 33 · 講座", "この講座は初心者向けですが、簡単な漢字が読めることが条件です。", ["上級者だけ", "初心者で漢字が読める人", "子どもだけ", "日本語を話せない人"], 1], ["Sample 34 · 買い替え", "古いパソコンは修理するより、新しいものを買ったほうが安いそうです。", ["修理する", "新しいものを買う", "何もしない", "友達から借りる"], 1], ["Sample 35 · 忘年会", "忘年会は駅前の店で行います。参加者は6時45分までに集合してください。", ["6時", "6時30分", "6時45分", "7時"], 2], ["Sample 36 · 予約変更", "美容院の予約を3時から4時に変更したいのですが、空いていますか。", ["2時", "3時", "4時", "5時"], 2], ["Sample 37 · 説明会", "説明会では最初に会社の説明があり、その後で質問の時間があります。", ["質問が最初", "会社説明が最初", "試験が最初", "休憩が最初"], 1], ["Sample 38 · 交通規制", "マラソン大会のため、午前中はこの道路を通れません。午後1時には解除されます。", ["午前だけ通れない", "午後も通れない", "一日中通れない", "夜だけ通れない"], 0], ["Sample 39 · 荷物の受け取り", "宅配便は明日の午後2時から4時の間に届く予定です。", ["午前中", "午後2時から4時", "午後5時から7時", "夜10時"], 1], ["Sample 40 · 映画館", "この映画は字幕版が6時、吹き替え版が7時半からです。", ["字幕は7時半", "吹き替えは6時", "字幕は6時", "両方6時"], 2], ["Sample 41 · 仕事の開始", "新しいシステムは来週月曜日から使い始めます。今週は今までの方法でお願いします。", ["今日から", "今週金曜から", "来週月曜から", "来月から"], 2], ["Sample 42 · 店の場所", "パン屋は銀行の隣です。駅の反対側ではありません。", ["銀行の隣", "駅の中", "公園の前", "学校の隣"], 0], ["Sample 43 · 講師変更", "今日の授業は先生が体調不良のため、別の先生が担当します。", ["授業が中止", "先生が変わる", "時間が変わる", "教室が閉まる"], 1], ["Sample 44 · 写真", "写真撮影は自由ですが、フラッシュは禁止されています。", ["写真は禁止", "フラッシュだけ禁止", "動画だけ禁止", "何でも禁止"], 1], ["Sample 45 · 会計", "お会計は現金だけでなく、カードでもできます。", ["現金だけ", "カードだけ", "現金とカードが使える", "電子マネーだけ"], 2], ["Sample 46 · 公園", "公園では犬を連れて入れますが、必ずリードをつけてください。", ["犬は禁止", "リードが必要", "猫だけ可能", "リードは不要"], 1], ["Sample 47 · 仕事の依頼", "この資料は今日中でなく、明日の午前中までに完成すれば大丈夫です。", ["今日の朝", "今日の夜", "明日の午前中", "来週"], 2], ["Sample 48 · 学校の休み", "学校は祝日のため休みです。授業は火曜日から再開します。", ["月曜日", "火曜日", "水曜日", "金曜日"], 1], ["Sample 49 · 料理教室", "料理教室では包丁を使うので、長い爪の方は短くしてきてください。", ["髪を切る", "爪を短くする", "靴を替える", "制服を着る"], 1], ["Sample 50 · 集合場所", "雨の場合は駅前ではなく、駅の中のカフェに集合してください。", ["駅前", "公園", "駅の中のカフェ", "学校"], 2]];
+function renderListen(){
+ const grid=$('#listenGrid');
+ const perPage=10;
+ const pages=Math.max(1,Math.ceil(listen.length/perPage));
+ window.listenPage=Math.min(Math.max(window.listenPage||1,1),pages);
+ $('#listenTotal').textContent=listen.length+' samples';
+ $('#lPage').textContent='Page '+window.listenPage+' / '+pages;
+ $('#lPrev').disabled=window.listenPage<=1;
+ $('#lNext').disabled=window.listenPage>=pages;
+ const start=(window.listenPage-1)*perPage;
+ const items=listen.slice(start,start+perPage);
+ grid.innerHTML='';
+ items.forEach((x,local)=>{
+   const i=start+local;
+   const c=document.createElement('article');
+   c.className='listen';
+   c.innerHTML='<h3>🎧 '+x[0]+'</h3><button class="btn primary" type="button">🔊 PLAY JAPANESE</button><div class="opts"></div><div class="feedback" id="lf'+i+'"></div><button class="btn secondary" type="button">Show transcript</button><div class="script">'+esc(x[1])+'</div>';
+   grid.appendChild(c);
+   c.querySelector('.primary').onclick=()=>speak(x[1],.8);
+   c.querySelector('.secondary').onclick=()=>{const s=c.querySelector('.script');s.style.display=s.style.display==='block'?'none':'block'};
+   x[2].forEach((a,j)=>{
+     const b=document.createElement('button');
+     b.className='choice';
+     b.type='button';
+     b.textContent=a;
+     b.onclick=()=>{
+       if(b.dataset.done)return;
+       b.dataset.done='1';
+       c.querySelectorAll('.choice').forEach(z=>z.disabled=true);
+       if(j===x[3]){
+         b.classList.add('correct');
+         $('#lf'+i).textContent='🎉 正解！ +10 XP';
+         addXP(10);
+       }else{
+         b.classList.add('wrong');
+         c.querySelectorAll('.choice')[x[3]].classList.add('correct');
+         $('#lf'+i).textContent='🌱 Not quite. Listen again and check the transcript.';
+       }
+     };
+     c.querySelector('.opts').appendChild(b);
+   });
+ });
+}
+document.getElementById('lPrev').onclick=()=>{window.listenPage=Math.max(1,(window.listenPage||1)-1);renderListen()};
+document.getElementById('lNext').onclick=()=>{window.listenPage=(window.listenPage||1)+1;renderListen()};
+
+async function loadLibraries(){
+  const timeout = (ms) => new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('timeout')), ms)
+  );
+
+  async function getJSON(url){
+    const res = await Promise.race([
+      fetch(url, {cache:'no-store'}),
+      timeout(9000)
+    ]);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return res.json();
+  }
+
+  function normalizeKanji(rows){
+    return (Array.isArray(rows)?rows:[]).map((x,i)=>({
+      id:x.id||('openjlpt-k-'+i),
+      character:x.character||x.kanji||'',
+      reading:x.reading||'',
+      meaning:Array.isArray(x.meanings)?x.meanings.join('; '):(x.meaning||''),
+      meanings:Array.isArray(x.meanings)?x.meanings:(x.meaning?[x.meaning]:[]),
+      onyomi:Array.isArray(x.onyomi)?x.onyomi:(x.onyomi?[x.onyomi]:[]),
+      kunyomi:Array.isArray(x.kunyomi)?x.kunyomi:(x.kunyomi?[x.kunyomi]:[]),
+      word:x.word||'',
+      wordReading:x.wordReading||'',
+      wordMeaning:x.wordMeaning||''
+    })).filter(x=>x.character);
+  }
+
+  function normalizeVocab(rows){
+    return (Array.isArray(rows)?rows:[]).map((x,i)=>{
+      const ex=Array.isArray(x.examples)&&x.examples.length?x.examples[0]:null;
+      return {
+        id:x.id||('openjlpt-v-'+i),
+        word:x.word||'',
+        reading:x.reading||'',
+        meaning:Array.isArray(x.meanings)?x.meanings.join('; '):(x.meaning||''),
+        example:x.example||(ex&&ex.ja)||'',
+        translation:x.translation||(ex&&ex.en)||''
+      };
+    }).filter(x=>x.word);
+  }
+
+  try{
+    const [remoteV,remoteK,remoteK1] = await Promise.all([
+      getJSON(N2V),
+      getJSON(N2K),
+      getJSON(N1K)
+    ]);
+
+    const k2=normalizeKanji(remoteK);
+    const k1=normalizeKanji(remoteK1);
+    const related=Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[];
+
+    // Keep the N2 set first, then add related characters until 500.
+    const seen=new Set();
+    state.kanji=[];
+    [...k2,...related,...k1].forEach(x=>{
+      const c=x.character;
+      if(c && !seen.has(c) && state.kanji.length<500){
+        seen.add(c); state.kanji.push(x);
+      }
+    });
+
+    state.vocab=normalizeVocab(remoteV).slice(0,1000);
+
+    // If the remote dataset ever changes, never leave the screen stuck.
+    if(state.kanji.length<500){
+      const local=(Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[]);
+      local.forEach(x=>{
+        if(state.kanji.length>=500)return;
+        if(x.character && !seen.has(x.character)){
+          seen.add(x.character); state.kanji.push(normalizeKanji([x])[0]);
+        }
+      });
+    }
+    if(state.vocab.length<1000){
+      const local=await getJSON('kotoba.json').catch(()=>[]);
+      const existing=new Set(state.vocab.map(x=>x.word));
+      normalizeVocab(local).forEach(x=>{
+        if(state.vocab.length<1000 && !existing.has(x.word)){
+          existing.add(x.word); state.vocab.push(x);
+        }
+      });
+    }
+  }catch(err){
+    // Offline/local fallback: load the files already bundled with N2gether.
+    const [localK,localV]=await Promise.all([
+      getJSON('kanji-related.json').catch(()=>[]),
+      getJSON('kotoba.json').catch(()=>[])
+    ]);
+
+    const seen=new Set();
+    state.kanji=[];
+    [...(Array.isArray(FALLBACK_KANJI)?FALLBACK_KANJI:[]),...(Array.isArray(localK)?localK:[])].forEach(x=>{
+      const n=normalizeKanji([x])[0];
+      if(n && n.character && !seen.has(n.character) && state.kanji.length<500){
+        seen.add(n.character); state.kanji.push(n);
+      }
+    });
+    state.vocab=normalizeVocab(localV).slice(0,1000);
+  }
+
+  // Always finish rendering — no infinite "Loading..." state.
+  if(!state.kanji.length) $('#kanjiGrid').innerHTML='<div class="empty">Kanji could not be loaded. Please refresh once.</div>';
+  if(!state.vocab.length) $('#vocabGrid').innerHTML='<div class="empty">Kotoba could not be loaded. Please refresh once.</div>';
+  renderKanji();
+  renderVocab();
+}
+
+stats();dailyMessage();renderListen();renderKanji();renderVocab();renderBunpo();loadLibraries();
 </script>
+
+<script>
+(function(){
+  const enBtn = document.getElementById('msgEN');
+  const idBtn = document.getElementById('msgID');
+  const msg = document.getElementById('dailyMessage');
+  if(!enBtn || !idBtn || !msg || typeof dailyMessages === 'undefined') return;
+
+  function setLang(lang){
+    const i = (typeof currentMessageIndex === 'number')
+      ? currentMessageIndex
+      : (new Date().getDate()-1) % dailyMessages.length;
+    msg.textContent = lang === 'id'
+      ? dailyMessagesID[i % dailyMessagesID.length]
+      : dailyMessages[i % dailyMessages.length];
+    enBtn.classList.toggle('active', lang === 'en');
+    idBtn.classList.toggle('active', lang === 'id');
+    localStorage.setItem('n2getherMessageLang', lang);
+  }
+  enBtn.addEventListener('click', ()=>setLang('en'));
+  idBtn.addEventListener('click', ()=>setLang('id'));
+
+  const saved = localStorage.getItem('n2getherMessageLang') || 'en';
+  setLang(saved);
+})();
+</script>
+
 </body>
 </html>
